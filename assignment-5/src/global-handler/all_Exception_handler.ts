@@ -8,7 +8,8 @@ export function globalErrorHandler(
   res: Response,
   next: NextFunction
 ) {
-  let httpStatus = 500;
+  try {
+    let httpStatus = 500;
   let message: string | {} = 'Internal server error';
 
   // HTTP-like errors (custom error classes or custom thrown errors)
@@ -42,4 +43,7 @@ if (err instanceof HttpException) {
     path: req.originalUrl,
     message,
   });
+  } catch (error) {
+     next(error);
+  }
 }
