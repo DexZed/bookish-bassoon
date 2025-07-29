@@ -1,6 +1,6 @@
 import mongoose, { HydratedDocument, ObjectId } from "mongoose";
 
-interface IStatusLogSchema {
+export interface IStatusLogSchema {
   status:
     | "Requested"
     | "Approved"
@@ -39,7 +39,7 @@ const statusLogSchema = new mongoose.Schema<IStatusLog>(
   }
 );
 
-interface IParcelSchema {
+export  interface IParcelSchema {
   trackingId: string; // TRK-YYYYMMDD-xxxxxx
   sender: ObjectId; // User
   receiver: ObjectId; // User
