@@ -1,7 +1,8 @@
 import mongoose from "mongoose";
 import { CreateParcelDTO } from "./parcelDTO/parcelDTO";
-import ParcelEntity from "./parcelEntity/parcel.entity";
 import ParcelRepository from "./parcelRepository/repository";
+import { IParcel } from "./parcelSchema/parcel.schema";
+import ParcelEntity from "./parcelEntity/parcel.entity";
 
 export default class ParcelService {
   private readonly parcelRepository: ParcelRepository;
@@ -10,7 +11,7 @@ export default class ParcelService {
     this.parcelRepository = new ParcelRepository();
   }
   //TODO: senders only parcel creation
-  async createParcel(createParcelDTO:CreateParcelDTO ): Promise<ParcelEntity> {
+  async createParcel(createParcelDTO:CreateParcelDTO ): Promise<IParcel> {
    
     const parcel = await this.parcelRepository.create({
         ...createParcelDTO,
@@ -20,4 +21,3 @@ export default class ParcelService {
     return parcel;
   }
 }
-
