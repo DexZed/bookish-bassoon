@@ -2,10 +2,12 @@ import express from "express";
 import cors from "cors";
 import chalk from "chalk";
 import morgan from "morgan";
-import dotenv from 'dotenv';
+import dotenv from "dotenv";
 import { Application } from "express";
 import helmet from "helmet";
 import routes from "./routes";
+import { globalErrorHandler } from "./global-handler/globalErrorhandler";
+import { NotFoundException } from "./global-handler/httpexception";
 dotenv.config();
 
 export default class App {
@@ -17,6 +19,7 @@ export default class App {
     this.app = express();
     this.initMiddlewares();
     this.initRoutes();
+    this.initErrorHandling();
   }
 
   private initMiddlewares(): void {
@@ -47,9 +50,15 @@ export default class App {
     this.app.use(helmet());
   }
   private initRoutes(): void {
-   routes.forEach(({path,controller})=>{
-    this.app.use(path,controller);
-   })
+    routes.forEach(({ path, controller }) => {
+      this.app.use(path, controller);
+    });
+  }
+  private initErrorHandling(): void {
+    this.app.use((req, _res, next) => {
+      next(new NotFoundException(`Route ${req.originalUrl} not found`));
+    });
+    this.app.use(globalErrorHandler);
   }
   public initServer(): void {
     this.app.listen(this.PORT, () => {
