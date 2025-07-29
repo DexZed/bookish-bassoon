@@ -15,16 +15,23 @@ class EnvConfig {
 
   @IsString()
   DB_NAME: string;
-}
+
+//   @IsString()
+//   ACCESS_TOKEN: string;
+
+  
+//   @IsString()
+//   REFRESH_TOKEN: string;
+ }
 
 const rawConfig = config(); 
 
 const validatedConfig = plainToInstance(EnvConfig, rawConfig);
-const errors = validateSync(validatedConfig, { skipMissingProperties: false });
+const errors = validateSync(validatedConfig, { skipMissingProperties: false, whitelist: true });
 
 if (errors.length) {
   throw new Error(`Config validation error: ${JSON.stringify(errors, null, 2)}`);
 }
-console.log
+//console.log(validatedConfig);
 export default validatedConfig;
 export  const MONGO_URI = `mongodb+srv://${validatedConfig.DB_HOST}:${validatedConfig.DB_PASSWORD}@cluster0.1xqqb.mongodb.net/${validatedConfig.DB_NAME}?retryWrites=true&w=majority&appName=Cluster0`;
