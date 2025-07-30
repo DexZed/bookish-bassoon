@@ -14,7 +14,7 @@ export default class AuthController {
     const user = await this.authService.register(data);
     res.status(201).json({ message: "User registered successfully", user });
   });
-
+ 
   loginUser = asyncHandler(async (req: Request, res: Response) => {
     const data = req.body;
     const user = await this.authService.login(data.email, data.password);

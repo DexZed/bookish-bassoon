@@ -1,12 +1,16 @@
+import validatedConfig from "../config/validate";
 import { IUSer } from "../User Module/userEntity/entity";
 import AuthRepository from "./auth repository/auth.repository";
 import bcrypt from "bcrypt";
-
+import jwt from 'jsonwebtoken'
 export default class AuthService {
   private readonly authRepository: AuthRepository;
   constructor() {
     this.authRepository = new AuthRepository();
   }
+  /**
+   * add request token here 
+   */
   async register(data: IUSer): Promise<IUSer> {
     const findUser= await this.authRepository.findByEmail(data.email);
     if (findUser) {
@@ -18,6 +22,9 @@ export default class AuthService {
     const user = await this.authRepository.register(data);
     return user;
   }
+   /**
+   * issue cookie here 
+   */
   async login(email: string, password: string): Promise<IUSer | null> {
     const user = await this.authRepository.login(email);
     if (!user) {
@@ -30,6 +37,26 @@ export default class AuthService {
     if (!isPasswordValid) {
       throw new Error("Invalid email or password");
     }
+    const accessToken = jwt.sign({
+        userName: user.name,
+        email: user.email,
+        role: user.role
+    },
+    validatedConfig.ACCESS_TOKEN
+    ,{
+        expiresIn: '30s' // change this to 1hr after testing
+    
+    })
+    const refreshToken = jwt.sign({
+        userName: user.name,
+        email: user.email,
+        role: user.role
+    },
+    validatedConfig.REFRESH_TOKEN
+    ,{
+        expiresIn: '1d' 
+    
+    })
     return user;
   }
   async findByEmail(email: string): Promise<IUSer | null> {

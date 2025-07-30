@@ -2,13 +2,11 @@ import express from "express";
 import cors from "cors";
 import chalk from "chalk";
 import morgan from "morgan";
-import dotenv from "dotenv";
 import { Application } from "express";
 import helmet from "helmet";
 import routes from "./routes";
 import { globalErrorHandler } from "./global-handler/globalErrorhandler";
 import { NotFoundException } from "./global-handler/httpexception";
-dotenv.config();
 
 export default class App {
   public app: Application;
