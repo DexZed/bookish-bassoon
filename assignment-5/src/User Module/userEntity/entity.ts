@@ -6,7 +6,7 @@ export interface IUserSchema {
   password: string;
   role: 'admin' | 'sender' | 'receiver';
   isBlocked: boolean;
-  createdAt: Date;
+
 }
 
 export interface IUSer extends HydratedDocument<IUserSchema> {
