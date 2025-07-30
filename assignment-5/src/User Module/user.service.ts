@@ -9,6 +9,7 @@ export default class UserService {
   async findAll(): Promise<IUSer[]> {
     return await this.userRepository.findAll();
   }
+  // only admins can block user , needs cookie auth from request
   async blockById(id: string): Promise<IUSer> {
     const user = await this.userRepository.findById(id);
     if (!user) {
@@ -18,6 +19,7 @@ export default class UserService {
     await user.save();
     return user;
   }
+  // only admins can unblock user , needs cookie auth from request
   async unblockById(id: string): Promise<IUSer> {
     const user = await this.userRepository.findById(id);
     if (!user) {
@@ -27,11 +29,12 @@ export default class UserService {
     await user.save();
     return user;
   }
-  async findByEmail(email: string): Promise<IUSer | null> {
-    return await this.userRepository.findByEmail(email);
-  }
-  async createUser(data: IUSer): Promise<IUSer> {
-    return await this.userRepository.create(data);
-  }
+   
+//   async findByEmail(email: string): Promise<IUSer | null> {
+//     return await this.userRepository.findByEmail(email);
+//   }
+//   async createUser(data: IUSer): Promise<IUSer> {
+//     return await this.userRepository.create(data);
+//   }
   
 }
