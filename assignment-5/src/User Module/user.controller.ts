@@ -2,7 +2,7 @@ import asyncHandler from "../utils/asynchandler";
 import UserService from "./user.service";
 import { Request, Response } from "express";
 import { IUSer } from "./userEntity/entity";
-
+import bcrypt from "bcrypt"
 export class UserController {
   private userService: UserService;
 
@@ -15,6 +15,8 @@ export class UserController {
     if (findUser) {
       res.status(400).json({ message: "Email already exists" });
     }
+    const hashedPassword = await bcrypt.hash(data.password,10);
+    data.password = hashedPassword as unknown as string;
     const user = await this.userService.createUser(data);
     res.status(201).json({ message: "User created successfully", user });
   });

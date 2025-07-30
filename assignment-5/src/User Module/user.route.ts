@@ -15,6 +15,7 @@ class UserRoute{
     }
     private initRoutes(): void {
         this.router.get('/',this.usercontroller.findAll);
+        this.router.post('/',this.usercontroller.createUser);
         this.router.patch('/block/:id',this.usercontroller.blockUser);
         this.router.patch('/unblock/:id',this.usercontroller.unblockUser);
     }
