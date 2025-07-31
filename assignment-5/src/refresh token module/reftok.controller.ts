@@ -8,10 +8,14 @@ export default class RefreshTokenController {
     this.refreshTokenService = new RefreshTokenService();
   }
   getRefreshToken = asyncHandler(async (req: Request, res: Response) => {
-    const refreshToken = await this.refreshTokenService.refreshToken(req, res);
+    const accessToken = await this.refreshTokenService.refreshToken(req);
+   
+    if (!accessToken) {
+      return res.sendStatus(403);
+    }
     return res.status(200).json({
       message: "Access token generated successfully",
-      response: refreshToken,
+      response: accessToken,
     });
   });
 }

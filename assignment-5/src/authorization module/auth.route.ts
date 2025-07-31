@@ -14,7 +14,8 @@ class AuthRoute {
     private initRoutes():void {
         this.router.post('/register',this.authController.registerUser);
         this.router.post("/login",this.authController.loginUser);
-        this.router.get("/:email",this.authController.getUser)
+        this.router.get("/:email",this.authController.getUser);
+        this.router.get("/logout",this.authController.logout);
     }
 }
 

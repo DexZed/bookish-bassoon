@@ -21,7 +21,7 @@ export class UserController {
 //     res.status(201).json({ message: "User created successfully", user });
 //   });
 
-  findAll = asyncHandler(async (req: Request, res: Response) => {
+  findAll = asyncHandler(async (_: Request, res: Response) => {
     const users = await this.userService.findAll();
     res.status(200).json({ message: "Users fetched successfully", users });
   });

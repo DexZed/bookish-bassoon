@@ -18,6 +18,9 @@ export default class AuthRepository extends GenericRepository<IUSer>{
         const user = await User.findOne({email});
         return user ? user : null;
     }
-    
+    async findByRefreshToken (refreshToken: string) : Promise<IUSer |null>{
+    const user = await User.findOne({ refreshToken });
+    return user ? user : null;
+  }
 
 }
