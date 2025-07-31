@@ -51,7 +51,7 @@ export default class AuthController {
     res.status(200).json({ message: "User fetched successfully", user });
   });
   logout = asyncHandler(async (req: Request, res: Response) => {
-    const user = await this.authService.logout(req, res);
+    await this.authService.logout(req, res);
     res.status(204).json({ message: "User logged out successfully" });
   });
 }
