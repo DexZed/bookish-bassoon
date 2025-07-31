@@ -1,0 +1,26 @@
+import jwt from "JsonWebToken";
+import asyncHandler from "../utils/asynchandler";
+import { NextFunction, Request, Response } from "express";
+import validatedConfig from "../config/validate";
+
+ const jwtVerify = asyncHandler(
+  async (req: Request, res: Response, next: NextFunction) => {
+    const authHeader = req.headers.authorization;
+    if (!authHeader) {
+      return res.status(401).json({ message: "Unauthorized" });
+    }
+    console.log(authHeader);
+    const token = authHeader.split(" ")[1];
+    jwt.verify(token,
+        validatedConfig.ACCESS_TOKEN,
+        (err: any, decoded: any) => {
+            if (err) {
+                return res.status(403).json({ message: "Forbidden" });
+            }
+            req.user = decoded;
+            next();
+        }
+    )
+  }
+);
+export default jwtVerify;

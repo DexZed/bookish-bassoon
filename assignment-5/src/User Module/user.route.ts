@@ -1,5 +1,6 @@
 import { Router } from "express";
 import { UserController } from "./user.controller";
+import jwtVerify from "../middleware/jwt.validation";
 
 
 class UserRoute{
@@ -14,10 +15,10 @@ class UserRoute{
     
     }
     private initRoutes(): void {
-        this.router.get('/',this.usercontroller.findAll);
+        this.router.get('/',jwtVerify,this.usercontroller.findAll);
         // this.router.post('/',this.usercontroller.createUser);
-        this.router.patch('/block/:id',this.usercontroller.blockUser);
-        this.router.patch('/unblock/:id',this.usercontroller.unblockUser);
+        this.router.patch('/block/:id',jwtVerify,this.usercontroller.blockUser);
+        this.router.patch('/unblock/:id',jwtVerify,this.usercontroller.unblockUser);
     }
 
 

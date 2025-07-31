@@ -12,10 +12,11 @@
      "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
     "strictPropertyInitialization": false,
+    "typeRoots": ["./node_modules/@types","./src/types"]
   },
   "include": [
     "./*.js",
     "src/**/*.ts",
-    "test/**/*.ts"
+    "test/**/*.ts",
   ]
 }

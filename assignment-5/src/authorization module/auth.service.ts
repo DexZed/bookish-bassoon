@@ -37,16 +37,7 @@ export default class AuthService {
     if (!isPasswordValid) {
       throw new Error("Invalid email or password");
     }
-    const accessToken = jwt.sign({
-        userName: user.name,
-        email: user.email,
-        role: user.role
-    },
-    validatedConfig.ACCESS_TOKEN
-    ,{
-        expiresIn: '30s' // change this to 1hr after testing
     
-    })
     const refreshToken = jwt.sign({
         userName: user.name,
         email: user.email,
@@ -57,6 +48,9 @@ export default class AuthService {
         expiresIn: '1d' 
     
     })
+    // saving refresh token in db
+    user.refreshToken = refreshToken;
+    await user.save();
     return user;
   }
   async findByEmail(email: string): Promise<IUSer | null> {

@@ -6,6 +6,7 @@ export interface IUserSchema {
   password: string;
   role: 'admin' | 'sender' | 'receiver';
   isBlocked: boolean;
+  refreshToken:string
 
 }
 
@@ -18,6 +19,7 @@ const userSchema = new mongoose.Schema<IUSer>({
     password: { type: String, required: true },
     role: { type: String, enum: ['admin', 'sender', 'receiver'], required: true },
     isBlocked: { type: Boolean, default: false },
+    refreshToken: { type: String, default: '' }
 },{
     timestamps: true,
     versionKey:false
