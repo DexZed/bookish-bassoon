@@ -2,9 +2,10 @@ import jwt from "JsonWebToken";
 import asyncHandler from "../utils/asynchandler";
 import { NextFunction, Request, Response } from "express";
 import validatedConfig from "../config/validate";
+import { RequestExtend } from "../types";
 
  const jwtVerify = asyncHandler(
-  async (req: Request, res: Response, next: NextFunction) => {
+  async (req: RequestExtend, res: Response, next: NextFunction) => {
     const authHeader = req.headers.authorization;
     if (!authHeader) {
       return res.status(401).json({ message: "Unauthorized" });
