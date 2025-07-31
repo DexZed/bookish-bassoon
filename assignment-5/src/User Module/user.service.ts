@@ -7,7 +7,17 @@ export default class UserService {
     this.userRepository = new UserRepository();
   }
   async findAll(): Promise<IUSer[]> {
-    return await this.userRepository.findAll();
+    const allUser =  await this.userRepository.findAll();
+    const serializedUsers = allUser.map((user) => 
+    ({
+      id: user.id,
+      name: user.name,
+      email: user.email,
+      role: user.role,
+      isBlocked: user.isBlocked,
+    } as IUSer)
+    )
+    return serializedUsers;
   }
   // only admins can block user , needs cookie auth from request
   async blockById(id: string): Promise<IUSer> {

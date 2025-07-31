@@ -7,6 +7,7 @@ import helmet from "helmet";
 import routes from "./routes";
 import { globalErrorHandler } from "./global-handler/globalErrorhandler";
 import { NotFoundException } from "./global-handler/httpexception";
+import cookieParser from "cookie-parser";
 
 export default class App {
   public app: Application;
@@ -46,10 +47,15 @@ export default class App {
     );
     this.app.use(cors());
     this.app.use(helmet());
+    this.app.use(cookieParser());
   }
   private initRoutes(): void {
-    routes.forEach(({ path, controller }) => {
-      this.app.use(path, controller);
+    routes.forEach(({ path, controller, middleware }) => {
+      if (middleware?.length) {
+        this.app.use(path, ...middleware, controller);
+      } else {
+        this.app.use(path, controller);
+      }
     });
   }
   private initErrorHandling(): void {

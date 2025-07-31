@@ -33,9 +33,9 @@ export default class AuthService {
     if (user.isBlocked) {
       throw new Error("User is blocked");
     }
-    const isPasswordValid = await bcrypt.compare(user.password, password);
+    const isPasswordValid = await bcrypt.compare(password, user.password);
     if (!isPasswordValid) {
-      throw new Error("Invalid email or password");
+      throw new Error("Invalid password");
     }
     
     const refreshToken = jwt.sign({

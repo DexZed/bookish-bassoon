@@ -26,7 +26,7 @@ export default class AuthController {
     },
     validatedConfig.ACCESS_TOKEN
     ,{
-        expiresIn: '30s' // change this to 1hr after testing
+        expiresIn: '1h' // change this to 1hr after testing
     
     })
     res.cookie('jwt',user?.refreshToken,{
