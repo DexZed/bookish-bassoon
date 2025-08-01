@@ -9,7 +9,7 @@ export default class ParcelController {
   }
   newParcel = asyncHandler(async (req: Request, res: Response) => {
     const data = req.body;
-    const parcel = await this.parcelService.createParcel(data);
+    const parcel = await this.parcelService.createParcel(req, data);
     res.status(201).json({ message: "Parcel created successfully", parcel });
   });
   cancelParcel = asyncHandler(async (req: Request, res: Response) => {

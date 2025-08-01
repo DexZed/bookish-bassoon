@@ -1,6 +1,9 @@
-import mongoose from "mongoose";
+
+import { RequestExtend } from "../types";
+import { Response } from "express";
 import ParcelRepository from "./parcelRepository/repository";
-import { IParcel, IStatusLog } from "./parcelSchema/parcel.schema";
+import { IParcel } from "./parcelSchema/parcel.schema";
+import { trackIdGenerator } from "../utils/utility";
 
 
 export default class ParcelService {
@@ -9,8 +12,14 @@ export default class ParcelService {
     this.parcelRepository = new ParcelRepository();
   }
   // Sender Only api routes
-async createParcel(parcel:IParcel):Promise<IParcel> {
-    const newParcel = await this.parcelRepository.create(parcel);
+async createParcel(req: RequestExtend, _: Response):Promise<IParcel> {
+    const trkID = trackIdGenerator();
+    const parcel = req.body;
+    
+    const parceldata={...parcel,trackingId:trkID,status:"requested"}
+    console.log("parcel data:",parceldata);
+    
+    const newParcel = await this.parcelRepository.create(parceldata);
     return newParcel;
 }
 async getParcels(id:string):Promise<IParcel[]| null> {
