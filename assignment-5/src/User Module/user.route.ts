@@ -1,6 +1,8 @@
 import { Router } from "express";
 import { UserController } from "./user.controller";
-import jwtVerify from "../middleware/jwt.validation";
+import verifyRoles from "../middleware/verify.roles";
+import { allowedUserRoles } from "../utils/interfaces";
+
 
 
 class UserRoute{
@@ -15,10 +17,9 @@ class UserRoute{
     
     }
     private initRoutes(): void {
-        this.router.get('/',jwtVerify,this.usercontroller.findAll);
-        // this.router.post('/',this.usercontroller.createUser);
-        this.router.patch('/block/:id',jwtVerify,this.usercontroller.blockUser);
-        this.router.patch('/unblock/:id',jwtVerify,this.usercontroller.unblockUser);
+        this.router.get('/',verifyRoles(allowedUserRoles.admin),this.usercontroller.findAll);
+        this.router.patch('/block/:id',verifyRoles(allowedUserRoles.admin),this.usercontroller.blockUser);
+        this.router.patch('/unblock/:id',verifyRoles(allowedUserRoles.admin),this.usercontroller.unblockUser);
     }
 
 

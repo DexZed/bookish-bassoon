@@ -1,1 +1,6 @@
-export const allowedUserRoles = ["admin","sender","receiver"]
+export const allowedUserRoles = {
+    admin: "admin",
+    sender: "sender",
+  receiver: "receiver",
+  
+}
