@@ -1,0 +1,1 @@
+export const allowedUserRoles = ["admin","sender","receiver"]

@@ -1,3 +1,4 @@
+import { Request } from "express";
 import UserRepository from "./repository/user.repository";
 import { IUSer } from "./userEntity/entity";
 
@@ -6,7 +7,7 @@ export default class UserService {
   constructor() {
     this.userRepository = new UserRepository();
   }
-  async findAll(): Promise<IUSer[]> {
+  async findAll(req:Request): Promise<IUSer[]> {
     const allUser =  await this.userRepository.findAll();
     const serializedUsers = allUser.map((user) => 
     ({

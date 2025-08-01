@@ -41,9 +41,7 @@ export default class AuthService {
 
     const refreshToken = jwt.sign(
       {
-        userName: user.name,
         email: user.email,
-        role: user.role,
       },
       validatedConfig.REFRESH_TOKEN,
       {
@@ -68,7 +66,7 @@ export default class AuthService {
         httpOnly: true,
         maxAge: 24 * 60 * 60 * 1000,
         sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
-       secure: process.env.NODE_ENV === "production" ? true : false,
+        secure: process.env.NODE_ENV === "production" ? true : false,
       });
       return null;
     }

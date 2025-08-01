@@ -6,8 +6,9 @@ import { RequestExtend } from "../types";
 
  const jwtVerify = asyncHandler(
   async (req: RequestExtend, res: Response, next: NextFunction) => {
-    const authHeader = req.headers.authorization;
-    if (!authHeader) {
+    const authHeaderRaw = req.headers.authorization || req.headers.Authorization;
+     const authHeader = Array.isArray(authHeaderRaw) ? authHeaderRaw[0] : authHeaderRaw;
+    if (!authHeader?.startsWith("Bearer ")) {
       return res.status(401).json({ message: "Unauthorized" });
     }
     console.log(authHeader);
