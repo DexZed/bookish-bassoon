@@ -7,6 +7,7 @@ export default class ParcelController {
   constructor() {
     this.parcelService = new ParcelService();
   }
+  // sender api calls
   newParcel = asyncHandler(async (req: Request, res: Response) => {
     const data = req.body;
     const parcel = await this.parcelService.createParcel(req, data);
@@ -28,5 +29,24 @@ export default class ParcelController {
     res
       .status(200)
       .json({ message: "Parcel status log fetched successfully", parcel });
+  });
+  // receiver api calls
+  getParcelsByReceiver = asyncHandler(async (req: Request, res: Response) => {
+    const { id } = req.params;
+    const parcels = await this.parcelService.getParcelsByReceiver(id);
+    res.status(200).json({ message: "Parcels fetched successfully", parcels });
+  });
+  confirmParcelByReceiver = asyncHandler(
+    async (req: Request, res: Response) => {
+      const { id } = req.params;
+      const parcel = await this.parcelService.confirmParcel(id);
+      res
+        .status(200)
+        .json({ message: "Parcel confirmed successfully", parcel });
+    }
+  );
+  getParcelHistory = asyncHandler(async (_: Request, res: Response) => {
+    const parcels = await this.parcelService.getParcelHistory();
+    res.status(200).json({ message: "Parcels fetched successfully", parcels });
   });
 }

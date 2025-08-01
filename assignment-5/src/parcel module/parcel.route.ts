@@ -13,10 +13,13 @@ class ParcelRoute {
       this.initRoutes();
     }
     private initRoutes(): void {
-      this.router.post("/",verifyRoles(allowedUserRoles.sender), this.parcelController.newParcel);
-      this.router.get("/:id",verifyRoles(allowedUserRoles.sender), this.parcelController.getParcels);
-      this.router.patch("/cancel/:id",verifyRoles(allowedUserRoles.sender), this.parcelController.cancelParcel);
-      this.router.get("/status/:id",verifyRoles(allowedUserRoles.sender), this.parcelController.getStatusLog);
+      this.router.post("/sender",verifyRoles(allowedUserRoles.sender), this.parcelController.newParcel);
+      this.router.get("/sender/:id",verifyRoles(allowedUserRoles.sender), this.parcelController.getParcels);
+      this.router.patch("/sender/cancel/:id",verifyRoles(allowedUserRoles.sender), this.parcelController.cancelParcel);
+      this.router.get("/sender/status/:id",verifyRoles(allowedUserRoles.sender), this.parcelController.getStatusLog);
+      this.router.get("/receiver/:id",verifyRoles(allowedUserRoles.receiver), this.parcelController.getParcelsByReceiver);
+      this.router.patch("/receiver/confirm/:id", verifyRoles(allowedUserRoles.receiver), this.parcelController.confirmParcelByReceiver);
+      this.router.get("/receiver/history", verifyRoles(allowedUserRoles.receiver), this.parcelController.getParcelHistory);
     }
 }
 

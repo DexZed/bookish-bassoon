@@ -30,7 +30,7 @@ const routes: RouteDefinition[] = [
     controller: userRoute,
   },
   {
-    path: `${GLOBAL_PREFIX}/parcel/sender`,
+    path: `${GLOBAL_PREFIX}/parcel`,
     middleware:[jwtVerify],
     controller: parcelRoute,
   },

@@ -23,5 +23,20 @@ export default class ParcelRepository extends GenericRepository<IParcel> {
     const parcel = await Parcel.findById(id);
     return parcel;
   }
+  // receiver parcel api route definiions
+  async getParcelsByReceiver(userId: string) {
+    const parcels = await Parcel.find({ receiver: userId });
+    return parcels;
+  
+  }
+  async confirmParcel(id: string) {
+    const parcel = await Parcel.findByIdAndUpdate(id, { status: "Delivered" });
+    return parcel;
+  }
+  async getParcelHistory(){
+    const parcels = await Parcel.find({status:"Delivered"});
+    return parcels;
+  
+  }
 
 }
