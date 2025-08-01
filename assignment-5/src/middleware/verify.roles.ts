@@ -3,6 +3,7 @@ import { RequestExtend } from "../types";
 
 export default function verifyRoles(...roles: string[]) {
   return (req: RequestExtend, res: Response, next: NextFunction) => {
+    console.log("Logged in User:", req.user);
     if (!req.user) {
      res.status(401).json({ message: "Unauthorized" })
      return

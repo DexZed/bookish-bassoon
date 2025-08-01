@@ -41,7 +41,9 @@ export default class AuthService {
 
     const refreshToken = jwt.sign(
       {
+        name: user.name,
         email: user.email,
+        role: user.role,
       },
       validatedConfig.REFRESH_TOKEN,
       {

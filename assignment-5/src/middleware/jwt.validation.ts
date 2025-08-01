@@ -1,6 +1,6 @@
 import jwt from "JsonWebToken";
 import asyncHandler from "../utils/asynchandler";
-import { NextFunction, Request, Response } from "express";
+import { NextFunction, Response } from "express";
 import validatedConfig from "../config/validate";
 import { RequestExtend } from "../types";
 
@@ -11,7 +11,7 @@ import { RequestExtend } from "../types";
     if (!authHeader?.startsWith("Bearer ")) {
       return res.status(401).json({ message: "Unauthorized" });
     }
-    console.log(authHeader);
+    //console.log(authHeader);
     const token = authHeader.split(" ")[1];
     jwt.verify(token,
         validatedConfig.ACCESS_TOKEN,
