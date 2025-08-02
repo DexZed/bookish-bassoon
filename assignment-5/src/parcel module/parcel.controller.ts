@@ -1,3 +1,4 @@
+
 import asyncHandler from "../utils/asynchandler";
 import ParcelService from "./parcel.service";
 import { Request, Response } from "express";
@@ -39,14 +40,39 @@ export default class ParcelController {
   confirmParcelByReceiver = asyncHandler(
     async (req: Request, res: Response) => {
       const { id } = req.params;
-      const parcel = await this.parcelService.confirmParcel(id);
+      const data = req.body;
+      const parcel = await this.parcelService.confirmParcel(id,data);
       res
         .status(200)
         .json({ message: "Parcel confirmed successfully", parcel });
     }
   );
-  getParcelHistory = asyncHandler(async (_: Request, res: Response) => {
-    const parcels = await this.parcelService.getParcelHistory();
+  getParcelHistory = asyncHandler(async (req: Request, res: Response) => {
+    const {receiver,status} = req.query;
+   
+    if(!receiver) return res.status(400).json({message:"receiver is required"})
+
+    const parcels = await this.parcelService.getParcelHistory(receiver as string,status as string);
     res.status(200).json({ message: "Parcels fetched successfully", parcels });
   });
+  // admin api calls
+  getParcelsByAdmin = asyncHandler(async (_: Request, res: Response) => {
+    const parcels = await this.parcelService.getAllParcels();
+    res.status(200).json({ message: "Parcels fetched successfully", parcels });
+  });
+  blockParcel = asyncHandler(async (req: Request, res: Response) => {
+    const { id } = req.params;
+    const parcel = await this.parcelService.blockParcel(id);
+    res
+      .status(200)
+      .json({ message: "Parcel blocked successfully", parcel });
+  });
+  unBlockParcel = asyncHandler(async (req: Request, res: Response) => {
+    const { id } = req.params;
+    const parcel = await this.parcelService.unblockParcel(id);
+    res
+      .status(200)
+      .json({ message: "Parcel unblocked successfully", parcel });
+  });
+  
 }

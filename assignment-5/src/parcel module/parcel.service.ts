@@ -46,15 +46,57 @@ export default class ParcelService {
     );
     return receiverParcels;
   }
-  async confirmParcel(id: string): Promise<IParcel | null> {
-    const parcel = await this.parcelRepository.confirmParcel(id);
+  async confirmParcel(
+    id: string,
+    data: Partial<IParcel>
+  ): Promise<IParcel | null> {
+    const parcel = await this.parcelRepository.update(id, data);
     if (!parcel) {
       throw new Error("Parcel not found");
     }
     return parcel;
   }
-  async getParcelHistory(): Promise<IParcel[] | null> {
-    const parcels = await this.parcelRepository.getParcelHistory();
+  async getParcelHistory(
+    receiver: string,
+    status: string
+  ): Promise<IParcel[] | null> {
+    const parcels = await this.parcelRepository.getParcelHistory(
+      receiver,
+      status
+    );
     return parcels;
+  }
+  // Admin Only api routes
+  async getAllParcels(): Promise<IParcel[] | null> {
+    const parcels = await this.parcelRepository.findAll();
+    return parcels;
+  }
+  async updateParcelStatus(
+    id: string,
+    status: string
+  ): Promise<IParcel | null> {
+    const parcel = await this.parcelRepository.update(id, { status });
+    if (!parcel) {
+      throw new Error("Parcel not found");
+    }
+    return parcel;
+  }
+  async blockParcel(id: string): Promise<IParcel | null> {
+    const parcel = await this.parcelRepository.update(id, {
+      isBlocked: false,
+    });
+    if (!parcel) {
+      throw new Error("Parcel not found");
+    }
+    return parcel;
+  }
+  async unblockParcel(id: string): Promise<IParcel | null> {
+    const parcel = await this.parcelRepository.update(id, {
+      isBlocked: false,
+    });
+if (!parcel) {
+      throw new Error("Parcel not found");
+    }
+    return parcel;
   }
 }
