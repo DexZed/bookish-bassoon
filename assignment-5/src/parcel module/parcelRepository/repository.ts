@@ -27,7 +27,7 @@ export default class ParcelRepository extends GenericRepository<IParcel> {
   }
   // receiver parcel api route definiions
   async getParcelsByReceiver(userId: CreateParcelDTO["receiver"]): Promise<IParcel[]> {
-    const parcels = await Parcel.find({ receiver: userId });
+    const parcels = await Parcel.find({ receiver: userId,status: { $in: ["In Transit", "Dispatched"] } });
     return parcels;
   
   }

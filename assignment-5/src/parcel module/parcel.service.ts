@@ -1,10 +1,13 @@
 import { RequestExtend } from "../types";
 import { Response } from "express";
 import ParcelRepository from "./parcelRepository/repository";
-import { IParcel, IStatusLog, IStatusLogSchema } from "./parcelSchema/parcel.schema";
+import {
+  IParcel,
+  IStatusLog,
+} from "./parcelSchema/parcel.schema";
 import { trackIdGenerator } from "../utils/utility";
-import mongoose from "mongoose";
 import { CreateParcelDTO, StatusLogDTO } from "./parcel DTO/parcel.DTO";
+import { BadRequestException } from "../global-handler/httpexception";
 
 export default class ParcelService {
   private parcelRepository: ParcelRepository;
@@ -15,11 +18,11 @@ export default class ParcelService {
   async createParcel(req: RequestExtend, _: Response): Promise<IParcel> {
     const trkID = trackIdGenerator();
     const parcel = req.body;
-
     const parceldata = { ...parcel, trackingId: trkID, status: "requested" };
     console.log("parcel data:", parceldata);
 
     const newParcel = await this.parcelRepository.create(parceldata);
+
     return newParcel;
   }
   async getParcels(id: string): Promise<IParcel[] | null> {
@@ -28,9 +31,23 @@ export default class ParcelService {
   }
   async cancelParcel(id: string): Promise<IParcel | null> {
     const parcel = await this.parcelRepository.cancelParcel(id);
+
     if (!parcel) {
       throw new Error("Parcel not found");
     }
+
+    const invalidStatuses = new Set([
+      "Requested",
+      "Approved",
+      "Dispatched",
+      "In Transit",
+    ]);
+    if (invalidStatuses.has(parcel.status)) {
+      throw new BadRequestException(
+        `${parcel.status} status cannot be cancelled`
+      );
+    }
+
     return parcel;
   }
   async getParcelStatusLog(id: string): Promise<IParcel | null> {
@@ -56,6 +73,10 @@ export default class ParcelService {
     if (!parcel) {
       throw new Error("Parcel not found");
     }
+    if (parcel.status !== "In Transit")
+      throw new BadRequestException(
+        "Only Parcel In Transit status can be confirmed"
+      );
     return parcel;
   }
   async getParcelHistory(

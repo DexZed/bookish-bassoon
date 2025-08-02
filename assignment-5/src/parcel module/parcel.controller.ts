@@ -1,3 +1,4 @@
+import { RequestExtend } from "../types";
 import asyncHandler from "../utils/asynchandler";
 import ParcelService from "./parcel.service";
 import { Request, Response } from "express";
@@ -8,7 +9,10 @@ export default class ParcelController {
     this.parcelService = new ParcelService();
   }
   // sender api calls
-  newParcel = asyncHandler(async (req: Request, res: Response) => {
+  newParcel = asyncHandler(async (req: RequestExtend, res: Response) => {
+    if (req.user?.role !== "sender") {
+      return res.status(401).json({ message: "Unauthorized" });
+    }
     const data = req.body;
     const parcel = await this.parcelService.createParcel(req, data);
     res.status(201).json({ message: "Parcel created successfully", parcel });

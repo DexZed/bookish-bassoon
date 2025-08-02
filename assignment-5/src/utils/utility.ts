@@ -1,3 +1,5 @@
+import { IParcel } from "../parcel module/parcelSchema/parcel.schema";
+
 export function trackIdGenerator() {
   // id structure TRK-YYYYMMDD-xxxxxx
   let date = new Date();
@@ -12,3 +14,4 @@ export function trackIdGenerator() {
     .padStart(6, "0")}`;
   return id;
 }
+

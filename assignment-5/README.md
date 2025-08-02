@@ -1,8 +1,6 @@
-
 # 📌 ParcelXpress
 
 Modular, Secure Parcel Delivery Backend
-
 
 ## 🔧 TECH STACK
 
@@ -17,6 +15,7 @@ Modular, Secure Parcel Delivery Backend
 - **Role-based Access Middleware**
 
 - **dotenv / Helmet / CORS (Security best practices)**
+
 ## 🎭 USER ROLES & PERMISSIONS
 
 | Role       | Permissions                                                          |
@@ -35,16 +34,24 @@ interface IUser {
   name: string;
   email: string;
   password: string;
-  role: 'admin' | 'sender' | 'receiver';
+  role: "admin" | "sender" | "receiver";
   isBlocked: boolean;
   createdAt: Date;
 }
 ```
+
 ### 2. Parcel
 
 ```typescript
 interface IStatusLog {
-  status: 'Requested' | 'Approved' | 'Dispatched' | 'In Transit' | 'Delivered' | 'Cancelled' | 'Returned';
+  status:
+    | "Requested"
+    | "Approved"
+    | "Dispatched"
+    | "In Transit"
+    | "Delivered"
+    | "Cancelled"
+    | "Returned";
   location?: string;
   note?: string;
   createdAt: Date;
@@ -52,10 +59,10 @@ interface IStatusLog {
 }
 
 interface IParcel {
-  trackingId: string; 
-  sender: ObjectId; 
-  receiver: ObjectId; 
-  type: 'Document' | 'Box' | 'Fragile' | 'Other';
+  trackingId: string;
+  sender: ObjectId;
+  receiver: ObjectId;
+  type: "Document" | "Box" | "Fragile" | "Other";
   weight: number;
   pickupAddress: string;
   deliveryAddress: string;
@@ -67,8 +74,8 @@ interface IParcel {
   createdAt: Date;
   updatedAt: Date;
 }
-
 ```
+
 ## 🔐 AUTHENTICATION & AUTHORIZATION
 
 - JWT Token-based authentication
@@ -81,9 +88,9 @@ interface IParcel {
 
 - Creation: Only senders can create parcels
 
-- Cancellation: Only senders can cancel parcels
+- Cancellation: Allowed only if status is `Requested` or `Approved`
 
-- Delivery Confirmation: Only receiver can mark as Delivered 
+- Delivery Confirmation: Only receiver can mark as `Delivered` if `In Transit`
 
 - Tracking ID: Auto-generated on creation, format: TRK-YYYYMMDD-xxxxxx
 
@@ -101,6 +108,7 @@ statusLogs: [
 ]
 
 ```
+
 - New status entries are pushed via admin actions or system events
 
 - Viewable by sender, receiver, and admin
@@ -113,7 +121,7 @@ statusLogs: [
 
 - 🚫 Senders can’t cancel parcels after dispatch
 
-- 🚫 Receivers can’t confirm delivery unless status is In Transit
+- 🚫 Receivers can’t confirm delivery unless status is `In Transit`
 
 - ✅ Role-based visibility:
 
@@ -125,53 +133,65 @@ statusLogs: [
 
 - 🚫 No deletions, only status updates (logical soft deletions)
 
-- ✋ Each parcel must have unique trackingId
+- ✋ Each parcel must have unique `trackingId`
 
 ## 🔗 API ENDPOINTS
-### 🔐 Auth
-- POST /auth/register – sender or receiver
 
-- POST /auth/login
+### 🔐 Auth - Applies to all user type
 
-- GET /auth/me
+- `POST /auth/register`
+
+- `POST /auth/login`
+
+- `POST /auth/logout`
+
+- `GET /auth/:email`
 
 ### 👤 Users (Admin-only)
-- GET /users – list all users
 
-- PATCH /users/block/:id – block user
+- `GET /users` – list all users
 
-- PATCH /users/unblock/:id
+- `PATCH /users/block/:id` – block user
+
+- `PATCH /users/unblock/:id` – unblock user
 
 ### 📦 Parcels
-### Sender-only
-- POST /parcels – create parcel
 
-- GET /parcels/me – view own parcels
+### Sender-only - `/parcels/sender`
 
-- PATCH /parcels/cancel/:id – cancel own parcel
+- `POST /` – create parcel
 
-- GET /parcels/:id/status-log – view parcel status
+- `GET /:id` – view own parcels
 
-### Receiver-only
-- GET /parcels/incoming – parcels addressed to receiver
+- `PATCH /cancel/:id` – cancel own parcel
 
-- PATCH /parcels/confirm/:id – mark as delivered
+- `GET /status/:id` – view parcel status
 
-- GET /parcels/history – past received parcels
+### Receiver-only `/parcels/receiver`
 
-### Admin-only
-- GET /parcels – all parcels, filter by status/date
 
-- PATCH /parcels/status/:id – update status 
+- `GET /:id` – parcels addressed to receiver
 
-- PATCH /parcels/block/:id – block parcel
+- `PATCH /confirm/:id` – mark as delivered
 
-- PATCH /parcels/unblock/:id
+- `GET /history` – past received parcels
+
+### Admin-only `/parcels/admin`
+
+- `GET /` – all parcels, filter by status/date
+
+- `PATCH /status-log/:id` – update status
+
+- `PATCH /block/:id` – block parcel
+
+- `PATCH /unblock/:id` – unblock parcel
 
 ### Public
-- GET /track/:trackingId – public tracking
+
+- `GET /track/:trackingId` – public tracking
 
 ## 🔁 TRACKING & SEARCH
+
 ### Search parcels by:
 
 - Tracking ID
@@ -183,15 +203,17 @@ statusLogs: [
 - Public tracking endpoint for anonymous users
 
 ## 🧨 ERROR HANDLING
+
 All errors standardized via a custom Error middleware
 
 Error format:
- ```json
+
+```json
 {
-  "statusCode": 404,
-  "timestamp": "2025-08-02T14:17:11.026Z",
-  "path":"/asd"
-  "message":"Route /asd not found"
+ "statusCode": 404,
+ "timestamp": "2025-08-02T14:17:11.026Z",
+ "path":"/asd"
+ "message":"Route /asd not found"
 }
 
- ```
+```
