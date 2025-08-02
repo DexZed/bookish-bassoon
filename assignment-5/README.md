@@ -157,7 +157,7 @@ statusLogs: [
 
 ### 📦 Parcels
 
-### Sender-only - `/parcels/sender`
+### Sender-only - `/parcel/sender`
 
 - `POST /` – create parcel
 
@@ -167,7 +167,7 @@ statusLogs: [
 
 - `GET /status/:id` – view parcel status
 
-### Receiver-only `/parcels/receiver`
+### Receiver-only `/parcel/receiver`
 
 
 - `GET /:id` – parcels addressed to receiver
@@ -176,7 +176,7 @@ statusLogs: [
 
 - `GET /history` – past received parcels
 
-### Admin-only `/parcels/admin`
+### Admin-only `/parcel/admin`
 
 - `GET /` – all parcels, filter by status/date
 
@@ -192,7 +192,8 @@ statusLogs: [
 
 ## 🔁 TRACKING & SEARCH
 
-### Search parcels by:
+### Search parcels by: 
+ex - `GET /parcel/search?trackingId=<value>&startdate=<value>&endDate=<value>&sender=<value>&receiver=<value>`
 
 - Tracking ID
 
