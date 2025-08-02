@@ -1,4 +1,6 @@
 import { Request, Response, Router } from "express";
+import asyncHandler from "../utils/asynchandler";
+import Parcel from "../parcel module/parcelSchema/parcel.schema";
 
 class IndexRoute {
   public readonly router: Router;
@@ -8,10 +10,23 @@ class IndexRoute {
   }
   private configureRoutes(): void {
     this.router.get("/", (_: Request, res: Response) => {
-      
-      
       res.json({ message: "Hello World" });
     });
+    this.router.get("/track/:id",
+      asyncHandler(async (req: Request, res: Response) => {
+        const parcelId = req.params.id;
+        const parcel = await Parcel.find({trackingId: parcelId});
+        
+        console.log(parcel);
+        if (!parcel) {
+          return res.status(404).json({ message: "Parcel not found" });
+        }
+        res.json({
+          message : "Parcel fetched successfully",
+          parcel
+        });
+      })
+    )
   }
 }
 
