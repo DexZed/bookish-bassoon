@@ -31,7 +31,8 @@ class ParcelRoute {
       this.router.patch("/admin/block/:id", verifyRoles(allowedUserRoles.admin), this.parcelController.blockParcel);
       this.router.patch("/admin/unblock/:id", verifyRoles(allowedUserRoles.admin), this.parcelController.unBlockParcel)
       this.router.patch("/admin/status-log/:id",validateData(statusLogDTO), verifyRoles(allowedUserRoles.admin), this.parcelController.updateParcelStatus)
-      
+      // search 
+      this.router.get("/search", this.parcelController.getSearchedParcels);
     }
 }
 

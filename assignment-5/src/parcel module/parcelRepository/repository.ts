@@ -2,6 +2,7 @@ import mongoose, { ObjectId } from "mongoose";
 import { GenericRepository } from "../../Base Repository/generic.repository";
 import Parcel, { IParcel } from "../parcelSchema/parcel.schema";
 import { CreateParcelDTO } from "../parcel DTO/parcel.DTO";
+import { ParcelSearchDTO } from "../../utils/utility";
 
 
 
@@ -40,4 +41,35 @@ export default class ParcelRepository extends GenericRepository<IParcel> {
     return parcels;
   
   }
+  // search percels by multi query 
+  async searchParcels(filters: ParcelSearchDTO): Promise<IParcel[]> {
+  const query: any = {};
+
+  if (filters.trackingId) {
+    query.trackingId = { $regex: filters.trackingId, $options: "i" }; // case-insensitive search
+  }
+
+  if (filters.status) {
+    query.status = Array.isArray(filters.status)
+      ? { $in: filters.status }
+      : filters.status;
+  }
+
+  if (filters.startDate || filters.endDate) {
+    query.createdAt = {};
+    if (filters.startDate) query.createdAt.$gte = new Date(filters.startDate);
+    if (filters.endDate) query.createdAt.$lte = new Date(filters.endDate);
+  }
+
+  if (filters.senderId) {
+    query.sender = filters.senderId;
+  }
+
+  if (filters.receiverId) {
+    query.receiver = filters.receiverId;
+  }
+
+  return await Parcel.find(query);
+}
+
 }

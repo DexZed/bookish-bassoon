@@ -1,5 +1,6 @@
 import { RequestExtend } from "../types";
 import asyncHandler from "../utils/asynchandler";
+import { ParcelSearchDTO } from "../utils/utility";
 import ParcelService from "./parcel.service";
 import { Request, Response } from "express";
 export default class ParcelController {
@@ -90,5 +91,11 @@ export default class ParcelController {
     res
       .status(200)
       .json({ message: "Parcel status updated successfully", parcel });
+  });
+
+  getSearchedParcels = asyncHandler(async (req: Request, res: Response) => {
+    const filters = req.query;
+    const parcels = await this.parcelService.searchParcels(filters as ParcelSearchDTO);
+    res.status(200).json({ message: "Parcels fetched successfully", parcels });
   });
 }

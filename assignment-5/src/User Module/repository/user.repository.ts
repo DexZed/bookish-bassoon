@@ -14,4 +14,5 @@ export default class UserRepository extends GenericRepository<IUSer> {
     const user = await User.findOne({ refreshToken });
     return user ? user : null;
   }
+
 }

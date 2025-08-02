@@ -5,7 +5,7 @@ import {
   IParcel,
   IStatusLog,
 } from "./parcelSchema/parcel.schema";
-import { trackIdGenerator } from "../utils/utility";
+import { ParcelSearchDTO, trackIdGenerator } from "../utils/utility";
 import { CreateParcelDTO, StatusLogDTO } from "./parcel DTO/parcel.DTO";
 import { BadRequestException } from "../global-handler/httpexception";
 
@@ -134,5 +134,9 @@ export default class ParcelService {
       throw new Error("Parcel not found");
     }
     return parcel;
+  }
+
+  async searchParcels(filters: ParcelSearchDTO): Promise<IParcel[]> {
+    return await this.parcelRepository.searchParcels(filters);
   }
 }
