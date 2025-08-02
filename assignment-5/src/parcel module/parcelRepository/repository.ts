@@ -39,5 +39,4 @@ export default class ParcelRepository extends GenericRepository<IParcel> {
     return parcels;
   
   }
-
 }

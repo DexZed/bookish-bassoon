@@ -1,8 +1,9 @@
 import { RequestExtend } from "../types";
 import { Response } from "express";
 import ParcelRepository from "./parcelRepository/repository";
-import { IParcel } from "./parcelSchema/parcel.schema";
+import { IParcel, IStatusLog, IStatusLogSchema } from "./parcelSchema/parcel.schema";
 import { trackIdGenerator } from "../utils/utility";
+import mongoose from "mongoose";
 
 export default class ParcelService {
   private parcelRepository: ParcelRepository;
@@ -73,17 +74,30 @@ export default class ParcelService {
   }
   async updateParcelStatus(
     id: string,
-    status: string
+    status: IStatusLogSchema["status"],
+    location?: string,
+    note?: string
   ): Promise<IParcel | null> {
-    const parcel = await this.parcelRepository.update(id, { status });
+    const parcel = await this.parcelRepository.findById(id);
+
     if (!parcel) {
       throw new Error("Parcel not found");
     }
+
+    parcel.statusLogs.push({
+      status,
+      location,
+      note,
+    } as IStatusLog);
+
+    await parcel.save();
+
     return parcel;
   }
+
   async blockParcel(id: string): Promise<IParcel | null> {
     const parcel = await this.parcelRepository.update(id, {
-      isBlocked: false,
+      isBlocked: true,
     });
     if (!parcel) {
       throw new Error("Parcel not found");
@@ -94,7 +108,7 @@ export default class ParcelService {
     const parcel = await this.parcelRepository.update(id, {
       isBlocked: false,
     });
-if (!parcel) {
+    if (!parcel) {
       throw new Error("Parcel not found");
     }
     return parcel;
