@@ -2,7 +2,8 @@ import { Router } from "express";
 import ParcelController from "./parcel.controller";
 import verifyRoles from "../middleware/verify.roles";
 import { allowedUserRoles } from "../utils/interfaces";
-
+import { validateData } from "../middleware/zod.validation";
+import  { createParcelDTO, statusLogDTO } from "./parcel DTO/parcel.DTO";
 class ParcelRoute {
     private readonly parcelController: ParcelController;
     public readonly router: Router;
@@ -13,7 +14,7 @@ class ParcelRoute {
       this.initRoutes();
     }
     private initRoutes(): void {
-      this.router.post("/sender",verifyRoles(allowedUserRoles.sender), this.parcelController.newParcel);
+      this.router.post("/sender",validateData(createParcelDTO),verifyRoles(allowedUserRoles.sender), this.parcelController.newParcel);
       this.router.get("/sender/:id",verifyRoles(allowedUserRoles.sender), this.parcelController.getParcels);
       this.router.patch("/sender/cancel/:id",verifyRoles(allowedUserRoles.sender), this.parcelController.cancelParcel);
       this.router.get("/sender/status/:id",verifyRoles(allowedUserRoles.sender), this.parcelController.getStatusLog);
@@ -29,7 +30,7 @@ class ParcelRoute {
       this.router.get("/admin", verifyRoles(allowedUserRoles.admin), this.parcelController.getParcelsByAdmin);
       this.router.patch("/admin/block/:id", verifyRoles(allowedUserRoles.admin), this.parcelController.blockParcel);
       this.router.patch("/admin/unblock/:id", verifyRoles(allowedUserRoles.admin), this.parcelController.unBlockParcel)
-      this.router.patch("/admin/status-log/:id", verifyRoles(allowedUserRoles.admin), this.parcelController.updateParcelStatus)
+      this.router.patch("/admin/status-log/:id",validateData(statusLogDTO), verifyRoles(allowedUserRoles.admin), this.parcelController.updateParcelStatus)
       
     }
 }

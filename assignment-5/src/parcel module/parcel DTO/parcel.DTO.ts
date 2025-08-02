@@ -1,6 +1,6 @@
 import { z } from "zod";
 
-const statusLogDTO = z.object({
+export const statusLogDTO = z.object({
     status: z.enum(["Requested", "Approved", "Dispatched", "In Transit", "Delivered", "Cancelled", "Returned"]),
     location: z.string().optional(),
     note: z.string().optional(),
@@ -9,7 +9,7 @@ const statusLogDTO = z.object({
 export type StatusLogDTO = z.infer<typeof statusLogDTO>;
 
 
-const createParcelDTO = z.object({
+export const createParcelDTO = z.object({
   trackingID: z.string(),
   sender: z.string(),
   receiver: z.string(),
