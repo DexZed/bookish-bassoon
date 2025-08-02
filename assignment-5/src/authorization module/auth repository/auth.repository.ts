@@ -1,13 +1,15 @@
 import { GenericRepository } from "../../Base Repository/generic.repository";
 import User, { IUSer } from "../../User Module/userEntity/entity";
+import { CreateUser } from "../userDTOs/user.DTO";
 
 
 export default class AuthRepository extends GenericRepository<IUSer>{
     constructor(){
         super(User);
     }
-    async register(data:IUSer):Promise<IUSer>{
-        return await this.create(data);
+    async register(data:CreateUser):Promise<IUSer>{
+        const user = new User(data);
+        return await this.create(user);
     
     }
     async login(email:string):Promise<IUSer | null>{

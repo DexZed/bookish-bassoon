@@ -1,6 +1,7 @@
 import mongoose, { ObjectId } from "mongoose";
 import { GenericRepository } from "../../Base Repository/generic.repository";
 import Parcel, { IParcel } from "../parcelSchema/parcel.schema";
+import { CreateParcelDTO } from "../parcel DTO/parcel.DTO";
 
 
 
@@ -8,10 +9,10 @@ export default class ParcelRepository extends GenericRepository<IParcel> {
   constructor() {
     super(Parcel);
   }
-  async createParcel(parcel: Partial<IParcel>): Promise<IParcel>{
+  async createParcel(parcel: Partial<CreateParcelDTO>): Promise<IParcel>{
     return await Parcel.create(parcel);
   }
-  async getParcelsByUser(userId: string): Promise<IParcel[]> {
+  async getParcelsByUser(userId: CreateParcelDTO["sender"]): Promise<IParcel[]> {
     const parcels = await Parcel.find({ sender: userId });
     return parcels;
   
@@ -25,12 +26,12 @@ export default class ParcelRepository extends GenericRepository<IParcel> {
     return parcel;
   }
   // receiver parcel api route definiions
-  async getParcelsByReceiver(userId: string): Promise<IParcel[]> {
+  async getParcelsByReceiver(userId: CreateParcelDTO["receiver"]): Promise<IParcel[]> {
     const parcels = await Parcel.find({ receiver: userId });
     return parcels;
   
   }
-  async getParcelHistory(receiverId: string, status: string): Promise<IParcel[]> {
+  async getParcelHistory(receiverId: CreateParcelDTO["receiver"], status: CreateParcelDTO["status"]): Promise<IParcel[]> {
       if (!mongoose.Types.ObjectId.isValid(receiverId)) {
     throw new Error("Invalid receiver ID");
   }

@@ -1,4 +1,4 @@
-import mongoose, { HydratedDocument, ObjectId } from "mongoose";
+import mongoose, { HydratedDocument } from "mongoose";
 
 export interface IUserSchema {
   name: string;

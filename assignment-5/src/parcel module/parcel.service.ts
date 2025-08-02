@@ -4,6 +4,7 @@ import ParcelRepository from "./parcelRepository/repository";
 import { IParcel, IStatusLog, IStatusLogSchema } from "./parcelSchema/parcel.schema";
 import { trackIdGenerator } from "../utils/utility";
 import mongoose from "mongoose";
+import { CreateParcelDTO, StatusLogDTO } from "./parcel DTO/parcel.DTO";
 
 export default class ParcelService {
   private parcelRepository: ParcelRepository;
@@ -49,7 +50,7 @@ export default class ParcelService {
   }
   async confirmParcel(
     id: string,
-    data: Partial<IParcel>
+    data: Partial<StatusLogDTO>
   ): Promise<IParcel | null> {
     const parcel = await this.parcelRepository.update(id, data);
     if (!parcel) {
@@ -58,8 +59,8 @@ export default class ParcelService {
     return parcel;
   }
   async getParcelHistory(
-    receiver: string,
-    status: string
+    receiver: CreateParcelDTO["receiver"],
+    status: CreateParcelDTO["status"]
   ): Promise<IParcel[] | null> {
     const parcels = await this.parcelRepository.getParcelHistory(
       receiver,
@@ -74,9 +75,9 @@ export default class ParcelService {
   }
   async updateParcelStatus(
     id: string,
-    status: IStatusLogSchema["status"],
-    location?: string,
-    note?: string
+    status: StatusLogDTO["status"],
+    location?: StatusLogDTO["location"],
+    note?: StatusLogDTO["note"]
   ): Promise<IParcel | null> {
     const parcel = await this.parcelRepository.findById(id);
 

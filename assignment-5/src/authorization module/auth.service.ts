@@ -4,6 +4,8 @@ import { IUSer } from "../User Module/userEntity/entity";
 import AuthRepository from "./auth repository/auth.repository";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
+import { CreateUser, createUserDTO } from "./userDTOs/user.DTO";
+
 export default class AuthService {
   private readonly authRepository: AuthRepository;
   constructor() {
@@ -12,7 +14,9 @@ export default class AuthService {
   /**
    * add request token here
    */
-  async register(data: IUSer): Promise<IUSer> {
+  async register(data: CreateUser): Promise<IUSer> {
+    
+
     const findUser = await this.authRepository.findByEmail(data.email);
     if (findUser) {
       throw new Error("Email already exists");
@@ -26,7 +30,8 @@ export default class AuthService {
   /**
    * issue cookie here
    */
-  async login(email: string, password: string): Promise<IUSer | null> {
+  async login(email: CreateUser["email"], password: CreateUser["password"]): Promise<IUSer | null> {
+
     const user = await this.authRepository.login(email);
     if (!user) {
       throw new Error("Invalid email or password");
@@ -55,7 +60,7 @@ export default class AuthService {
     await user.save();
     return user;
   }
-  async findByEmail(email: string): Promise<IUSer | null> {
+  async findByEmail(email: CreateUser["email"]): Promise<IUSer | null> {
     return await this.authRepository.findByEmail(email);
   }
   async logout(req: Request, res: Response): Promise<IUSer | null> {

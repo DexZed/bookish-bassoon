@@ -40,12 +40,5 @@ export default class UserService {
     await user.save();
     return user;
   }
-   
-//   async findByEmail(email: string): Promise<IUSer | null> {
-//     return await this.userRepository.findByEmail(email);
-//   }
-//   async createUser(data: IUSer): Promise<IUSer> {
-//     return await this.userRepository.create(data);
-//   }
   
 }
