@@ -6,6 +6,7 @@ import type { CreateParcelDTO, StatusLogDTO } from "./parcel DTO/parcel.DTO";
 import type {
   IParcel,
   IStatusLog,
+  IStatusLogSchema,
 } from "./parcelSchema/parcel.schema";
 
 import { BadRequestException } from "../global-handler/httpexception";
@@ -78,15 +79,16 @@ export default class ParcelService {
     id: string,
     data: Partial<StatusLogDTO>,
   ): Promise<IParcel | null> {
-    const parcel = await this.parcelRepository.update(id, data);
-    if (!parcel) {
+    const findParcel = await this.parcelRepository.findById(id);
+    if (!findParcel) {
       throw new Error("Parcel not found");
     }
-    if (parcel.status !== "In Transit") {
+    if (findParcel.status  !== "In Transit") {
       throw new BadRequestException(
         "Only Parcel In Transit status can be confirmed",
       );
     }
+    const parcel = await this.parcelRepository.update(id, data);
     return parcel;
   }
 
