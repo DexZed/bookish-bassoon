@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 
 export class MongoConnection {
-  private mongoUrl: string;
+  private mongoUrl!: string;
   private static instance: MongoConnection;
   private isConnected = false;
   private constructor() {}

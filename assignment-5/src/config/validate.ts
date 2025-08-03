@@ -7,22 +7,22 @@ import config from "./config";
 class EnvConfig {
   @Type(() => Number)
   @IsNumber()
-  PORT: number;
+  PORT!: number;
 
   @IsString()
-  DB_HOST: string;
+  DB_HOST!: string;
 
   @IsString()
-  DB_PASSWORD: string;
+  DB_PASSWORD!: string;
 
   @IsString()
-  DB_NAME: string;
+  DB_NAME!: string;
 
   @IsString()
-  ACCESS_TOKEN: string;
+  ACCESS_TOKEN!: string;
 
   @IsString()
-  REFRESH_TOKEN: string;
+  REFRESH_TOKEN!: string;
 }
 
 const rawConfig = config();
