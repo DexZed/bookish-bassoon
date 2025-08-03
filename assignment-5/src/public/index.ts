@@ -20,7 +20,7 @@ class IndexRoute {
       const parcelId = req.params.id;
       const parcel = await Parcel.find({ trackingId: parcelId });
 
-      console.log(parcel);
+      //console.log(parcel);
       if (!parcel) {
         return res.status(404).json({ message: "Parcel not found" });
       }

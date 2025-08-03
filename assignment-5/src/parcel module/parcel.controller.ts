@@ -95,7 +95,7 @@ export default class ParcelController {
   updateParcelStatus = asyncHandler(async (req: Request, res: Response) => {
     const { id } = req.params;
     const { status, location, note } = req.body;
-    console.log("parcel status update fields", id, status, location, note);
+    //console.log("parcel status update fields", id, status, location, note);
     const parcel = await this.parcelService.updateParcelStatus(
       id,
       status,

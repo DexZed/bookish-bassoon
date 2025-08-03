@@ -29,10 +29,10 @@ export default class RefreshTokenService {
 
     try {
       decoded = jwt.verify(refreshToken, validatedConfig.REFRESH_TOKEN) as JwtPayload;
-      console.log(decoded);
+      //console.log(decoded);
     }
     catch (error: any) {
-      console.error("Error verifying refresh token:", error);
+      //console.error("Error verifying refresh token:", error);
       return null;
     }
 
@@ -55,7 +55,7 @@ export default class RefreshTokenService {
       role: user?.role,
       accessToken,
     };
-    console.log("user object", userObject);
+    //console.log("user object", userObject);
     return userObject;
   }
 }

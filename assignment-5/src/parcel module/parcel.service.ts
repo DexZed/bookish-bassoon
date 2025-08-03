@@ -23,7 +23,7 @@ export default class ParcelService {
     const trkID = trackIdGenerator();
     const parcel = req.body;
     const parceldata = { ...parcel, trackingId: trkID, status: "requested" };
-    console.log("parcel data:", parceldata);
+    //console.log("parcel data:", parceldata);
 
     const newParcel = await this.parcelRepository.create(parceldata);
 

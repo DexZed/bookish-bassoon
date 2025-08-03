@@ -11,7 +11,7 @@
   "keywords": [],
   "main": "src/server.ts",
   "scripts": {
-    "start": "node dist/src/server.js",
+    "start": "node dist/server.js",
     "dev": "nodemon",
     "build": "tsc",
     "lint": "eslint --fix src",
