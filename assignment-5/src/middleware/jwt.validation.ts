@@ -1,6 +1,6 @@
 import type { NextFunction, Response } from "express";
 
-import jwt from "JsonWebToken";
+import jwt from "jsonwebtoken";
 
 import type { RequestExtend } from "../types";
 
