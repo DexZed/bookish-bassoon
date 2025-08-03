@@ -11,6 +11,7 @@ export class MongoConnection {
     }
     return MongoConnection.instance;
   }
+
   public async connect(uri: string): Promise<void> {
     if (this.isConnected) {
       console.log("MongoDB Already Connected");
@@ -20,17 +21,20 @@ export class MongoConnection {
       await mongoose.connect(uri);
       this.isConnected = true;
       console.log("MongoDB Connected");
-    } catch (error) {
+    }
+    catch (error) {
       console.error("❌ MongoDB connection error:", error);
       throw error;
     }
   }
+
   public async disconnect(): Promise<void> {
     return mongoose.disconnect().then(() => {
       this.isConnected = false;
       console.log("MongoDB Disconnected");
     });
   }
+
   public connectionStatus(): void {
     mongoose.connection.on("open", () => console.log("open"));
     mongoose.connection.on("disconnected", () => console.log("disconnected"));

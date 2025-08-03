@@ -1,8 +1,11 @@
-import { Request, Response } from "express";
+import type { Request, Response } from "express";
+
+import jwt from "jsonwebtoken";
+
+import validatedConfig from "../config/validate";
 import asyncHandler from "../utils/asynchandler";
 import AuthService from "./auth.service";
-import jwt from "jsonwebtoken";
-import validatedConfig from "../config/validate";
+
 export default class AuthController {
   private readonly authService: AuthService;
 
@@ -28,7 +31,7 @@ export default class AuthController {
       validatedConfig.ACCESS_TOKEN,
       {
         expiresIn: "1h", // change this to 1hr after testing
-      }
+      },
     );
     res.cookie("jwt", user?.refreshToken, {
       httpOnly: true,
@@ -45,11 +48,13 @@ export default class AuthController {
       .status(200)
       .json({ message: "User logged in successfully", filteredUserField });
   });
+
   getUser = asyncHandler(async (req: Request, res: Response) => {
     const email = req.params.email;
     const user = await this.authService.findByEmail(email);
     res.status(200).json({ message: "User fetched successfully", user });
   });
+
   logout = asyncHandler(async (req: Request, res: Response) => {
     await this.authService.logout(req, res);
     res.status(204).json({ message: "User logged out successfully" });

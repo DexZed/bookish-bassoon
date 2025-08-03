@@ -1,10 +1,11 @@
-import { RequestHandler, Router } from "express";
-import IndexRoute from "../public";
-import userRoute from "../User Module/user.route";
+import type { RequestHandler, Router } from "express";
+
 import authRoute from "../authorization module/auth.route";
-import parcelRoute from "../parcel module/parcel.route";
 import jwtVerify from "../middleware/jwt.validation";
+import parcelRoute from "../parcel module/parcel.route";
+import IndexRoute from "../public";
 import refreshTokenRoute from "../refresh token module/reftok.route";
+import userRoute from "../User Module/user.route";
 
 type RouteDefinition = {
   path: string;
@@ -15,23 +16,23 @@ const GLOBAL_PREFIX = "/api/v1";
 
 const routes: RouteDefinition[] = [
   { path: "/", controller: IndexRoute },
-  
+
   {
     path: `${GLOBAL_PREFIX}/auth`,
     controller: authRoute,
   },
   {
-    path:`${GLOBAL_PREFIX}/refresh`,
+    path: `${GLOBAL_PREFIX}/refresh`,
     controller: refreshTokenRoute,
   },
   {
     path: `${GLOBAL_PREFIX}/users`,
-    middleware:[jwtVerify],
+    middleware: [jwtVerify],
     controller: userRoute,
   },
   {
     path: `${GLOBAL_PREFIX}/parcel`,
-    middleware:[jwtVerify],
+    middleware: [jwtVerify],
     controller: parcelRoute,
   },
 ];

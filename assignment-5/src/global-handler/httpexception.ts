@@ -12,19 +12,19 @@ export class HttpException extends Error {
   }
 }
 export class BadRequestException extends HttpException {
-  constructor(message = 'Bad Request') {
+  constructor(message = "Bad Request") {
     super(400, message);
   }
 }
 
 export class NotFoundException extends HttpException {
-  constructor(message = 'Not Found') {
+  constructor(message = "Not Found") {
     super(404, message);
   }
 }
 
 export class UnauthorizedException extends HttpException {
-  constructor(message = 'Unauthorized') {
+  constructor(message = "Unauthorized") {
     super(401, message);
   }
 }

@@ -1,6 +1,6 @@
-import { ObjectId } from "mongoose";
+import type { ObjectId } from "mongoose";
 
-export default interface ParcelEntity {
+type ParcelEntity = {
   trackingId: string;
   sender: ObjectId;
   receiver: ObjectId;
@@ -17,4 +17,5 @@ export default interface ParcelEntity {
   fee: number;
   deliveryDate: Date;
   isBlocked: boolean;
-}
+};
+export default ParcelEntity;

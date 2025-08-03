@@ -1,4 +1,5 @@
-import { Response, Request } from "express";
+import type { Request, Response } from "express";
+
 import asyncHandler from "../utils/asynchandler";
 import RefreshTokenService from "./reftok.service";
 
@@ -7,9 +8,10 @@ export default class RefreshTokenController {
   constructor() {
     this.refreshTokenService = new RefreshTokenService();
   }
+
   getRefreshToken = asyncHandler(async (req: Request, res: Response) => {
     const accessToken = await this.refreshTokenService.refreshToken(req);
-   
+
     if (!accessToken) {
       return res.sendStatus(403);
     }

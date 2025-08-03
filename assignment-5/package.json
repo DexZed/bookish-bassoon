@@ -14,7 +14,7 @@
     "start": "node --env-file=.env dist/src/server.js",
     "dev": "nodemon",
     "build": "tsc",
-    "lint": "eslint --fix src test",
+    "lint": "eslint --fix src",
     "test": "vitest run",
     "typecheck": "tsc --noEmit"
   },

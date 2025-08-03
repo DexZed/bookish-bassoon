@@ -1,14 +1,18 @@
-import { RequestExtend } from "../types";
+import type { Request, Response } from "express";
+
+import type { RequestExtend } from "../types";
+import type { ParcelSearchDTO } from "../utils/utility";
+
 import asyncHandler from "../utils/asynchandler";
-import { ParcelSearchDTO } from "../utils/utility";
 import ParcelService from "./parcel.service";
-import { Request, Response } from "express";
+
 export default class ParcelController {
   private readonly parcelService: ParcelService;
 
   constructor() {
     this.parcelService = new ParcelService();
   }
+
   // sender api calls
   newParcel = asyncHandler(async (req: RequestExtend, res: Response) => {
     if (req.user?.role !== "sender") {
@@ -18,16 +22,19 @@ export default class ParcelController {
     const parcel = await this.parcelService.createParcel(req, data);
     res.status(201).json({ message: "Parcel created successfully", parcel });
   });
+
   cancelParcel = asyncHandler(async (req: Request, res: Response) => {
     const { id } = req.params;
     const parcel = await this.parcelService.cancelParcel(id);
     res.status(200).json({ message: "Parcel cancelled successfully", parcel });
   });
+
   getParcels = asyncHandler(async (req: Request, res: Response) => {
     const { id } = req.params;
     const parcels = await this.parcelService.getParcels(id);
     res.status(200).json({ message: "Parcels fetched successfully", parcels });
   });
+
   getStatusLog = asyncHandler(async (req: Request, res: Response) => {
     const { id } = req.params;
     const parcel = await this.parcelService.getParcelStatusLog(id);
@@ -35,12 +42,14 @@ export default class ParcelController {
       .status(200)
       .json({ message: "Parcel status log fetched successfully", parcel });
   });
+
   // receiver api calls
   getParcelsByReceiver = asyncHandler(async (req: Request, res: Response) => {
     const { id } = req.params;
     const parcels = await this.parcelService.getParcelsByReceiver(id);
     res.status(200).json({ message: "Parcels fetched successfully", parcels });
   });
+
   confirmParcelByReceiver = asyncHandler(
     async (req: Request, res: Response) => {
       const { id } = req.params;
@@ -49,8 +58,9 @@ export default class ParcelController {
       res
         .status(200)
         .json({ message: "Parcel confirmed successfully", parcel });
-    }
+    },
   );
+
   getParcelHistory = asyncHandler(async (req: Request, res: Response) => {
     const { receiver, status } = req.query;
 
@@ -59,34 +69,38 @@ export default class ParcelController {
 
     const parcels = await this.parcelService.getParcelHistory(
       receiver as string,
-      status as string
+      status as string,
     );
     res.status(200).json({ message: "Parcels fetched successfully", parcels });
   });
+
   // admin api calls
   getParcelsByAdmin = asyncHandler(async (_: Request, res: Response) => {
     const parcels = await this.parcelService.getAllParcels();
     res.status(200).json({ message: "Parcels fetched successfully", parcels });
   });
+
   blockParcel = asyncHandler(async (req: Request, res: Response) => {
     const { id } = req.params;
     const parcel = await this.parcelService.blockParcel(id);
     res.status(200).json({ message: "Parcel blocked successfully", parcel });
   });
+
   unBlockParcel = asyncHandler(async (req: Request, res: Response) => {
     const { id } = req.params;
     const parcel = await this.parcelService.unblockParcel(id);
     res.status(200).json({ message: "Parcel unblocked successfully", parcel });
   });
+
   updateParcelStatus = asyncHandler(async (req: Request, res: Response) => {
     const { id } = req.params;
     const { status, location, note } = req.body;
-    console.log("parcel status update fields",id,status, location, note);
+    console.log("parcel status update fields", id, status, location, note);
     const parcel = await this.parcelService.updateParcelStatus(
       id,
       status,
       location,
-      note
+      note,
     );
     res
       .status(200)

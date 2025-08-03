@@ -1,5 +1,7 @@
+import type { IUSer } from "../userEntity/entity";
+
 import { GenericRepository } from "../../Base Repository/generic.repository";
-import User, { IUSer } from "../userEntity/entity";
+import User from "../userEntity/entity";
 
 export default class UserRepository extends GenericRepository<IUSer> {
   constructor() {
@@ -8,11 +10,11 @@ export default class UserRepository extends GenericRepository<IUSer> {
 
   async findByEmail(email: string): Promise<IUSer | null> {
     const user = await User.findOne({ email });
-    return user ? user : null;
-  }
-  async findByRefreshToken (refreshToken: string) : Promise<IUSer |null>{
-    const user = await User.findOne({ refreshToken });
-    return user ? user : null;
+    return user || null;
   }
 
+  async findByRefreshToken(refreshToken: string): Promise<IUSer | null> {
+    const user = await User.findOne({ refreshToken });
+    return user || null;
+  }
 }

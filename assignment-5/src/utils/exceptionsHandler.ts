@@ -1,37 +1,38 @@
-import { MongoConnection } from "../db/MongoConnection";
+import { MongoConnection } from "../db/mongo-connection";
 
 export class ExceptionHandler {
   private static shuttingDown = false;
 
   public static init(): void {
-    process.on('uncaughtException', (err) => {
-      console.error('Uncaught Exception:', err);
+    process.on("uncaughtException", (err) => {
+      console.error("Uncaught Exception:", err);
       ExceptionHandler.shutdown(1);
     });
 
-    process.on('unhandledRejection', (reason) => {
-      console.error('Unhandled Rejection:', reason);
+    process.on("unhandledRejection", (reason) => {
+      console.error("Unhandled Rejection:", reason);
       ExceptionHandler.shutdown(1);
     });
 
-    process.on('SIGINT', () => {
-      console.log('SIGINT received');
+    process.on("SIGINT", () => {
+      console.log("SIGINT received");
       ExceptionHandler.shutdown(0);
     });
 
-    process.on('SIGTERM', () => {
-      console.log('SIGTERM received');
+    process.on("SIGTERM", () => {
+      console.log("SIGTERM received");
       ExceptionHandler.shutdown(0);
     });
   }
 
   private static shutdown(code: number): void {
-    if (ExceptionHandler.shuttingDown) return;
+    if (ExceptionHandler.shuttingDown)
+      return;
     ExceptionHandler.shuttingDown = true;
 
-    console.log('Shutting down gracefully...');
+    console.log("Shutting down gracefully...");
 
-   MongoConnection.getInstance().disconnect();
+    MongoConnection.getInstance().disconnect();
     setTimeout(() => {
       process.exit(code);
     }, 1000);

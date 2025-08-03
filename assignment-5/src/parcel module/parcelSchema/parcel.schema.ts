@@ -1,6 +1,8 @@
-import mongoose, { HydratedDocument, ObjectId } from "mongoose";
+import type { HydratedDocument, ObjectId } from "mongoose";
 
-export interface IStatusLogSchema {
+import mongoose from "mongoose";
+
+export type IStatusLogSchema = {
   status:
     | "Requested"
     | "Approved"
@@ -11,8 +13,8 @@ export interface IStatusLogSchema {
     | "Returned";
   location?: string;
   note?: string;
-}
-export interface IStatusLog extends HydratedDocument<IStatusLogSchema> {}
+};
+export type IStatusLog = {} & HydratedDocument<IStatusLogSchema>;
 
 const statusLogSchema = new mongoose.Schema<IStatusLog>(
   {
@@ -36,10 +38,10 @@ const statusLogSchema = new mongoose.Schema<IStatusLog>(
     timestamps: true,
     versionKey: false,
     id: false,
-  }
+  },
 );
 
-export  interface IParcelSchema {
+export type IParcelSchema = {
   trackingId: string; // TRK-YYYYMMDD-xxxxxx
   sender: ObjectId; // User
   receiver: ObjectId; // User
@@ -52,8 +54,8 @@ export  interface IParcelSchema {
   fee: number;
   deliveryDate: Date;
   isBlocked: boolean;
-}
-export interface IParcel extends HydratedDocument<IParcelSchema> {}
+};
+export type IParcel = {} & HydratedDocument<IParcelSchema>;
 
 const parcelSchema = new mongoose.Schema<IParcel>(
   {
@@ -85,7 +87,7 @@ const parcelSchema = new mongoose.Schema<IParcel>(
   {
     timestamps: true,
     versionKey: false,
-  }
+  },
 );
 
 const Parcel = mongoose.model<IParcel>("Package", parcelSchema);

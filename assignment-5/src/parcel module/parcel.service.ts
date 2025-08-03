@@ -1,19 +1,23 @@
-import { RequestExtend } from "../types";
-import { Response } from "express";
-import ParcelRepository from "./parcelRepository/repository";
-import {
+import type { Response } from "express";
+
+import type { RequestExtend } from "../types";
+import type { ParcelSearchDTO } from "../utils/utility";
+import type { CreateParcelDTO, StatusLogDTO } from "./parcel DTO/parcel.DTO";
+import type {
   IParcel,
   IStatusLog,
 } from "./parcelSchema/parcel.schema";
-import { ParcelSearchDTO, trackIdGenerator } from "../utils/utility";
-import { CreateParcelDTO, StatusLogDTO } from "./parcel DTO/parcel.DTO";
+
 import { BadRequestException } from "../global-handler/httpexception";
+import { trackIdGenerator } from "../utils/utility";
+import ParcelRepository from "./parcelRepository/repository";
 
 export default class ParcelService {
   private parcelRepository: ParcelRepository;
   constructor() {
     this.parcelRepository = new ParcelRepository();
   }
+
   // Sender Only api routes
   async createParcel(req: RequestExtend, _: Response): Promise<IParcel> {
     const trkID = trackIdGenerator();
@@ -25,10 +29,12 @@ export default class ParcelService {
 
     return newParcel;
   }
+
   async getParcels(id: string): Promise<IParcel[] | null> {
     const senderParcels = await this.parcelRepository.getParcelsByUser(id);
     return senderParcels;
   }
+
   async cancelParcel(id: string): Promise<IParcel | null> {
     const parcel = await this.parcelRepository.cancelParcel(id);
 
@@ -44,12 +50,13 @@ export default class ParcelService {
     ]);
     if (invalidStatuses.has(parcel.status)) {
       throw new BadRequestException(
-        `${parcel.status} status cannot be cancelled`
+        `${parcel.status} status cannot be cancelled`,
       );
     }
 
     return parcel;
   }
+
   async getParcelStatusLog(id: string): Promise<IParcel | null> {
     const parcel = await this.parcelRepository.getParcelStatusLog(id);
     if (!parcel) {
@@ -58,47 +65,53 @@ export default class ParcelService {
 
     return parcel;
   }
+
   // Receiver Only api routes
   async getParcelsByReceiver(id: string): Promise<IParcel[] | null> {
     const receiverParcels = await this.parcelRepository.getParcelsByReceiver(
-      id
+      id,
     );
     return receiverParcels;
   }
+
   async confirmParcel(
     id: string,
-    data: Partial<StatusLogDTO>
+    data: Partial<StatusLogDTO>,
   ): Promise<IParcel | null> {
     const parcel = await this.parcelRepository.update(id, data);
     if (!parcel) {
       throw new Error("Parcel not found");
     }
-    if (parcel.status !== "In Transit")
+    if (parcel.status !== "In Transit") {
       throw new BadRequestException(
-        "Only Parcel In Transit status can be confirmed"
+        "Only Parcel In Transit status can be confirmed",
       );
+    }
     return parcel;
   }
+
   async getParcelHistory(
     receiver: CreateParcelDTO["receiver"],
-    status: CreateParcelDTO["status"]
+    status: CreateParcelDTO["status"],
   ): Promise<IParcel[] | null> {
     const parcels = await this.parcelRepository.getParcelHistory(
       receiver,
-      status
+      status,
     );
     return parcels;
   }
+
   // Admin Only api routes
   async getAllParcels(): Promise<IParcel[] | null> {
     const parcels = await this.parcelRepository.findAll();
     return parcels;
   }
+
   async updateParcelStatus(
     id: string,
     status: StatusLogDTO["status"],
     location?: StatusLogDTO["location"],
-    note?: StatusLogDTO["note"]
+    note?: StatusLogDTO["note"],
   ): Promise<IParcel | null> {
     const parcel = await this.parcelRepository.findById(id);
 
@@ -126,6 +139,7 @@ export default class ParcelService {
     }
     return parcel;
   }
+
   async unblockParcel(id: string): Promise<IParcel | null> {
     const parcel = await this.parcelRepository.update(id, {
       isBlocked: false,
