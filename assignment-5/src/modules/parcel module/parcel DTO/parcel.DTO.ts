@@ -31,10 +31,10 @@ export const createParcelDTO = z.object({
   fee: z.number(),
   deliveryDate: z
     .string()
-    .refine((val) => !isNaN(Date.parse(val)), {
+    .refine(val => !isNaN(Date.parse(val)), {
       message: "Invalid date string",
     })
-    .transform((val) => new Date(val)),
+    .transform(val => new Date(val)),
   isBlocked: z.boolean().optional(),
 });
 

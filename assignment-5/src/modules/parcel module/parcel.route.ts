@@ -1,8 +1,8 @@
 import { Router } from "express";
 
-import verifyRoles from "../middleware/verify.roles";
-import { validateData } from "../middleware/zod.validation";
-import { allowedUserRoles } from "../utils/interfaces";
+import verifyRoles from "../../middleware/verify.roles";
+import { validateData } from "../../middleware/zod.validation";
+import { allowedUserRoles } from "../../utils/interfaces";
 import ParcelController from "./parcel.controller";
 import { createParcelDTO, statusLogDTO } from "./parcel DTO/parcel.DTO";
 

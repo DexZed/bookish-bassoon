@@ -2,7 +2,7 @@ import type { Request, Response } from "express";
 
 import { Router } from "express";
 
-import Parcel from "../parcel module/parcelSchema/parcel.schema";
+import Parcel from "../modules/parcel module/parcelSchema/parcel.schema";
 import asyncHandler from "../utils/asynchandler";
 
 class IndexRoute {
@@ -20,7 +20,7 @@ class IndexRoute {
       const parcelId = req.params.id;
       const parcel = await Parcel.find({ trackingId: parcelId });
 
-      //console.log(parcel);
+      // console.log(parcel);
       if (!parcel) {
         return res.status(404).json({ message: "Parcel not found" });
       }

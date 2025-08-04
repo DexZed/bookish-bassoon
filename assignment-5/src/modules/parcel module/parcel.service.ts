@@ -1,12 +1,12 @@
 import type { Response } from "express";
 
-import type { RequestExtend } from "../types";
-import type { ParcelSearchDTO } from "../utils/utility";
+import type { RequestExtend } from "../../types";
+import type { ParcelSearchDTO } from "../../utils/utility";
 import type { CreateParcelDTO, StatusLogDTO } from "./parcel DTO/parcel.DTO";
 import type { IParcel } from "./parcelSchema/parcel.schema";
 
-import { BadRequestException, NotFoundException } from "../global-handler/httpexception";
-import { trackIdGenerator } from "../utils/utility";
+import { BadRequestException, NotFoundException } from "../../global-handler/httpexception";
+import { trackIdGenerator } from "../../utils/utility";
 import ParcelRepository from "./parcelRepository/repository";
 
 export default class ParcelService {
@@ -20,7 +20,7 @@ export default class ParcelService {
     const trkID = trackIdGenerator();
     const parcel = req.body;
     const parceldata = { ...parcel, trackingId: trkID, status: "requested" };
-    //console.log("parcel data:", parceldata);
+    // console.log("parcel data:", parceldata);
 
     const newParcel = await this.parcelRepository.create(parceldata);
 
@@ -42,7 +42,7 @@ export default class ParcelService {
     const invalidStatuses = new Set(["Requested", "Dispatched", "In Transit"]);
     if (invalidStatuses.has(parcelData.status)) {
       throw new BadRequestException(
-        `${parcelData.status} status cannot be cancelled`
+        `${parcelData.status} status cannot be cancelled`,
       );
     }
     const parcel = await this.parcelRepository.cancelParcel(id);
@@ -61,7 +61,7 @@ export default class ParcelService {
   // Receiver Only api routes
   async getParcelsByReceiver(id: string): Promise<IParcel[] | null> {
     const receiverParcels = await this.parcelRepository.getParcelsByReceiver(
-      id
+      id,
     );
     if (receiverParcels.length === 0) {
       throw new NotFoundException("No parcels found for this receiver or no parcel with 'In Transit' status found for this receiver yet");
@@ -71,7 +71,7 @@ export default class ParcelService {
 
   async confirmParcel(
     id: string,
-    data: Partial<StatusLogDTO>
+    data: Partial<StatusLogDTO>,
   ): Promise<IParcel | null> {
     const findParcel = await this.parcelRepository.findById(id);
     if (!findParcel) {
@@ -79,7 +79,7 @@ export default class ParcelService {
     }
     if (findParcel.status !== "In Transit") {
       throw new BadRequestException(
-        "Only Parcel In Transit status can be confirmed"
+        "Only Parcel In Transit status can be confirmed",
       );
     }
     const parcel = await this.parcelRepository.update(id, data);
@@ -88,11 +88,11 @@ export default class ParcelService {
 
   async getParcelHistory(
     receiver: CreateParcelDTO["receiver"],
-    status: CreateParcelDTO["status"]
+    status: CreateParcelDTO["status"],
   ): Promise<IParcel[] | null> {
     const parcels = await this.parcelRepository.getParcelHistory(
       receiver,
-      status
+      status,
     );
     return parcels;
   }
@@ -107,19 +107,19 @@ export default class ParcelService {
     id: string,
     status: StatusLogDTO["status"],
     location?: StatusLogDTO["location"],
-    note?: StatusLogDTO["note"]
+    note?: StatusLogDTO["note"],
   ): Promise<IParcel | null> {
     const parcel = await this.parcelRepository.findById(id);
 
     if (!parcel) {
       throw new Error("Parcel not found");
     }
-    
-    const parcelUpdated = await this.parcelRepository.updateStatusLogs(id,{
+
+    const parcelUpdated = await this.parcelRepository.updateStatusLogs(id, {
       status,
       location,
-      note
-    })
+      note,
+    });
     return parcelUpdated;
   }
 

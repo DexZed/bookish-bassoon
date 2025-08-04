@@ -5,22 +5,22 @@ export class ExceptionHandler {
 
   public static init(): void {
     process.on("uncaughtException", (err) => {
-      //console.error("Uncaught Exception:", err);
+       console.error("Uncaught Exception:", err);
       ExceptionHandler.shutdown(1);
     });
 
     process.on("unhandledRejection", (reason) => {
-      //console.error("Unhandled Rejection:", reason);
+       console.error("Unhandled Rejection:", reason);
       ExceptionHandler.shutdown(1);
     });
 
     process.on("SIGINT", () => {
-      //console.log("SIGINT received");
+      console.log("SIGINT received");
       ExceptionHandler.shutdown(0);
     });
 
     process.on("SIGTERM", () => {
-      //console.log("SIGTERM received");
+      console.log("SIGTERM received");
       ExceptionHandler.shutdown(0);
     });
   }
@@ -30,7 +30,7 @@ export class ExceptionHandler {
       return;
     ExceptionHandler.shuttingDown = true;
 
-    //console.log("Shutting down gracefully...");
+    console.log("Shutting down gracefully...");
 
     MongoConnection.getInstance().disconnect();
     setTimeout(() => {

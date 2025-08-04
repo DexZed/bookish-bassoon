@@ -6,7 +6,7 @@ import jwt from "jsonwebtoken";
 import type { IUSer } from "../User Module/userEntity/entity";
 import type { CreateUser } from "./userDTOs/user.DTO";
 
-import validatedConfig from "../config/validate";
+import validatedConfig from "../../config/validate";
 import AuthRepository from "./auth repository/auth.repository";
 
 export default class AuthService {

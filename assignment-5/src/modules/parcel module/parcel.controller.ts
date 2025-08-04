@@ -1,9 +1,9 @@
 import type { Request, Response } from "express";
 
-import type { RequestExtend } from "../types";
-import type { ParcelSearchDTO } from "../utils/utility";
+import type { RequestExtend } from "../../types";
+import type { ParcelSearchDTO } from "../../utils/utility";
 
-import asyncHandler from "../utils/asynchandler";
+import asyncHandler from "../../utils/asynchandler";
 import ParcelService from "./parcel.service";
 
 export default class ParcelController {
@@ -95,7 +95,7 @@ export default class ParcelController {
   updateParcelStatus = asyncHandler(async (req: Request, res: Response) => {
     const { id } = req.params;
     const { status, location, note } = req.body;
-    //console.log("parcel status update fields", id, status, location, note);
+    // console.log("parcel status update fields", id, status, location, note);
     const parcel = await this.parcelService.updateParcelStatus(
       id,
       status,

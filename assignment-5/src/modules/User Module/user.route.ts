@@ -1,7 +1,7 @@
 import { Router } from "express";
 
-import verifyRoles from "../middleware/verify.roles";
-import { allowedUserRoles } from "../utils/interfaces";
+import verifyRoles from "../../middleware/verify.roles";
+import { allowedUserRoles } from "../../utils/interfaces";
 import { UserController } from "./user.controller";
 
 class UserRoute {

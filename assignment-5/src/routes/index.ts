@@ -1,11 +1,10 @@
 import type { RequestHandler, Router } from "express";
-
-import authRoute from "../authorization module/auth.route";
 import jwtVerify from "../middleware/jwt.validation";
-import parcelRoute from "../parcel module/parcel.route";
+import parcelRoute from "../modules/parcel module/parcel.route";
 import IndexRoute from "../public";
 import refreshTokenRoute from "../refresh token module/reftok.route";
-import userRoute from "../User Module/user.route";
+import authRoute from "../modules/authorization module/auth.route";
+import userRoute from "../modules/User Module/user.route";
 
 type RouteDefinition = {
   path: string;

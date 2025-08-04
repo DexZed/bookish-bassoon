@@ -4,7 +4,8 @@ import type { JwtPayload } from "jsonwebtoken";
 import jwt from "jsonwebtoken";
 
 import validatedConfig from "../config/validate";
-import UserRepository from "../User Module/repository/user.repository";
+import UserRepository from "../modules/User Module/repository/user.repository";
+
 
 export default class RefreshTokenService {
   private readonly userRepository: UserRepository;
@@ -29,10 +30,10 @@ export default class RefreshTokenService {
 
     try {
       decoded = jwt.verify(refreshToken, validatedConfig.REFRESH_TOKEN) as JwtPayload;
-      //console.log(decoded);
+      // console.log(decoded);
     }
     catch (error: any) {
-      //console.error("Error verifying refresh token:", error);
+      // console.error("Error verifying refresh token:", error);
       return null;
     }
 

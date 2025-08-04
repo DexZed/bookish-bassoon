@@ -1,7 +1,7 @@
 import type { IUSer } from "../../User Module/userEntity/entity";
 import type { CreateUser } from "../userDTOs/user.DTO";
 
-import { GenericRepository } from "../../Base Repository/generic.repository";
+import { GenericRepository } from "../../../Base Repository/generic.repository";
 import User from "../../User Module/userEntity/entity";
 
 export default class AuthRepository extends GenericRepository<IUSer> {

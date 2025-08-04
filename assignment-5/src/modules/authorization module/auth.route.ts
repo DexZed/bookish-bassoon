@@ -1,6 +1,6 @@
 import { Router } from "express";
 
-import { validateData } from "../middleware/zod.validation";
+import { validateData } from "../../middleware/zod.validation";
 import AuthController from "./auth.controller";
 import { createUserDTO } from "./userDTOs/user.DTO";
 

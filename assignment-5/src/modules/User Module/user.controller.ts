@@ -1,6 +1,6 @@
 import type { Request, Response } from "express";
 
-import asyncHandler from "../utils/asynchandler";
+import asyncHandler from "../../utils/asynchandler";
 import UserService from "./user.service";
 
 export class UserController {

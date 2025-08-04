@@ -2,8 +2,8 @@ import type { Request, Response } from "express";
 
 import jwt from "jsonwebtoken";
 
-import validatedConfig from "../config/validate";
-import asyncHandler from "../utils/asynchandler";
+import validatedConfig from "../../config/validate";
+import asyncHandler from "../../utils/asynchandler";
 import AuthService from "./auth.service";
 
 export default class AuthController {

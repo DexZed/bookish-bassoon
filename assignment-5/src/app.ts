@@ -7,10 +7,9 @@ import express from "express";
 import helmet from "helmet";
 import morgan from "morgan";
 
-import { globalErrorHandler } from "./global-handler/global-errorhandler";
 import { NotFoundException } from "./global-handler/httpexception";
 import routes from "./routes/index";
-
+import { globalErrorHandler } from "./global-handler/global-errorhandler";
 
 export default class App {
   public app: Application;
@@ -68,7 +67,7 @@ export default class App {
     this.app.use((req, _res, next) => {
       next(new NotFoundException(`Route ${req.originalUrl} not found`));
     });
-    //this.app.use(globalErrorHandler);
+     this.app.use(globalErrorHandler);
   }
 
   public initServer(): void {

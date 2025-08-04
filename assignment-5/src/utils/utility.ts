@@ -19,11 +19,11 @@ export const parcelSearchSchema = z.object({
   trackingId: z.string().optional(),
   status: z.union([z.string(), z.array(z.string())]).optional(),
   startDate: z.string().optional().refine(
-    date => !date || !isNaN(Date.parse(date)),
+    date => !date || !Number.isNaN(Date.parse(date)),
     { message: "startDate must be a valid ISO date string" },
   ),
   endDate: z.string().optional().refine(
-    date => !date || !isNaN(Date.parse(date)),
+    date => !date || !Number.isNaN(Date.parse(date)),
     { message: "endDate must be a valid ISO date string" },
   ),
   senderId: z.string().optional(),

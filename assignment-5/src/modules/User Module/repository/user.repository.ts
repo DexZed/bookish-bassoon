@@ -1,6 +1,6 @@
 import type { IUSer } from "../userEntity/entity";
 
-import { GenericRepository } from "../../Base Repository/generic.repository";
+import { GenericRepository } from "../../../Base Repository/generic.repository";
 import User from "../userEntity/entity";
 
 export default class UserRepository extends GenericRepository<IUSer> {
