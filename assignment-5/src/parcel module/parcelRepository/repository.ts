@@ -2,7 +2,7 @@ import mongoose from "mongoose";
 
 import type { ParcelSearchDTO } from "../../utils/utility";
 import type { CreateParcelDTO } from "../parcel DTO/parcel.DTO";
-import type { IParcel } from "../parcelSchema/parcel.schema";
+import type { IParcel, IStatusLog } from "../parcelSchema/parcel.schema";
 
 import { GenericRepository } from "../../Base Repository/generic.repository";
 import Parcel from "../parcelSchema/parcel.schema";
@@ -77,5 +77,9 @@ export default class ParcelRepository extends GenericRepository<IParcel> {
     }
 
     return await Parcel.find(query);
+  }
+  async updateStatusLogs(id:string,data:Partial<IStatusLog>): Promise<IParcel | null>{
+    const parcel = await Parcel.findByIdAndUpdate(id, { $push: { statusLogs: data} }, { new: true });
+    return parcel;
   }
 }

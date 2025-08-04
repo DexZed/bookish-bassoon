@@ -79,7 +79,7 @@ const parcelSchema = new mongoose.Schema<IParcel>(
     pickupAddress: { type: String, required: true },
     deliveryAddress: { type: String, required: true },
     status: { type: String, required: true },
-    statusLogs: {statusLogSchema,default:{}},
+    statusLogs: [statusLogSchema],
     fee: { type: Number, required: true },
     deliveryDate: { type: Date, required: true },
     isBlocked: { type: Boolean, default: false },
