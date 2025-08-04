@@ -22,7 +22,7 @@ export default class ParcelRepository extends GenericRepository<IParcel> {
   }
 
   async cancelParcel(id: string): Promise<IParcel | null> {
-    const parcel = await Parcel.findByIdAndUpdate(id, { status: "Cancelled" });
+    const parcel = await Parcel.findByIdAndUpdate(id, {$set:{ status: "Cancelled" },},{ new: true });
     return parcel;
   }
 

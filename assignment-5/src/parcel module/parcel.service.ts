@@ -6,12 +6,13 @@ import type { CreateParcelDTO, StatusLogDTO } from "./parcel DTO/parcel.DTO";
 import type {
   IParcel,
   IStatusLog,
-  IStatusLogSchema,
 } from "./parcelSchema/parcel.schema";
 
 import { BadRequestException } from "../global-handler/httpexception";
 import { trackIdGenerator } from "../utils/utility";
 import ParcelRepository from "./parcelRepository/repository";
+import mongoose from "mongoose";
+import { IUSer } from "../User Module/userEntity/entity";
 
 export default class ParcelService {
   private parcelRepository: ParcelRepository;
@@ -23,7 +24,7 @@ export default class ParcelService {
   async createParcel(req: RequestExtend, _: Response): Promise<IParcel> {
     const trkID = trackIdGenerator();
     const parcel = req.body;
-    const parceldata = { ...parcel, trackingId: trkID, status: "requested" };
+    const parceldata = { ...parcel, trackingId: trkID, status: "requested", };
     //console.log("parcel data:", parceldata);
 
     const newParcel = await this.parcelRepository.create(parceldata);
@@ -37,24 +38,23 @@ export default class ParcelService {
   }
 
   async cancelParcel(id: string): Promise<IParcel | null> {
-    const parcel = await this.parcelRepository.cancelParcel(id);
+    const parcelData = await this.parcelRepository.findById(id);
 
-    if (!parcel) {
+    if (!parcelData) {
       throw new Error("Parcel not found");
     }
 
     const invalidStatuses = new Set([
       "Requested",
-      "Approved",
       "Dispatched",
       "In Transit",
     ]);
-    if (invalidStatuses.has(parcel.status)) {
+    if (invalidStatuses.has(parcelData.status)) {
       throw new BadRequestException(
-        `${parcel.status} status cannot be cancelled`,
+        `${parcelData.status} status cannot be cancelled`,
       );
     }
-
+    const parcel = await this.parcelRepository.cancelParcel(id);
     return parcel;
   }
 
@@ -121,12 +121,12 @@ export default class ParcelService {
       throw new Error("Parcel not found");
     }
 
-    parcel.statusLogs.push({
+    parcel.statusLogs.updateOne({
       status,
       location,
       note,
     } as IStatusLog);
-
+    
     await parcel.save();
 
     return parcel;
