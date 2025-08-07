@@ -6,6 +6,7 @@ import type { IParcel, IStatusLog } from "../parcelSchema/parcel.schema";
 
 import { GenericRepository } from "../../../Base Repository/generic.repository";
 import Parcel from "../parcelSchema/parcel.schema";
+import { BadRequestException } from "../../../global-handler/httpexception";
 
 export default class ParcelRepository extends GenericRepository<IParcel> {
   constructor() {
@@ -53,7 +54,7 @@ export default class ParcelRepository extends GenericRepository<IParcel> {
     status: CreateParcelDTO["status"],
   ): Promise<IParcel[]> {
     if (!mongoose.Types.ObjectId.isValid(receiverId)) {
-      throw new Error("Invalid receiver ID");
+      throw new BadRequestException('Invalid receiver id')
     }
     const receiver = new mongoose.Types.ObjectId(receiverId);
     const parcels = await Parcel.find({ receiver, status });

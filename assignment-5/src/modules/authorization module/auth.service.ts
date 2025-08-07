@@ -8,6 +8,7 @@ import type { CreateUser } from "./userDTOs/user.DTO";
 
 import validatedConfig from "../../config/validate";
 import AuthRepository from "./auth repository/auth.repository";
+import { BadRequestException, UnauthorizedException } from "../../global-handler/httpexception";
 
 export default class AuthService {
   private readonly authRepository: AuthRepository;
@@ -21,7 +22,7 @@ export default class AuthService {
   async register(data: CreateUser): Promise<IUSer> {
     const findUser = await this.authRepository.findByEmail(data.email);
     if (findUser) {
-      throw new Error("Email already exists");
+      throw new BadRequestException('Email already exists');
     }
 
     const hashedPassword = await bcrypt.hash(data.password, 10);
@@ -36,14 +37,14 @@ export default class AuthService {
   async login(email: CreateUser["email"], password: CreateUser["password"]): Promise<IUSer | null> {
     const user = await this.authRepository.login(email);
     if (!user) {
-      throw new Error("Invalid email or password");
+      throw new BadRequestException("Invalid email or password")
     }
     if (user.isBlocked) {
-      throw new Error("User is blocked");
+      throw new UnauthorizedException("User is blocked");
     }
     const isPasswordValid = await bcrypt.compare(password, user.password);
     if (!isPasswordValid) {
-      throw new Error("Invalid password");
+      throw new BadRequestException("Invalid password")
     }
 
     const refreshToken = jwt.sign(

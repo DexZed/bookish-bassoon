@@ -1,6 +1,7 @@
 import type { IUSer } from "./userEntity/entity";
 
 import UserRepository from "./repository/user.repository";
+import { NotFoundException } from "../../global-handler/httpexception";
 
 export default class UserService {
   private readonly userRepository: UserRepository;
@@ -26,7 +27,7 @@ export default class UserService {
   async blockById(id: string): Promise<IUSer> {
     const user = await this.userRepository.findById(id);
     if (!user) {
-      throw new Error("User not found");
+      throw new NotFoundException("User not found");
     }
     user.isBlocked = true;
     await user.save();
@@ -37,7 +38,7 @@ export default class UserService {
   async unblockById(id: string): Promise<IUSer> {
     const user = await this.userRepository.findById(id);
     if (!user) {
-      throw new Error("User not found");
+      throw new NotFoundException("User not found");
     }
     user.isBlocked = false;
     await user.save();

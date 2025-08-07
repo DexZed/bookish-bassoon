@@ -36,7 +36,7 @@ export default class ParcelService {
     const parcelData = await this.parcelRepository.findById(id);
 
     if (!parcelData) {
-      throw new Error("Parcel not found");
+      throw new NotFoundException("Parcel not found");
     }
 
     const invalidStatuses = new Set(["Requested", "Dispatched", "In Transit"]);
@@ -52,7 +52,7 @@ export default class ParcelService {
   async getParcelStatusLog(id: string): Promise<IParcel | null> {
     const parcel = await this.parcelRepository.getParcelStatusLog(id);
     if (!parcel) {
-      throw new Error("Parcel not found");
+      throw new NotFoundException("Parcel not found");
     }
 
     return parcel;
@@ -112,7 +112,7 @@ export default class ParcelService {
     const parcel = await this.parcelRepository.findById(id);
 
     if (!parcel) {
-      throw new Error("Parcel not found");
+      throw new NotFoundException("Parcel not found");
     }
 
     const parcelUpdated = await this.parcelRepository.updateStatusLogs(id, {
@@ -128,7 +128,7 @@ export default class ParcelService {
       isBlocked: true,
     });
     if (!parcel) {
-      throw new Error("Parcel not found");
+      throw new NotFoundException("Parcel not found");
     }
     return parcel;
   }
@@ -138,7 +138,7 @@ export default class ParcelService {
       isBlocked: false,
     });
     if (!parcel) {
-      throw new Error("Parcel not found");
+      throw new NotFoundException("Parcel not found");
     }
     return parcel;
   }
@@ -147,3 +147,4 @@ export default class ParcelService {
     return await this.parcelRepository.searchParcels(filters);
   }
 }
+
