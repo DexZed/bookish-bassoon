@@ -25,7 +25,9 @@ function Navbar({}: Props) {
       <li>
         <Link to="/">🏠 Home</Link>
       </li>
-      <li><Link to="/about">ℹ️ About</Link></li>
+      <li>
+        <Link to="/about">ℹ️ About</Link>
+      </li>
       <li>
         <Link to="/contact">📞 Contact</Link>
       </li>
@@ -109,7 +111,11 @@ function Navbar({}: Props) {
           <ul className="menu menu-horizontal px-1">{links}</ul>
         </div>
         <div className="navbar-end">
-          <a className="btn">Button</a>
+          {/* The matrix() function take six parameters, containing mathematic functions, which allows you to rotate, scale, move (translate), and skew elements.
+          The parameters are as follow: matrix(scaleX(), skewY(), skewX(), scaleY(), translateX(), translateY()) */}
+          <div className="btn btn-outline btn-primary" style={{ transform: "matrix(1,0,0.4,1,0,0)" }}>
+            <a style={{ transform: "matrix(1,0,-0.4,1,0,0)" }} >Button</a>
+          </div>
         </div>
       </div>
     </header>
