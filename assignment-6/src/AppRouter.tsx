@@ -4,6 +4,7 @@ import AdminLayout from "./layouts/AdminLayout";
 import ReceiverLayout from "./layouts/ReceiverLayout";
 import SenderLayout from "./layouts/SenderLayout";
 import App from "./App";
+import Skeleton from "./components/Skeleton";
 
 // Lazy-loaded pages
 const Home = lazy(() => import("./pages/Home"));
@@ -28,12 +29,12 @@ const AppRouter = createBrowserRouter([
       path: "/",
       element: <App />,
       children: [
-        { index: true, element: <Suspense fallback={<div>Loading...</div>}><Home /></Suspense> },
-      { path: "about", element: <Suspense fallback={<div>Loading...</div>}><About /></Suspense> },
-      { path: "contact", element: <Suspense fallback={<div>Loading...</div>}><Contact /></Suspense> },
-      { path: "login", element: <Suspense fallback={<div>Loading...</div>}><Login /></Suspense> },
-      { path: "register", element: <Suspense fallback={<div>Loading...</div>}><Register /></Suspense> },
-      { path: "tracking/:trackingId", element: <Suspense fallback={<div>Loading...</div>}><Tracking /></Suspense> },
+        { index: true, element: <Suspense fallback={<Skeleton/>}><Home /></Suspense> },
+      { path: "about", element: <Suspense fallback={<Skeleton/>}><About /></Suspense> },
+      { path: "contact", element: <Suspense fallback={<Skeleton/>}><Contact /></Suspense> },
+      { path: "login", element: <Suspense fallback={<Skeleton/>}><Login /></Suspense> },
+      { path: "register", element: <Suspense fallback={<Skeleton/>}><Register /></Suspense> },
+      { path: "tracking/:trackingId", element: <Suspense fallback={<Skeleton/>}><Tracking /></Suspense> },
     
       ]
     },
@@ -45,7 +46,7 @@ const AppRouter = createBrowserRouter([
         {
           path: "create",
           element: (
-            <Suspense fallback={<div>Loading...</div>}>
+            <Suspense fallback={<Skeleton/>}>
               <CreateParcel />
             </Suspense>
           ),
@@ -53,7 +54,7 @@ const AppRouter = createBrowserRouter([
         {
           path: "parcels",
           element: (
-            <Suspense fallback={<div>Loading...</div>}>
+            <Suspense fallback={<Skeleton/>}>
               <Parcels />
             </Suspense>
           ),
@@ -67,7 +68,7 @@ const AppRouter = createBrowserRouter([
         {
           path: "incoming",
           element: (
-            <Suspense fallback={<div>Loading...</div>}>
+            <Suspense fallback={<Skeleton/>}>
               <IncomingParcels />
             </Suspense>
           ),
@@ -75,7 +76,7 @@ const AppRouter = createBrowserRouter([
         {
           path: "history",
           element: (
-            <Suspense fallback={<div>Loading...</div>}>
+            <Suspense fallback={<Skeleton/>}>
               <DeliveryHistory />
             </Suspense>
           ),
@@ -89,7 +90,7 @@ const AppRouter = createBrowserRouter([
         {
           path: "users",
           element: (
-            <Suspense fallback={<div>Loading...</div>}>
+            <Suspense fallback={<Skeleton/>}>
               <ManageUsers />
             </Suspense>
           ),
@@ -97,7 +98,7 @@ const AppRouter = createBrowserRouter([
         {
           path: "parcels",
           element: (
-            <Suspense fallback={<div>Loading...</div>}>
+            <Suspense fallback={<Skeleton/>}>
               <ManageParcels />
             </Suspense>
           ),
@@ -108,7 +109,7 @@ const AppRouter = createBrowserRouter([
     {
       path: "/tracking/:trackingId",
       element: (
-        <Suspense fallback={<div>Loading...</div>}>
+        <Suspense fallback={<Skeleton/>}>
           <Tracking />
         </Suspense>
       ),
@@ -116,7 +117,7 @@ const AppRouter = createBrowserRouter([
     {
       path: "*",
       element: (
-        <Suspense fallback={<div>Loading...</div>}>
+        <Suspense fallback={<Skeleton/>}>
           <NotFound />
         </Suspense>
       ),

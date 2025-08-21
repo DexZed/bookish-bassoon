@@ -1,5 +1,6 @@
 import { Suspense } from "react";
 import { Link, Outlet } from "react-router";
+import Skeleton from "../components/Skeleton";
 // TODO: Fix styling and update route components
 export default function SenderLayout() {
   return (
@@ -9,7 +10,7 @@ export default function SenderLayout() {
         <Link to="/sender/parcels">📋 My Parcels</Link>
       </nav>
       <hr />
-      <Suspense fallback={<div>Loading...</div>}>
+      <Suspense fallback={<Skeleton/>}>
         <Outlet />
       </Suspense>
     </div>
