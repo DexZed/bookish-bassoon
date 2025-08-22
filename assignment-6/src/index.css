@@ -1,2 +1,27 @@
 @import "tailwindcss";
 @plugin "daisyui";
+
+
+@layer utilities {
+  
+  .skew-x-var {
+    transform: skewX(var(--tw-skew-x, 0deg))
+               skewY(var(--tw-skew-y, 0deg))
+               rotate(var(--tw-rotate, 0))
+               scaleX(var(--tw-scale-x, 1))
+               scaleY(var(--tw-scale-y, 1))
+               translateX(var(--tw-translate-x, 0))
+               translateY(var(--tw-translate-y, 0));
+  }
+
+  /* Generalized skew-y utility */
+  .skew-y-var {
+    transform: skewX(var(--tw-skew-x, 0deg))
+               skewY(var(--tw-skew-y, 0deg))
+               rotate(var(--tw-rotate, 0))
+               scaleX(var(--tw-scale-x, 1))
+               scaleY(var(--tw-scale-y, 1))
+               translateX(var(--tw-translate-x, 0))
+               translateY(var(--tw-translate-y, 0));
+  }
+}

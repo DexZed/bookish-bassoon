@@ -5,7 +5,7 @@ type Props = {};
 
 function Navbar({}: Props) {
   const [theme, setTheme] = useState("light");
-
+  
   // Load theme from local storage on initial render
   useEffect(() => {
     const savedTheme = localStorage.getItem("theme") || "light";
@@ -113,8 +113,8 @@ function Navbar({}: Props) {
         <div className="navbar-end">
           {/* The matrix() function take six parameters, containing mathematic functions, which allows you to rotate, scale, move (translate), and skew elements.
           The parameters are as follow: matrix(scaleX(), skewY(), skewX(), scaleY(), translateX(), translateY()) */}
-          <div className="btn btn-outline btn-primary" style={{ transform: "matrix(1,0,0.4,1,0,0)" }}>
-            <a style={{ transform: "matrix(1,0,-0.4,1,0,0)" }} >Button</a>
+          <div className="btn btn-outline btn-primary skew-x-var [--tw-skew-x:22.6deg]">
+            <Link to={'/register'} className="skew-x-var [--tw-skew-x:-22.6deg]" >Register</Link>
           </div>
         </div>
       </div>
