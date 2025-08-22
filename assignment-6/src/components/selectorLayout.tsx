@@ -4,14 +4,14 @@ type Props = {
   children: React.ReactNode;
 };
 
-function selectorLayout({ description, errorDescription, children }: Props) {
+function SelectorLayout({ description, errorDescription, children }: Props) {
   return (
     <fieldset className="fieldset">
       <legend className="fieldset-legend">{description}</legend>
       {children}
-      <span className="label">{errorDescription}</span>
+      <span className="label text-amber-500">{errorDescription}</span>
     </fieldset>
   );
 }
 
-export default selectorLayout;
+export default SelectorLayout;
