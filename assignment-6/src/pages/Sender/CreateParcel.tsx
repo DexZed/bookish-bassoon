@@ -1,11 +1,139 @@
 // TODO: ADD styling and functionality
 
-type Props = {}
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useForm, type SubmitHandler } from "react-hook-form";
+import InputLayout from "../../components/InputLayout";
+import SelectorLayout from "../../components/selectorLayout";
+import { ParcelSchema, type ParcelFields } from "../../interfaces/interfaces";
+
+type Props = {};
 
 function CreateParcels({}: Props) {
+  const {
+    register,
+    handleSubmit,
+    setError,
+    formState: { errors, isSubmitting },
+  } = useForm<ParcelFields>({
+    resolver: zodResolver(ParcelSchema),
+  });
+  const onSubmit: SubmitHandler<ParcelFields> = async (data) => {
+    try {
+      await new Promise((resolve) => setTimeout(resolve, 1000));
+      console.log(data);
+      
+    } catch (error) {
+      setError("root", {
+        message: "Random error message",
+      });
+    }
+  };
   return (
-    <div></div>
-  )
+    <>
+      <div className="h-dvh flex justify-center items-center flex-col gap-4">
+        <h1 className="text-3xl font-bold">Create Parcel</h1>
+        <form
+          className="space-y-2 card bg-base-200 border-base-300 rounded-box w-xs border p-4 "
+          onSubmit={handleSubmit(onSubmit)}
+        >
+          <InputLayout
+            description="Sender"
+            errorDescription={errors.sender && `${errors.sender?.message}`}
+          >
+            <input
+              {...register("sender")}
+              type="text"
+              className="input input-secondary"
+              placeholder="Sender"
+            />
+          </InputLayout>
+          <InputLayout
+            description="Receiver"
+            errorDescription={ errors.receiver && `${errors.receiver?.message}`}
+          >
+            <input
+              {...register("receiver")}
+              type="text"
+              className="input input-primary"
+              placeholder="Receiver"
+            />
+          </InputLayout>
+          <SelectorLayout
+            description="Type"
+            errorDescription={ errors.type && `${errors.type?.message}`}
+          >
+            <select
+              {...register("type")}
+              className="select select-primary w-full"
+              defaultValue={"Select Package Type"}
+            >
+              <option disabled={true}>Select Package Type</option>
+              <option value={"Document"}>Document</option>
+              <option value={"Box"}>Box</option>
+              <option value={"Fragile"}>Fragile</option>
+              <option value={"Other"}>Other</option>
+            </select>
+          </SelectorLayout>
+          <InputLayout
+            description="Weight kg"
+            errorDescription={errors.weight && `${errors.weight?.message}`}
+          >
+            <input
+              {...register("weight",{valueAsNumber: true})}
+              type="number"
+              className="input input-primary"
+              placeholder="84 kg"
+            />
+          </InputLayout>
+          <InputLayout
+            description="Pickup Address"
+            errorDescription={ errors.pickupAddress && `${errors.pickupAddress?.message}`}
+          >
+            <input
+              {...register("pickupAddress")}
+              type="text"
+              className="input input-accent"
+              placeholder="1234 Main St, Anytown, USA"
+            />
+          </InputLayout>
+          <InputLayout
+            description="Delivery Address"
+            errorDescription={errors.deliveryAddress && `${errors.deliveryAddress?.message}`}
+          >
+            <input
+              {...register("deliveryAddress")}
+              type="text"
+              className="input input-warning"
+              placeholder="4567 Elm St, Anytown, USA"
+            />
+          </InputLayout>
+          <InputLayout
+            description="Delivery Date"
+            errorDescription={
+              errors.deliveryDate && `${errors.deliveryDate?.message}`
+            }
+          >
+            <input
+              {...register("deliveryDate",{valueAsDate: true})}
+              type="datetime-local"
+              className="input input-secondary"
+              placeholder="dd/mm/yyyy hh:mm"
+            />
+          </InputLayout>
+          <div className="mt-3">
+            <button
+              disabled={isSubmitting}
+              className="btn btn-accent w-full btn-outline rounded-2xl"
+              type="submit"
+            >
+              {isSubmitting ? "Loading..." : "Create Parcel"}
+            </button>
+            <span className="text-amber-500">{errors.root?.message}</span>
+          </div>
+        </form>
+      </div>
+    </>
+  );
 }
 
-export default CreateParcels
+export default CreateParcels;

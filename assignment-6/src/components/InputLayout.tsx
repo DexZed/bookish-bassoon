@@ -9,7 +9,7 @@ function InputLayout({ description, errorDescription, children }: Props) {
     <fieldset className="fieldset">
       <legend className="fieldset-legend">{description}</legend>
       {children}
-      <p className="label text-amber-500">{errorDescription}</p>
+      {errorDescription && <p className="label text-amber-500">{errorDescription}</p>}
     </fieldset>
   );
 }

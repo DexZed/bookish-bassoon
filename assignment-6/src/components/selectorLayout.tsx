@@ -9,7 +9,7 @@ function SelectorLayout({ description, errorDescription, children }: Props) {
     <fieldset className="fieldset">
       <legend className="fieldset-legend">{description}</legend>
       {children}
-      <span className="label text-amber-500">{errorDescription}</span>
+      {errorDescription && <p className="label text-amber-500">{errorDescription}</p>}
     </fieldset>
   );
 }
