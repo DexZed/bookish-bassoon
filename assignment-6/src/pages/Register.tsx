@@ -1,7 +1,6 @@
 import { useForm, type SubmitHandler } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import InputLayout from "../components/InputLayout";
-
 import { RegistrationSchema, type RegistrationFields } from "../interfaces/interfaces";
 import SelectorLayout from "../components/SelectorLayout";
 
