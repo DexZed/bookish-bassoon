@@ -31,3 +31,6 @@ export const parcelSearchSchema = z.object({
 });
 
 export type ParcelSearchDTO = z.infer<typeof parcelSearchSchema>;
+
+// cors allowed domains 
+export const allowedOrigins = ["http://localhost:5173"]

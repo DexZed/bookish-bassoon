@@ -10,6 +10,7 @@ import morgan from "morgan";
 import { NotFoundException } from "./global-handler/httpexception";
 import routes from "./routes/index";
 import { globalErrorHandler } from "./global-handler/global-errorhandler";
+import { allowedOrigins } from "./utils/utility";
 
 export default class App {
   public app: Application;
@@ -30,14 +31,14 @@ export default class App {
       morgan((tokens, req, res) => {
         const status = Number(tokens.status(req, res));
 
-        const color
-          = status >= 500
+        const color =
+          status >= 500
             ? chalk.red
             : status >= 400
-              ? chalk.yellow
-              : status >= 300
-                ? chalk.cyan
-                : chalk.green;
+            ? chalk.yellow
+            : status >= 300
+            ? chalk.cyan
+            : chalk.green;
 
         return [
           chalk.gray(tokens.method(req, res)),
@@ -45,9 +46,21 @@ export default class App {
           color(tokens.status(req, res)),
           chalk.magenta(`${tokens["response-time"](req, res)} ms`),
         ].join(" ");
-      }),
+      })
     );
-    this.app.use(cors());
+    this.app.use(
+      cors({
+        origin: (allowedOrigins, callback) => {
+          // Allow requests with no origin (e.g., mobile apps, server-to-server)
+          if (!allowedOrigins || allowedOrigins.includes(allowedOrigins)) {
+            callback(null, true);
+          } else {
+            callback(new Error("Not allowed by CORS"));
+          }
+        },
+        credentials: true,
+      })
+    );
     this.app.use(helmet());
     this.app.use(cookieParser());
   }
@@ -56,8 +69,7 @@ export default class App {
     routes.forEach(({ path, controller, middleware }) => {
       if (middleware?.length) {
         this.app.use(path, ...middleware, controller);
-      }
-      else {
+      } else {
         this.app.use(path, controller);
       }
     });
@@ -67,7 +79,7 @@ export default class App {
     this.app.use((req, _res, next) => {
       next(new NotFoundException(`Route ${req.originalUrl} not found`));
     });
-     this.app.use(globalErrorHandler);
+    this.app.use(globalErrorHandler);
   }
 
   public initServer(): void {
