@@ -1,8 +1,9 @@
 import { useForm, type SubmitHandler } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import InputLayout from "../components/InputLayout";
-import SelectorLayout from "../components/selectorLayout";
+
 import { RegistrationSchema, type RegistrationFields } from "../interfaces/interfaces";
+import SelectorLayout from "../components/SelectorLayout";
 
 type Props = {};
 // TODO: Add api calls and sweet alert
@@ -36,7 +37,7 @@ function Register({}: Props) {
         >
           <InputLayout
             description="Name"
-            errorDescription={`${errors.name?.message}`}
+            errorDescription={errors.name &&`${errors.name?.message}`}
           >
             <input
               {...register("name")}
@@ -47,7 +48,7 @@ function Register({}: Props) {
           </InputLayout>
           <InputLayout
             description="Email"
-            errorDescription={`${errors.email?.message}`}
+            errorDescription={errors.email &&`${errors.email?.message}`}
           >
             <input
               {...register("email")}
@@ -58,7 +59,7 @@ function Register({}: Props) {
           </InputLayout>
           <InputLayout
             description="Password"
-            errorDescription={`${errors.password?.message}`}
+            errorDescription={errors.password && `${errors.password?.message}`}
           >
             <input
               {...register("password")}
@@ -69,7 +70,7 @@ function Register({}: Props) {
           </InputLayout>
           <SelectorLayout
             description="Role"
-            errorDescription={`${errors.role?.message}`}
+            errorDescription={errors.role && `${errors.role?.message}`}
           >
             <select
               {...register("role")}

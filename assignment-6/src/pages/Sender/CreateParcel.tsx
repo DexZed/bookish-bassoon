@@ -1,9 +1,9 @@
-// TODO: ADD styling and functionality
+
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm, type SubmitHandler } from "react-hook-form";
 import InputLayout from "../../components/InputLayout";
-import SelectorLayout from "../../components/selectorLayout";
+import SelectorLayout from "../../components/SelectorLayout";
 import { ParcelSchema, type ParcelFields } from "../../interfaces/interfaces";
 
 type Props = {};
@@ -17,14 +17,14 @@ function CreateParcels({}: Props) {
   } = useForm<ParcelFields>({
     resolver: zodResolver(ParcelSchema),
   });
-  const onSubmit: SubmitHandler<ParcelFields> = async (data) => {
+  const onSubmit: SubmitHandler<ParcelFields> = (data) => {
+    // TODO: ADD api functionality and notifications from sweet alert
     try {
-      await new Promise((resolve) => setTimeout(resolve, 1000));
       console.log(data);
-      
     } catch (error) {
       setError("root", {
-        message: "Random error message",
+        type: "manual",
+        message: "Something went wrong",
       });
     }
   };
@@ -45,29 +45,31 @@ function CreateParcels({}: Props) {
               type="text"
               className="input input-secondary"
               placeholder="Sender"
+              required
             />
           </InputLayout>
           <InputLayout
             description="Receiver"
-            errorDescription={ errors.receiver && `${errors.receiver?.message}`}
+            errorDescription={errors.receiver && `${errors.receiver?.message}`}
           >
             <input
               {...register("receiver")}
               type="text"
               className="input input-primary"
               placeholder="Receiver"
+              required
             />
           </InputLayout>
           <SelectorLayout
             description="Type"
-            errorDescription={ errors.type && `${errors.type?.message}`}
+            errorDescription={errors.type && `${errors.type?.message}`}
           >
             <select
               {...register("type")}
               className="select select-primary w-full"
-              defaultValue={"Select Package Type"}
+              required
             >
-              <option disabled={true}>Select Package Type</option>
+              <option disabled>Select Package Type</option>
               <option value={"Document"}>Document</option>
               <option value={"Box"}>Box</option>
               <option value={"Fragile"}>Fragile</option>
@@ -79,32 +81,50 @@ function CreateParcels({}: Props) {
             errorDescription={errors.weight && `${errors.weight?.message}`}
           >
             <input
-              {...register("weight",{valueAsNumber: true})}
+              {...register("weight", { valueAsNumber: true })}
               type="number"
-              className="input input-primary"
+              className="input input-info"
               placeholder="84 kg"
+              required
+              min={0}
             />
           </InputLayout>
           <InputLayout
             description="Pickup Address"
-            errorDescription={ errors.pickupAddress && `${errors.pickupAddress?.message}`}
+            errorDescription={
+              errors.pickupAddress && `${errors.pickupAddress?.message}`
+            }
           >
             <input
               {...register("pickupAddress")}
               type="text"
               className="input input-accent"
               placeholder="1234 Main St, Anytown, USA"
+              required
             />
           </InputLayout>
           <InputLayout
             description="Delivery Address"
-            errorDescription={errors.deliveryAddress && `${errors.deliveryAddress?.message}`}
+            errorDescription={
+              errors.deliveryAddress && `${errors.deliveryAddress?.message}`
+            }
           >
             <input
               {...register("deliveryAddress")}
               type="text"
               className="input input-warning"
               placeholder="4567 Elm St, Anytown, USA"
+              required
+            />
+          </InputLayout>
+          <InputLayout description="Fee" errorDescription={errors.fee && `${errors.fee?.message}`}>
+            <input
+              {...register("fee", { valueAsNumber: true })}
+              type="number"
+              className="input input-success"
+              placeholder="$10"
+              required
+              min={0}
             />
           </InputLayout>
           <InputLayout
@@ -114,10 +134,12 @@ function CreateParcels({}: Props) {
             }
           >
             <input
-              {...register("deliveryDate",{valueAsDate: true})}
-              type="datetime-local"
+              {...register("deliveryDate",{valueAsDate:true})}
+              type="date"
               className="input input-secondary"
-              placeholder="dd/mm/yyyy hh:mm"
+              placeholder="dd/mm/yyyy"
+              required
+              min={new Date().toISOString().split("T")[0]}
             />
           </InputLayout>
           <div className="mt-3">
