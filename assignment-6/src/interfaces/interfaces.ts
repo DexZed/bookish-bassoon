@@ -18,3 +18,18 @@ export const ParcelSchema = z.object({
     deliveryDate: z.date(),
 })
 export type ParcelFields = z.infer<typeof ParcelSchema>;
+// {
+//         "name": "Admin",
+//         "email": "Admin@gmail.com",
+//         "role": "admin",
+//         "isBlocked": false,
+//         "accessToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyTmFtZSI6IkFkbWluIiwiZW1haWwiOiJBZG1pbkBnbWFpbC5jb20iLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE3NTU5NTA3NzEsImV4cCI6MTc1NTk1NDM3MX0.SjHWApuhr59qgLTF2W9rPRrOSOX5HMQq8Cv8KPw9Clw"
+//     }
+
+export interface AuthState {
+  name: string;
+  email: string;
+  role: string;
+  isBlocked: boolean;
+  accessToken: string;
+}
