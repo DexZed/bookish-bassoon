@@ -1,7 +1,7 @@
 // TODO: ADD functionality and styling
-type Props = {}
 
-function Users({}: Props) {
+
+function Users() {
   return (
     <div>Users</div>
   )

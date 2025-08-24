@@ -1,6 +1,5 @@
-type Props = {};
 
-function Skeleton({}: Props) {
+function Skeleton() {
   return (
     <>
       <div className="skeleton hero h-dvh">

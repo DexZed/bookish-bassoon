@@ -1,7 +1,7 @@
 // TODO: ADD functionality and styling
-type Props = {}
 
-function Tracking({}: Props) {
+
+function Tracking() {
   return (
     <div>Tracking</div>
   )

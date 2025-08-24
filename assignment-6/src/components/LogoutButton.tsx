@@ -4,9 +4,7 @@ import { useLogoutMutation } from "../features/slices/authApiSlice";
 import CustomErrorPage from "../pages/AppError";
 import { clearAuthData } from "../features/slices/authSlice";
 
-type Props = {};
-
-function LogoutButton({}: Props) {
+function LogoutButton() {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const [logout, { error }] = useLogoutMutation();

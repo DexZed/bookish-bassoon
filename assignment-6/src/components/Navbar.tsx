@@ -3,9 +3,10 @@ import { Link } from "react-router";
 import { useState, useEffect } from "react";
 import { useAppSelector } from "../features/app/hooks";
 import LogoutButton from "./LogoutButton";
-type Props = {};
+// eslint-disable-next-line
+;
 
-function Navbar({}: Props) {
+function Navbar() {
   const [theme, setTheme] = useState("light");
   const userSelector = useAppSelector((state) => state.auth);
   // Load theme from local storage on initial render

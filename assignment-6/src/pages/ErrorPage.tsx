@@ -6,7 +6,7 @@ type Props = {
   message?: string;
 };
 
- function NotFound({}: Props) {
+ function NotFound() {
   const error = useRouteError() as Props | null;
   const errorMessage =
     error?.statusText || error?.message || "Unknown error occurred";

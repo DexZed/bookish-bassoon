@@ -6,9 +6,9 @@ import InputLayout from "../../components/InputLayout";
 import SelectorLayout from "../../components/SelectorLayout";
 import { ParcelSchema, type ParcelFields } from "../../interfaces/interfaces";
 
-type Props = {};
+;
 
-function CreateParcels({}: Props) {
+function CreateParcels() {
   const {
     register,
     handleSubmit,
@@ -22,6 +22,7 @@ function CreateParcels({}: Props) {
     try {
       console.log(data);
     } catch (error) {
+      console.error(error);
       setError("root", {
         type: "manual",
         message: "Something went wrong",

@@ -1,7 +1,8 @@
 // TODO: ADD functionality and styling
-type Props = {}
 
-function AllParcels({}: Props) {
+
+
+function AllParcels() {
   return (
     <div>AllParcels</div>
   )

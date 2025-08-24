@@ -25,7 +25,7 @@ const baseQuery = fetchBaseQuery({
 const baseQueryWithReAuth = async (
   args: string | FetchArgs,
   api: BaseQueryApi,
-  extraOptions: {}
+  extraOptions: object
 ) => {
   let result = await baseQuery(args, api, extraOptions);
   // send refresh token to get new access token

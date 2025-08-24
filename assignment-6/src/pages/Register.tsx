@@ -4,9 +4,9 @@ import InputLayout from "../components/InputLayout";
 import { RegistrationSchema, type RegistrationFields } from "../interfaces/interfaces";
 import SelectorLayout from "../components/SelectorLayout";
 
-type Props = {};
+;
 // TODO: Add api calls and sweet alert
-function Register({}: Props) {
+function Register() {
   const {
     register,
     handleSubmit,
@@ -21,6 +21,7 @@ function Register({}: Props) {
       console.log(data);
       throw new Error("Random error message");
     } catch (error) {
+      console.error(error);
       setError("root", {
         message: "Random error message",
       });

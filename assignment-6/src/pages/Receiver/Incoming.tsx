@@ -1,8 +1,8 @@
 
 // TODO: ADD functionality and styling
-type Props = {}
 
-function Incoming({}: Props) {
+
+function Incoming() {
   return (
     <div>Incoming</div>
   )

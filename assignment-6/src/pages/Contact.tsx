@@ -1,8 +1,8 @@
 // TODO: Add styling and content
 
-type Props = {}
 
-function Contact({}: Props) {
+
+function Contact() {
   return (
     <div>Contact</div>
   )

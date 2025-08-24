@@ -1,9 +1,9 @@
 // TODO: ADD functionality and styling
 
 
-type Props = {}
 
-function Parcels({}: Props) {
+
+function Parcels() {
   return (
     <div>Parcels</div>
   )

@@ -1,9 +1,9 @@
 
 import { Link } from 'react-router'
 
-type Props = {}
 
-export default function CustomErrorPage({}: Props) {
+
+export default function CustomErrorPage() {
   return (
     <div className="flex items-center justify-center min-h-screen bg-gray-100">
             <div className="bg-white shadow-lg rounded-xl p-6 max-w-md text-center border border-red-200">

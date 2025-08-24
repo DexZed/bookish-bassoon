@@ -1,8 +1,8 @@
 import React from 'react'
 // TODO: ADD functionality and styling
-type Props = {}
 
-function History({}: Props) {
+
+function History() {
   return (
     <div>History</div>
   )
