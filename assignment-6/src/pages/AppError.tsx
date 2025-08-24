@@ -3,7 +3,7 @@ import { Link } from 'react-router'
 
 
 
-export default function CustomErrorPage() {
+export default function CustomErrorPage({ error }: { error?: any }) {
   return (
     <div className="flex items-center justify-center min-h-screen bg-gray-100">
             <div className="bg-white shadow-lg rounded-xl p-6 max-w-md text-center border border-red-200">
@@ -29,6 +29,7 @@ export default function CustomErrorPage() {
                   We couldn't complete your request. Please try again later or
                   contact support.
                 </p>
+                <p className='text-red-600 font-semibold text-md'>Error: {error}</p>
                 <Link
                   to={"/"}
                   className="mt-4 px-4 py-2 bg-red-500 text-white rounded-md hover:bg-red-600"

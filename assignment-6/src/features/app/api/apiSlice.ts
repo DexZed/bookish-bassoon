@@ -1,5 +1,5 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-import { setAuthData, clearAuthData } from "../../slices/authSlice";
+import { setAuthData, clearAuthData } from "../../auth/authSlice";
 import type { BaseQueryApi, FetchArgs } from "@reduxjs/toolkit/query";
 import type { RootState } from "../store";
 

@@ -1,8 +1,8 @@
 import { useNavigate } from "react-router";
 import { useAppDispatch} from "../features/app/hooks";
-import { useLogoutMutation } from "../features/slices/authApiSlice";
+import { useLogoutMutation } from "../features/auth/authApiSlice";
 import CustomErrorPage from "../pages/AppError";
-import { clearAuthData } from "../features/slices/authSlice";
+import { clearAuthData } from "../features/auth/authSlice";
 
 function LogoutButton() {
   const navigate = useNavigate();

@@ -32,3 +32,15 @@ export const LoginSchema = z.object({
   password: z.string().min(6),
 });
 export type LoginFields = z.infer<typeof LoginSchema>;
+
+export interface User {
+  id: string;
+  name: string;
+  email: string;
+  role: string;
+  isBlocked: boolean;
+  accessToken?: string;
+}
+export interface Users {
+  users: User[];
+}
