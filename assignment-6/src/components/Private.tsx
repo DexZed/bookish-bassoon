@@ -3,12 +3,14 @@ import { useAppSelector } from "../features/app/hooks";
 import { showErrorAlert } from "../utilities/utils";
 
 
-type Props = { children: React.ReactNode; allowedRoles?: string[] };
+type Props = {featureFlag?: boolean, children: React.ReactNode; allowedRoles?: string[] };
 
-function Private({ children }: Props) {
+function Private({ featureFlag,children }: Props) {
   const location = useLocation();
   const { isBlocked, role } = useAppSelector((state) => state.auth);
-  console.log(role)
+  if (!featureFlag) {
+    return children;
+  }
   if (isBlocked) {
     showErrorAlert(
       "You have been blocked.",
