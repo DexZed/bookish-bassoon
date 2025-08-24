@@ -5,6 +5,7 @@ import ReceiverLayout from "./layouts/ReceiverLayout";
 import SenderLayout from "./layouts/SenderLayout";
 import App from "./App";
 import Skeleton from "./components/Skeleton";
+import Private from "./components/Private";
 
 // Lazy-loaded pages
 const Home = lazy(() => import("./pages/Home"));
@@ -41,7 +42,7 @@ const AppRouter = createBrowserRouter([
 
     {
       path: "/sender",
-      element: <SenderLayout />,
+      element: <Private allowedRoles={["sender"]}><SenderLayout /></Private>,
       children: [
         {
           path: "create",
@@ -63,7 +64,7 @@ const AppRouter = createBrowserRouter([
     },
     {
       path: "/receiver",
-      element: <ReceiverLayout />,
+      element: <Private allowedRoles={["receiver"]}><ReceiverLayout /></Private>,
       children: [
         {
           path: "incoming",
@@ -85,7 +86,7 @@ const AppRouter = createBrowserRouter([
     },
     {
       path: "/admin",
-      element: <AdminLayout />,
+      element: <Private allowedRoles={["admin"]}><AdminLayout /></Private>,
       children: [
         {
           path: "users",

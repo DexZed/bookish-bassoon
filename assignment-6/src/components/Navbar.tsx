@@ -1,11 +1,13 @@
 // TODO: ADD functionality and styling
 import { Link } from "react-router";
 import { useState, useEffect } from "react";
+import { useAppSelector } from "../features/app/hooks";
+import LogoutButton from "./LogoutButton";
 type Props = {};
 
 function Navbar({}: Props) {
   const [theme, setTheme] = useState("light");
-  
+  const userSelector = useAppSelector((state) => state.auth);
   // Load theme from local storage on initial render
   useEffect(() => {
     const savedTheme = localStorage.getItem("theme") || "light";
@@ -35,10 +37,10 @@ function Navbar({}: Props) {
         <Link to="/login">🔑 Login</Link>
       </li>
       <li>
-        <Link to="/register">📝 Register</Link>
+        <Link to="/register">➕ Register</Link>
       </li>
       <li>
-        <label className="swap swap-rotate md:-translate-y-2">
+        <label className="swap swap-rotate">
           {/* this hidden checkbox controls the state */}
           <input
             name="theme"
@@ -108,13 +110,21 @@ function Navbar({}: Props) {
           </div>
         </div>
         <div className="navbar-center hidden lg:flex">
-          <ul className="menu menu-horizontal px-1">{links}</ul>
+          <ul className="menu menu-horizontal px-1 flex justify-center items-center">
+            {links}
+          </ul>
         </div>
         <div className="navbar-end">
           {/* The matrix() function take six parameters, containing mathematic functions, which allows you to rotate, scale, move (translate), and skew elements.
           The parameters are as follow: matrix(scaleX(), skewY(), skewX(), scaleY(), translateX(), translateY()) */}
           <div className="btn btn-outline btn-primary skew-x-var [--tw-skew-x:22.6deg]">
-            <Link to={'/register'} className="skew-x-var [--tw-skew-x:-22.6deg]" >Register</Link>
+            {userSelector.email == null ? (
+              <Link to={"/login"} className="skew-x-var [--tw-skew-x:-22.6deg]">
+                login
+              </Link>
+            ) : (
+              <LogoutButton></LogoutButton>
+            )}
           </div>
         </div>
       </div>
@@ -123,3 +133,4 @@ function Navbar({}: Props) {
 }
 
 export default Navbar;
+
