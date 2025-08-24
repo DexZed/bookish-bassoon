@@ -15,6 +15,7 @@ import CustomErrorPage from "./AppError";
 export default function Login() {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
+
   const [login, { isLoading, error }] = useLoginMutation();
   const {
     register,
@@ -26,15 +27,16 @@ export default function Login() {
   const onSubmit: SubmitHandler<LoginFields> = async (data) => {
     try {
       const res = await login(data).unwrap();
-      dispatch(setAuthData(res));
+      const dt = typeof res === "string" ? JSON.parse(res) : res;
+      dispatch(setAuthData(dt.filteredUserField));
       showSuccessAlert("Success", "Logged in successfully");
-     
-      navigate(`/${res.role}`);
+      navigate(`/${dt.filteredUserField.role}`);
     } catch (err) {
       showErrorAlert("Something went wrong!", err as string);
       console.error(err);
     }
   };
+  
   return (
     <>
       {isLoading ? (
