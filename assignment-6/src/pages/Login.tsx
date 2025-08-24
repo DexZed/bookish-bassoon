@@ -5,7 +5,7 @@ import { useForm, type SubmitHandler } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { LoginSchema, type LoginFields } from "../interfaces/interfaces";
 import { useNavigate } from "react-router";
-import { useAppDispatch} from "../features/app/hooks";
+import { useAppDispatch } from "../features/app/hooks";
 import { useLoginMutation } from "../features/auth/authApiSlice";
 import { setAuthData } from "../features/auth/authSlice";
 import Skeleton from "../components/Skeleton";
@@ -36,7 +36,7 @@ export default function Login() {
       console.error(err);
     }
   };
-  
+
   return (
     <>
       {isLoading ? (
@@ -99,7 +99,7 @@ export default function Login() {
                   className="btn btn-warning w-full btn-outline rounded-2xl mt-2"
                   type="submit"
                 >
-                  {isSubmitting ? "Loading..." : "Register"}
+                  {isSubmitting ? "Loading..." : "Log In"}
                 </button>
                 <span className="text-amber-500">{errors.root?.message}</span>
               </div>

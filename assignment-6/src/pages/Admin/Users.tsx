@@ -2,7 +2,7 @@
 
 import Skeleton from "../../components/Skeleton";
 import { useGetUsersQuery } from "../../features/users/userApiSlice";
-import type { Users } from "../../interfaces/interfaces";
+import type { User, Users } from "../../interfaces/interfaces";
 import CustomErrorPage from "../AppError";
 
 function Users() {
@@ -11,12 +11,16 @@ function Users() {
     isLoading,
     error
   } = useGetUsersQuery(undefined);
-console.log(users);
+
+
   return (<>
     {
       isLoading ? <><Skeleton/></>:
       error? <><CustomErrorPage/></>:
-      <><div>Users</div></>
+      <><div>Users</div>
+      <div>{users?.map((user:User) => (
+        <ul key={user.id}></ul> 
+      ))}</div></>
     }
     </>);
 }
