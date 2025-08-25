@@ -1,16 +1,15 @@
 import type { Application } from "express";
-
 import chalk from "chalk";
 import cookieParser from "cookie-parser";
 import cors from "cors";
 import express from "express";
 import helmet from "helmet";
 import morgan from "morgan";
-
 import { NotFoundException } from "./global-handler/httpexception";
 import routes from "./routes/index";
 import { globalErrorHandler } from "./global-handler/global-errorhandler";
-import { allowedOrigins } from "./utils/utility";
+import { whitelist } from "./utils/utility";
+
 
 export default class App {
   public app: Application;
@@ -50,9 +49,9 @@ export default class App {
     );
     this.app.use(
       cors({
-        origin: (allowedOrigins, callback) => {
+        origin: (origin, callback) => {
           // Allow requests with no origin (e.g., mobile apps, server-to-server)
-          if (!allowedOrigins || allowedOrigins.includes(allowedOrigins)) {
+          if (!origin || whitelist.includes(origin)) {
             callback(null, true);
           } else {
             callback(new Error("Not allowed by CORS"));

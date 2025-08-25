@@ -11,7 +11,8 @@ function LogoutButton() {
 
   function handleClick() {
     logout();
-    dispatch(clearAuthData())
+    dispatch(clearAuthData());
+    localStorage.removeItem("state");
     navigate("/");
   }
   return (

@@ -1,5 +1,4 @@
 // TODO: ADD functionality and styling
-
 import Skeleton from "../../components/Skeleton";
 
 import {
@@ -12,14 +11,22 @@ import { showErrorAlert, showSuccessAlert } from "../../utilities/utils";
 import CustomErrorPage from "../AppError";
 
 function Users() {
-  const { data, isLoading, error } = useGetUsersQuery(undefined);
+  const { data, isLoading, error } = useGetUsersQuery(undefined,
+    {
+      refetchOnMountOrArgChange: true,
+      refetchOnReconnect: true,
+    }
+  );
   const [block] = useBlockUserMutation();
   const [unblock] = useUnblockUserMutation();
+  
+
 
   async function handleBlockUser(id: string) {
     try {
       await block(id).unwrap();
       showSuccessAlert("Success", "User blocked successfully");
+
     } catch (error) {
       console.error(error);
       showErrorAlert("Error", error as string);
@@ -30,6 +37,7 @@ function Users() {
     try {
       await unblock(id).unwrap();
       showSuccessAlert("Success", "User unblocked successfully");
+ 
     } catch (error) {
       console.error(error);
       showErrorAlert("Error", error as string);
