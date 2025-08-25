@@ -57,7 +57,7 @@ function Users() {
       ) : (
         <>
           <article>
-            <h2>Users</h2>
+            <h2 className="text-2xl font-bold text-center mb-4">All Users</h2>
             <div className="overflow-x-auto">
               <table className="table">
                 {/* head */}

@@ -47,3 +47,35 @@ export interface UsersResponse {
   message: string;
   users: User[];
 }
+//  Interface for Status Log
+export interface StatusLog {
+  status: string;
+  location: string;
+  note: string;
+  _id: string;
+  createdAt: string;
+  updatedAt: string;
+}
+// Interface for Parcel
+export interface Parcel {
+  _id: string;
+  trackingId: string;
+  sender: string;
+  receiver: string;
+  type: string;
+  weight: number;
+  pickupAddress: string;
+  deliveryAddress: string;
+  status: string;
+  fee: number;
+  deliveryDate: string;
+  isBlocked: boolean;
+  createdAt: string;
+  updatedAt: string;
+  statusLogs: StatusLog[];
+}
+// Interface for parcel Response
+export interface ParcelsResponse {
+  message: string;
+  parcels: Parcel[];
+}
