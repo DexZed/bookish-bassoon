@@ -22,7 +22,7 @@ function LogoutButton() {
         </>
       ) : (
         <>
-          <div onClick={handleClick} className="btn-style skew-x-var [--tw-skew-x:-22.6deg]">
+          <div onClick={handleClick} className="skew-x-var [--tw-skew-x:-22.6deg]">
             Log Out
           </div>
         </>

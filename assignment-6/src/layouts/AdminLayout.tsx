@@ -1,11 +1,16 @@
 import { Suspense } from "react";
-import { Outlet, Link } from "react-router";
+import { Outlet, Link, useLocation } from "react-router";
 import Skeleton from "../components/Skeleton";
 import SideBar from "../components/SideBar";
 import AppContainer from "../components/Container";
-import { useAppSelector } from "../features/app/hooks";
+import AdminDash from "../components/AdminDash";
+import Footer from "../components/Footer";
 export default function AdminLayout() {
-  const selector = useAppSelector((state) => state.auth);
+  const location = useLocation();
+  // conditionally render AdminDash only in dashboard route
+  const hideDash =
+    location.pathname.startsWith("/admin/users") ||
+    location.pathname.startsWith("/admin/parcels");
   const adminLinks = (
     <>
       <li>
@@ -19,11 +24,13 @@ export default function AdminLayout() {
   return (
     <>
       <AppContainer>
-        <SideBar navLinks={adminLinks} user={`${selector.name}`}>
+        <SideBar navLinks={adminLinks}>
           <Suspense fallback={<Skeleton />}>
+            {!hideDash && <AdminDash />}
             <Outlet />
           </Suspense>
         </SideBar>
+        <Footer />
       </AppContainer>
     </>
   );

@@ -3,7 +3,7 @@
 import InputLayout from "../components/InputLayout";
 import { useForm, type SubmitHandler } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { LoginSchema, type LoginFields } from "../interfaces/interfaces";
+import { LoginSchema, type LoginFields } from "../interfaces/globalInterfaces";
 import { useNavigate } from "react-router";
 import { useAppDispatch } from "../features/app/hooks";
 import { useLoginMutation } from "../features/auth/authApiSlice";

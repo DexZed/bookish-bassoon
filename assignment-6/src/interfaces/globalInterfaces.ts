@@ -33,14 +33,17 @@ export const LoginSchema = z.object({
 });
 export type LoginFields = z.infer<typeof LoginSchema>;
 
+// Interface for a single user object
 export interface User {
   id: string;
   name: string;
   email: string;
   role: string;
   isBlocked: boolean;
-  accessToken?: string;
 }
-export interface Users {
+
+// Interface for the entire response payload
+export interface UsersResponse {
+  message: string;
   users: User[];
 }
