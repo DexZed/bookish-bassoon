@@ -25,7 +25,7 @@ export const senderApiSlice = apiSlice.injectEndpoints({
       }),
       invalidatesTags: ["Sender"],
     }),
-    senderStatusLog: builder.query<Parcel, { id: string }>({
+    senderStatusLog: builder.query<Parcel,string>({
         query: (id) => `parcel/sender/status/${id}`,
         providesTags: ["Sender"],
     })
