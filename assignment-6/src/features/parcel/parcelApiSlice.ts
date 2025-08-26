@@ -1,5 +1,8 @@
-import { url } from "zod";
-import type { ParcelsResponse } from "../../interfaces/globalInterfaces";
+import type {
+  ParcelsResponse,
+  UpdateStatusBody,
+  UpdateStatusResponse,
+} from "../../interfaces/globalInterfaces";
 import { apiSlice } from "../app/api/apiSlice";
 
 export const parcelApiSlice = apiSlice.injectEndpoints({
@@ -22,13 +25,23 @@ export const parcelApiSlice = apiSlice.injectEndpoints({
       }),
       invalidatesTags: ["Parcel"],
     }),
-    updateStatus: builder.mutation({
+    updateStatus: builder.mutation<
+      UpdateStatusResponse,
+      { id: string; body: UpdateStatusBody }
+    >({
       query: ({ id, body }) => ({
         url: `/parcel/admin/status-log/${id}`,
         method: "PATCH",
-        body: body
+        body: body,
       }),
       invalidatesTags: ["Parcel"],
     }),
   }),
 });
+
+export const {
+  useGetParcelsQuery,
+  useBlockParcelMutation,
+  useUnblockParcelMutation,
+  useUpdateStatusMutation,
+} = parcelApiSlice;

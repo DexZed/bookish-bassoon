@@ -6,6 +6,7 @@ import SenderLayout from "./layouts/SenderLayout";
 import App from "./App";
 import Skeleton from "./components/Skeleton";
 import Private from "./components/Private";
+import UpdateStatus from "./pages/Admin/UpdateStatus";
 
 // Lazy-loaded pages
 const Home = lazy(() => import("./pages/Home"));
@@ -101,6 +102,14 @@ const AppRouter = createBrowserRouter([
           element: (
             <Suspense fallback={<Skeleton/>}>
               <ManageParcels />
+            </Suspense>
+          ),
+        },
+        {
+          path: "status/:parcelId",
+          element: (
+            <Suspense fallback={<Skeleton/>}>
+              <UpdateStatus/>
             </Suspense>
           ),
         },

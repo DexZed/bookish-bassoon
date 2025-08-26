@@ -1,7 +1,9 @@
-import { useAppSelector } from "../features/app/hooks";
+import type { AuthState } from '../interfaces/globalInterfaces'
 
-function AdminDash() {
-  const selector = useAppSelector((state) => state.auth);
+type Props = {userData:AuthState}
+
+function Dash({userData}: Props) {
+
   return (
     <>
       <main className="h-dvh flex justify-center items-center">
@@ -9,9 +11,9 @@ function AdminDash() {
           <div className="border-base-content card bg-base-100 border text-center rotate-12">
             <div className="card-body -rotate-12 flex justify-center items-center">
               <div className="flex flex-col gap-2">
-                <h2 className="text-2xl font-bold">{selector.name} </h2>
-                <p className="text-lg">{selector.email} </p>
-                <p className="text-md text-gray-500">{selector.role} </p>
+                <h2 className="text-2xl font-bold">{userData.name} </h2>
+                <p className="text-lg">{userData.email} </p>
+                <p className="text-md text-gray-500">{userData.role} </p>
               </div>
             </div>
           </div>
@@ -21,7 +23,7 @@ function AdminDash() {
         </div>
       </main>
     </>
-  );
+  )
 }
 
-export default AdminDash;
+export default Dash

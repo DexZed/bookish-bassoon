@@ -6,8 +6,8 @@ import AppContainer from "../components/Container";
 import AdminDash from "../components/AdminDash";
 import Footer from "../components/Footer";
 export default function AdminLayout() {
+
   const location = useLocation();
-  // conditionally render AdminDash only in dashboard route
   const hideDash =
     location.pathname.startsWith("/admin/users") ||
     location.pathname.startsWith("/admin/parcels");

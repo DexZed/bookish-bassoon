@@ -4,6 +4,7 @@ import type { AuthState } from "../../interfaces/globalInterfaces";
 
 
 const initialState:AuthState = {
+    id:null,
     name:null,
     email:null,
     role:null,
@@ -16,6 +17,7 @@ export const authSlice = createSlice({
     initialState,
     reducers:{
         setAuthData(state,action:PayloadAction<AuthState>){
+            state.id = action.payload.id;
             state.name = action.payload.name;
             state.email = action.payload.email;
             state.role = action.payload.role;
@@ -23,6 +25,7 @@ export const authSlice = createSlice({
             state.isBlocked = action.payload.isBlocked;
         },
         clearAuthData(state){
+            state.id = null;
             state.name = null;
             state.email = null;
             state.role = null;

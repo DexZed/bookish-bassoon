@@ -5,23 +5,31 @@ export const userApiSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
     getUsers: builder.query<UsersResponse, undefined>({
       query: () => "/users",
-      providesTags: ['User'], 
+      providesTags: ["User"],
     }),
     blockUser: builder.mutation({
       query: (id) => ({
         url: `/users/block/${id}`,
         method: "PATCH",
       }),
-      invalidatesTags: ['User'],
+      invalidatesTags: ["User"],
     }),
     unblockUser: builder.mutation({
       query: (id) => ({
         url: `/users/unblock/${id}`,
         method: "PATCH",
       }),
-      invalidatesTags: ['User'],
+      invalidatesTags: ["User"],
+    }),
+    getUserByEmail: builder.query<UsersResponse, string>({
+      query: (email) => `/${email}`,
     }),
   }),
 });
 
-export const { useGetUsersQuery, useBlockUserMutation, useUnblockUserMutation } = userApiSlice;
+export const {
+  useGetUsersQuery,
+  useBlockUserMutation,
+  useUnblockUserMutation,
+  useGetUserByEmailQuery,
+} = userApiSlice;

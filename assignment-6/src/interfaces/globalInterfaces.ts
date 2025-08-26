@@ -18,7 +18,9 @@ export const ParcelSchema = z.object({
   deliveryDate: z.date(),
 });
 export type ParcelFields = z.infer<typeof ParcelSchema>;
+
 export interface AuthState {
+  id: string | null;
   name: string | null;
   email: string | null;
   role: string | null;
@@ -40,6 +42,9 @@ export interface User {
   email: string;
   role: string;
   isBlocked: boolean;
+  createdAt?: string;
+  updatedAt?: string;
+  refreshToken?:string;
 }
 
 // Interface for the entire response payload
@@ -78,4 +83,14 @@ export interface Parcel {
 export interface ParcelsResponse {
   message: string;
   parcels: Parcel[];
+}
+export interface UpdateStatusBody {
+  status: string;
+  location?: string;
+  note?: string;
+}
+
+ export interface UpdateStatusResponse {
+  message: string;
+  updatedParcel: Parcel; // reuse the Parcel interface from before
 }

@@ -38,6 +38,7 @@ export default class AuthController {
       maxAge: 24 * 60 * 60 * 1000,
     });
     const filteredUserField = {
+      id: user?.id,
       name: user?.name,
       email: user?.email,
       role: user?.role,
