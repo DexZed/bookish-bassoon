@@ -31,11 +31,14 @@ export default class AuthController {
       validatedConfig.ACCESS_TOKEN,
       {
         expiresIn: "1h", // change this to 1hr after testing
-      },
+      }
     );
     res.cookie("jwt", user?.refreshToken, {
       httpOnly: true,
-      maxAge: 24 * 60 * 60 * 1000,
+      secure: process.env.NODE_ENV === "production", // only true in prod
+      sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
+      maxAge: 24 * 60 * 60 * 1000, // 1 day
+      path: "/",
     });
     const filteredUserField = {
       id: user?.id,
