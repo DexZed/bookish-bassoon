@@ -12,7 +12,8 @@ export default function SenderLayout() {
   const location = useLocation();
   const hideDash =
     location.pathname.startsWith("/sender/create") ||
-    location.pathname.startsWith("/sender/parcels");
+    location.pathname.startsWith("/sender/parcels") ||
+    location.pathname.startsWith("/sender/status");
   const senderLinks = (
     <>
       <li>

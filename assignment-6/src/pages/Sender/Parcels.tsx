@@ -1,3 +1,4 @@
+import { Link } from "react-router";
 import Skeleton from "../../components/Skeleton";
 import { useAppSelector } from "../../features/app/hooks";
 import {
@@ -72,7 +73,14 @@ function Parcels() {
                       <td>{parcel.status}</td>
                       <td>{parcel.pickupAddress}</td>
                       <td>{parcel.deliveryAddress}</td>
-                      <td>
+                      <td className="flex justify-between gap-2">
+                        <Link
+                          className="btn btn-outline btn-info rounded-4xl"
+                          to={`/sender/status/${parcel._id}`}
+                        >
+                          Status Details
+                        </Link>
+
                         {(() => {
                           const isInvalid = invalidStatuses.has(parcel.status);
                           return (

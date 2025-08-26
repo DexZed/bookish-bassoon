@@ -7,6 +7,7 @@ import App from "./App";
 import Skeleton from "./components/Skeleton";
 import Private from "./components/Private";
 import UpdateStatus from "./pages/Admin/UpdateStatus";
+import Status from "./pages/Sender/Status";
 
 // Lazy-loaded pages
 const Home = lazy(() => import("./pages/Home"));
@@ -61,6 +62,14 @@ const AppRouter = createBrowserRouter([
             </Suspense>
           ),
         },
+        {
+          path: "status/:parcelId",
+          element: (
+            <Suspense fallback={<Skeleton/>}>
+             <Status/>
+            </Suspense>
+          ),
+        }
       ],
     },
     {
