@@ -3,9 +3,12 @@ import { apiSlice } from "../app/api/apiSlice";
 
 export const senderApiSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
-    getSenderParcels: builder.query<ParcelsResponse, { id: string }>({
+    getSenderParcels: builder.query<ParcelsResponse, string>({
       query: (id) => `parcel/sender/${id}`,
       providesTags: ["Sender"],
+      transformErrorResponse: (response: any) => {
+        return response.data;
+      },
     }),
     addSenderParcel: builder.mutation({
       query: (data) => ({

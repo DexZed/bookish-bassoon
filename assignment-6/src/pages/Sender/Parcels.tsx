@@ -1,16 +1,39 @@
-import Skeleton from "../../components/Skeleton"
-import { useAppSelector } from "../../features/app/hooks"
-import { useGetSenderParcelsQuery } from "../../features/sender/senderApiSlice"
-import CustomErrorPage from "../AppError"
-
-
+import Skeleton from "../../components/Skeleton";
+import { useAppSelector } from "../../features/app/hooks";
+import {
+  useCancelSenderParcelMutation,
+  useGetSenderParcelsQuery,
+} from "../../features/sender/senderApiSlice";
+import { showSuccessAlert, showErrorAlert } from "../../utilities/utils";
+import CustomErrorPage from "../AppError";
 
 function Parcels() {
-  const selector = useAppSelector((state) => state.auth)
-
-  const {} = useGetSenderParcelsQuery(selector.)
+  const selector = useAppSelector((state) => state.auth);
+  const [parcelCancel] = useCancelSenderParcelMutation();
+  const { data, isLoading, error } = useGetSenderParcelsQuery(
+    selector.id as string,
+    {
+      refetchOnMountOrArgChange: true,
+      refetchOnReconnect: true,
+    }
+  );
+  const invalidStatuses = new Set([
+    "Requested",
+    "Dispatched",
+    "In Transit",
+    "Cancelled",
+  ]);
+  async function handleCancel(id: string) {
+    try {
+      await parcelCancel(id);
+      showSuccessAlert("Success", "Parcel canceled successfully");
+    } catch (error) {
+      console.error(error);
+      showErrorAlert("Error", "Something went wrong while canceling parcel");
+    }
+  }
   return (
-     <>
+    <>
       {isLoading ? (
         <>
           <Skeleton />
@@ -39,7 +62,7 @@ function Parcels() {
                     <th>Actions</th>
                   </tr>
                 </thead>
-                {/* <tbody>
+                <tbody>
                   {data?.parcels.map((parcel, idx) => (
                     <tr key={idx}>
                       <th>{parcel.trackingId}</th>
@@ -49,28 +72,39 @@ function Parcels() {
                       <td>{parcel.status}</td>
                       <td>{parcel.pickupAddress}</td>
                       <td>{parcel.deliveryAddress}</td>
-
-                      <td className="flex gap-2 flex-col">
-                        <button onClick={() => handleBlock(parcel._id)} disabled={parcel.isBlocked} className="btn btn-warning btn-outline btn-xs rounded-full">
-                          Block
-                        </button>
-                        <button onClick={() => handleUnblock(parcel._id)} disabled={!parcel.isBlocked} className="btn btn-info btn-outline btn-xs rounded-full">
-                          Unblock
-                        </button>
-                        <Link to={`/status/${parcel._id}`} className="btn btn-primary btn-outline btn-xs rounded-full">
-                          Update
-                        </Link>
+                      <td>
+                        {(() => {
+                          const isInvalid = invalidStatuses.has(parcel.status);
+                          return (
+                            <div
+                              className={isInvalid ? "tooltip" : undefined}
+                              data-tip={
+                                isInvalid
+                                  ? "Only allowed if status is not Requested, Dispatched, In Transit or Cancelled"
+                                  : undefined
+                              }
+                            >
+                              <button
+                                disabled={isInvalid}
+                                onClick={() => handleCancel(parcel._id)}
+                                className="btn btn-outline btn-warning rounded-4xl"
+                              >
+                                Cancel
+                              </button>
+                            </div>
+                          );
+                        })()}
                       </td>
                     </tr>
                   ))}
-                </tbody> */}
+                </tbody>
               </table>
             </div>
           </article>
         </>
       )}
     </>
-  )
+  );
 }
 
-export default Parcels
+export default Parcels;
