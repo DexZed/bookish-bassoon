@@ -1,4 +1,4 @@
-import type { Parcel, ParcelsResponse } from "../../interfaces/globalInterfaces";
+import type {ParcelResponse, ParcelsResponse } from "../../interfaces/globalInterfaces";
 import { apiSlice } from "../app/api/apiSlice";
 
 export const senderApiSlice = apiSlice.injectEndpoints({
@@ -25,7 +25,7 @@ export const senderApiSlice = apiSlice.injectEndpoints({
       }),
       invalidatesTags: ["Sender"],
     }),
-    senderStatusLog: builder.query<Parcel,string>({
+    senderStatusLog: builder.query<ParcelResponse,string>({
         query: (id) => `parcel/sender/status/${id}`,
         providesTags: ["Sender"],
     })

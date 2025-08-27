@@ -45,3 +45,14 @@ export function showConfirmationAlert(
     }
   });
 }
+export function formatDate(isoString?: string, locale: string = "en-US") {
+  if (!isoString) return "";
+  const date = new Date(isoString);
+
+  return date.toLocaleDateString(locale, {
+    weekday: "short",   // e.g. "Wed"
+    year: "numeric",    // 2026
+    month: "long",      // "August"
+    day: "numeric",     // 5
+  });
+}

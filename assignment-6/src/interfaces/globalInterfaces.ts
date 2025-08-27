@@ -94,3 +94,8 @@ export interface UpdateStatusBody {
   message: string;
   updatedParcel: Parcel; // reuse the Parcel interface from before
 }
+
+export interface ParcelResponse {
+  message: string;
+  parcel: Parcel;
+}
