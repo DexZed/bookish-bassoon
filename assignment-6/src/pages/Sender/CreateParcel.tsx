@@ -4,7 +4,8 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm, type SubmitHandler } from "react-hook-form";
 import InputLayout from "../../components/InputLayout";
 import SelectorLayout from "../../components/SelectorLayout";
-import { ParcelSchema, type ParcelFields } from "../../interfaces/globalInterfaces";
+import { ParcelSchema, type ParcelData, type ParcelFields } from "../../interfaces/globalInterfaces";
+import { useAppSelector } from "../../features/app/hooks";
 
 ;
 
@@ -17,10 +18,11 @@ function CreateParcels() {
   } = useForm<ParcelFields>({
     resolver: zodResolver(ParcelSchema),
   });
+  const selector = useAppSelector((state) => state.auth);
   const onSubmit: SubmitHandler<ParcelFields> = (data) => {
-    // TODO: ADD api functionality and notifications from sweet alert
+    const parcelData:Partial<ParcelData> = {...data,sender:selector.id as string}
+    console.log(parcelData);
     try {
-      console.log(data);
     } catch (error) {
       console.error(error);
       setError("root", {
@@ -37,18 +39,7 @@ function CreateParcels() {
           className="space-y-2 card bg-base-200 border-base-300 rounded-box w-xs border p-4 "
           onSubmit={handleSubmit(onSubmit)}
         >
-          <InputLayout
-            description="Sender"
-            errorDescription={errors.sender && `${errors.sender?.message}`}
-          >
-            <input
-              {...register("sender")}
-              type="text"
-              className="input input-secondary"
-              placeholder="Sender"
-              required
-            />
-          </InputLayout>
+          
           <InputLayout
             description="Receiver"
             errorDescription={errors.receiver && `${errors.receiver?.message}`}

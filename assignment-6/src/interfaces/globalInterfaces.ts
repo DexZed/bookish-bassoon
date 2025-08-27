@@ -8,7 +8,6 @@ export const RegistrationSchema = z.object({
 export type RegistrationFields = z.infer<typeof RegistrationSchema>;
 
 export const ParcelSchema = z.object({
-  sender: z.string(),
   receiver: z.string(),
   type: z.enum(["Document", "Box", "Fragile", "Other"]),
   weight: z.number(),
@@ -17,6 +16,17 @@ export const ParcelSchema = z.object({
   fee: z.number(),
   deliveryDate: z.date(),
 });
+export interface ParcelData {
+  sender: string;
+  receiver: string;
+  type: string
+  weight: number
+  pickupAddress: string; 
+  deliveryAddress: string;
+  status: string;
+  fee: number;
+  deliveryDate: Date;
+}
 export type ParcelFields = z.infer<typeof ParcelSchema>;
 
 export interface AuthState {
