@@ -29,13 +29,14 @@ const baseQueryWithReAuth = async (
 ) => {
   let result = await baseQuery(args, api, extraOptions);
   // send refresh token to get new access token
-  if (result.error?.status === 403) {
+  if (result.error?.status === 401) {
     console.info("Sending Refresh Token");
     const refreshResult = await baseQuery("/refresh", api, extraOptions);
     console.info("New Access Token:", refreshResult);
     if (refreshResult.data) {
       const state = api.getState() as RootState;
       const user = state.auth;
+      console.info("User State:", user);
       // store new token
       api.dispatch(setAuthData({ ...user }));
       // retry the original query with new access token

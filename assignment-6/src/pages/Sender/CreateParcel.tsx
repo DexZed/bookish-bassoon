@@ -10,6 +10,8 @@ import {
 } from "../../interfaces/globalInterfaces";
 import { useAppSelector } from "../../features/app/hooks";
 import axios from "axios";
+import { useAddSenderParcelMutation } from "../../features/sender/senderApiSlice";
+import { showErrorAlert, showSuccessAlert } from "../../utilities/utils";
 
 function CreateParcels() {
   const {
@@ -20,6 +22,7 @@ function CreateParcels() {
   } = useForm<ParcelFields>({
     resolver: zodResolver(ParcelSchema),
   });
+  const [addParcel]  = useAddSenderParcelMutation();
   const selector = useAppSelector((state) => state.auth);
   const onSubmit: SubmitHandler<ParcelFields> = async (data) => {
     const receiverData = await fetchUser(data.receiver);
@@ -28,14 +31,18 @@ function CreateParcels() {
       sender: selector.id as string,
       receiver: receiverData?._id as string,
     };
-    console.log(parcelData);
+
     try {
+      await addParcel(parcelData).unwrap();
+      showSuccessAlert("Success","Parcel created successfully");
     } catch (error) {
       console.error(error);
+      showErrorAlert("Error","Something went wrong");
       setError("root", {
-        type: "manual",
+        type: "FormError",
         message: "Something went wrong",
       });
+      console.error(error);
     }
   };
   async function fetchUser(email: string): Promise<User | null> {
