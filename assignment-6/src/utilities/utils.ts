@@ -1,4 +1,6 @@
+import axios from "axios";
 import Swal from "sweetalert2";
+import type { User } from "../interfaces/globalInterfaces";
 // Success alert
 export function showSuccessAlert(title: string, text: string): void {
   Swal.fire({
@@ -50,9 +52,19 @@ export function formatDate(isoString?: string, locale: string = "en-US") {
   const date = new Date(isoString);
 
   return date.toLocaleDateString(locale, {
-    weekday: "short",   // e.g. "Wed"
-    year: "numeric",    // 2026
-    month: "long",      // "August"
-    day: "numeric",     // 5
+    weekday: "short", // e.g. "Wed"
+    year: "numeric", // 2026
+    month: "long", // "August"
+    day: "numeric", // 5
   });
+}
+
+export async function fetchUser(url: string): Promise<User | null> {
+  try {
+    const response = await axios.get<{ message: string; user: User }>(url);
+    return response.data.user;
+  } catch (error) {
+    console.error(error);
+    return null;
+  }
 }
