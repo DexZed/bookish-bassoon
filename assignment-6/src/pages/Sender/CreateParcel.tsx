@@ -6,9 +6,10 @@ import {
   ParcelSchema,
   type ParcelData,
   type ParcelFields,
+  type User,
 } from "../../interfaces/globalInterfaces";
 import { useAppSelector } from "../../features/app/hooks";
-import { useGetUserQuery } from "../../features/public/publicApiSlice";
+import axios from "axios";
 
 function CreateParcels() {
   const {
@@ -20,12 +21,12 @@ function CreateParcels() {
     resolver: zodResolver(ParcelSchema),
   });
   const selector = useAppSelector((state) => state.auth);
-  const {data} = useGetUserQuery(selector.email as string);
-  console.log(data);
-  const onSubmit: SubmitHandler<ParcelFields> = (data) => {
+  const onSubmit: SubmitHandler<ParcelFields> = async (data) => {
+    const receiverData = await fetchUser(data.receiver);
     const parcelData: Partial<ParcelData> = {
       ...data,
       sender: selector.id as string,
+      receiver: receiverData?._id as string,
     };
     console.log(parcelData);
     try {
@@ -37,7 +38,17 @@ function CreateParcels() {
       });
     }
   };
-
+  async function fetchUser(email: string): Promise<User | null> {
+    try {
+      const response = await axios.get<{ message: string; user: User }>(
+        `http://localhost:3000/user/${email}`
+      );
+      return response.data.user;
+    } catch (error) {
+      console.error(error);
+      return null;
+    }
+  }
   return (
     <>
       <div className="h-dvh flex justify-center items-center flex-col gap-4">
