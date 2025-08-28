@@ -4,6 +4,7 @@ import Parcel from "../modules/parcel module/parcelSchema/parcel.schema";
 import asyncHandler from "../utils/asynchandler";
 import User from "../modules/User Module/userEntity/entity";
 import { NotFoundException } from "../global-handler/httpexception";
+import mongoose from "mongoose";
 class IndexRoute {
   public readonly router: Router;
   constructor() {
@@ -13,28 +14,34 @@ class IndexRoute {
 
   private configureRoutes(): void {
     this.router.get(
-  "/user/:id",
-  asyncHandler(async (req: Request, res: Response) => {
-    const email = req.params.id;
+      "/user/:identifier",
+      asyncHandler(async (req: Request, res: Response) => {
+        const { identifier } = req.params;
 
-    console.log(email);
+        console.log("Identifier received:", identifier);
 
-    // ✅ fetch user by email
-    const user = await User.findOne({ email }).lean();
+        let user;
 
-    if (!user) {
-      throw new NotFoundException("User not found");
-    }
+        if (mongoose.isValidObjectId(identifier)) {
+          // fetch by MongoDB _id
+          user = await User.findById(identifier).lean();
+        } else {
+          // fetch by email
+          user = await User.findOne({ email: identifier }).lean();
+        }
 
-    // ✅ remove password field with destructuring
-    const { password, ...filteredUser } = user;
+        if (!user) {
+          throw new NotFoundException("User not found");
+        }
 
-    res.json({
-      message: "User fetched successfully",
-      user: filteredUser,
-    });
-  })
-);
+        const { password, ...filteredUser } = user;
+
+        res.json({
+          message: "User fetched successfully",
+          user: filteredUser,
+        });
+      })
+    );
     this.router.get("/", (_: Request, res: Response) => {
       res.json({ message: "Hello World" });
     });
