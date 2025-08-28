@@ -1,12 +1,9 @@
 import type { Request, Response } from "express";
-
 import { Router } from "express";
-
 import Parcel from "../modules/parcel module/parcelSchema/parcel.schema";
 import asyncHandler from "../utils/asynchandler";
 import User from "../modules/User Module/userEntity/entity";
 import { NotFoundException } from "../global-handler/httpexception";
-
 class IndexRoute {
   public readonly router: Router;
   constructor() {
@@ -15,6 +12,29 @@ class IndexRoute {
   }
 
   private configureRoutes(): void {
+    this.router.get(
+  "/user/:id",
+  asyncHandler(async (req: Request, res: Response) => {
+    const email = req.params.id;
+
+    console.log(email);
+
+    // ✅ fetch user by email
+    const user = await User.findOne({ email }).lean();
+
+    if (!user) {
+      throw new NotFoundException("User not found");
+    }
+
+    // ✅ remove password field with destructuring
+    const { password, ...filteredUser } = user;
+
+    res.json({
+      message: "User fetched successfully",
+      user: filteredUser,
+    });
+  })
+);
     this.router.get("/", (_: Request, res: Response) => {
       res.json({ message: "Hello World" });
     });
@@ -31,24 +51,6 @@ class IndexRoute {
         res.json({
           message: "Parcel fetched successfully",
           parcel,
-        });
-      })
-    );
-    this.router.get(
-      "/user/:id",
-      asyncHandler(async (req: Request, res: Response) => {
-        const userId = req.params.id;
-        const users = await User.find({ userId });
-
-        if (!users || users.length === 0) {
-          throw new NotFoundException("User not found") ;
-        }
-
-        const filteredData = users.map(({ password, ...rest }) => rest);
-
-        res.json({
-          message: "User fetched successfully",
-          filteredData,
         });
       })
     );

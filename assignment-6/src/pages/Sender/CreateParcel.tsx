@@ -1,13 +1,14 @@
-
-
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm, type SubmitHandler } from "react-hook-form";
 import InputLayout from "../../components/InputLayout";
 import SelectorLayout from "../../components/SelectorLayout";
-import { ParcelSchema, type ParcelData, type ParcelFields } from "../../interfaces/globalInterfaces";
+import {
+  ParcelSchema,
+  type ParcelData,
+  type ParcelFields,
+} from "../../interfaces/globalInterfaces";
 import { useAppSelector } from "../../features/app/hooks";
-
-;
+import { useGetUserQuery } from "../../features/public/publicApiSlice";
 
 function CreateParcels() {
   const {
@@ -19,8 +20,13 @@ function CreateParcels() {
     resolver: zodResolver(ParcelSchema),
   });
   const selector = useAppSelector((state) => state.auth);
+  const {data} = useGetUserQuery(selector.email as string);
+  console.log(data);
   const onSubmit: SubmitHandler<ParcelFields> = (data) => {
-    const parcelData:Partial<ParcelData> = {...data,sender:selector.id as string}
+    const parcelData: Partial<ParcelData> = {
+      ...data,
+      sender: selector.id as string,
+    };
     console.log(parcelData);
     try {
     } catch (error) {
@@ -31,6 +37,7 @@ function CreateParcels() {
       });
     }
   };
+
   return (
     <>
       <div className="h-dvh flex justify-center items-center flex-col gap-4">
@@ -39,14 +46,13 @@ function CreateParcels() {
           className="space-y-2 card bg-base-200 border-base-300 rounded-box w-xs border p-4 "
           onSubmit={handleSubmit(onSubmit)}
         >
-          
           <InputLayout
-            description="Receiver"
+            description="Receiver Email"
             errorDescription={errors.receiver && `${errors.receiver?.message}`}
           >
             <input
               {...register("receiver")}
-              type="text"
+              type="email"
               className="input input-primary"
               placeholder="Receiver"
               required
@@ -109,7 +115,10 @@ function CreateParcels() {
               required
             />
           </InputLayout>
-          <InputLayout description="Fee" errorDescription={errors.fee && `${errors.fee?.message}`}>
+          <InputLayout
+            description="Fee"
+            errorDescription={errors.fee && `${errors.fee?.message}`}
+          >
             <input
               {...register("fee", { valueAsNumber: true })}
               type="number"
@@ -126,7 +135,7 @@ function CreateParcels() {
             }
           >
             <input
-              {...register("deliveryDate",{valueAsDate:true})}
+              {...register("deliveryDate", { valueAsDate: true })}
               type="date"
               className="input input-secondary"
               placeholder="dd/mm/yyyy"

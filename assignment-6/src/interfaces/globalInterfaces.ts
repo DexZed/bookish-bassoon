@@ -62,6 +62,10 @@ export interface UsersResponse {
   message: string;
   users: User[];
 }
+export interface UserResponse {
+  message: string;
+  user: User;
+}
 //  Interface for Status Log
 export interface StatusLog {
   status: string;
