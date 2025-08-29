@@ -10,14 +10,14 @@ export const receiverApiSlice = apiSlice.injectEndpoints({
     }),
     approveParcel: builder.mutation({
         query: ({id,payload})=> ({
-            url: `/receiver/confirm/${id}`,
+            url: `parcel/receiver/confirm/${id}`,
             method: "PATCH",
             body: payload
         }),
         invalidatesTags: ["Receiver"]
     }),
     getHistory: builder.query<ParcelsResponse,undefined>({
-    query: () => "/receiver/history",
+    query: () => "parcel/receiver/history",
         providesTags: ["Receiver"],
   })
   }),

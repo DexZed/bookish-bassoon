@@ -54,6 +54,7 @@ export default class ParcelController {
     async (req: Request, res: Response) => {
       const { id } = req.params;
       const data = req.body;
+     // console.log("confirmParcelByReceiver body data:", data);
       const parcel = await this.parcelService.confirmParcel(id, data);
       res
         .status(200)

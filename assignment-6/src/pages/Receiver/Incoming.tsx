@@ -3,13 +3,27 @@
 
 import Skeleton from "../../components/Skeleton"
 import { useAppSelector } from "../../features/app/hooks"
-import { useGetIncomingQuery } from "../../features/receiver/receiverApiSlice"
+import { useApproveParcelMutation, useGetIncomingQuery } from "../../features/receiver/receiverApiSlice"
+import { showErrorAlert, showSuccessAlert } from "../../utilities/utils"
 import CustomErrorPage from "../AppError"
 
 
 function Incoming() {
   const selector = useAppSelector((state) => state.auth)
-  const {data, isLoading, error} = useGetIncomingQuery(selector.id as string)
+  const {data, isLoading, error} = useGetIncomingQuery(selector.id as string,{
+    refetchOnMountOrArgChange: true,
+    refetchOnReconnect: true,
+  })
+  const [approve] = useApproveParcelMutation();
+  async function acceptParcel(id: string) {
+    try {
+      await approve({ id, payload: { status: "Delivered" } }).unwrap();
+      showSuccessAlert("Success", "Parcel marked as Delivered")
+    } catch (error: any) {
+      showErrorAlert("Error", error.data.message  as string)
+      console.error(error);
+    }
+  }
   return (
     <>
     <>
@@ -49,7 +63,7 @@ function Incoming() {
                           <td>{parcel.status}</td>
                           <td>{parcel.pickupAddress}</td>
                           <td>{parcel.deliveryAddress}</td>
-                          <td><button className="btn btn-success btn-outline rounded-4xl">Approve</button></td>
+                          <td><button onClick={() => acceptParcel(parcel._id)} className="btn btn-success btn-outline rounded-4xl">Approve</button></td>
                         </tr>
                       ))}
                     </tbody>

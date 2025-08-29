@@ -78,7 +78,7 @@ export default class App {
     this.app.use((req, _res, next) => {
       next(new NotFoundException(`Route ${req.originalUrl} not found`));
     });
-    this.app.use(globalErrorHandler);
+     this.app.use(globalErrorHandler);
   }
 
   public initServer(): void {

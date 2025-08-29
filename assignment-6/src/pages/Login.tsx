@@ -11,11 +11,12 @@ import { setAuthData } from "../features/auth/authSlice";
 import Skeleton from "../components/Skeleton";
 import { showErrorAlert, showSuccessAlert } from "../utilities/utils";
 import CustomErrorPage from "./AppError";
+import { useState } from "react";
 
 export default function Login() {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
-
+  const [showPassword, setShowPassword] = useState(false);
   const [login, { isLoading, error }] = useLoginMutation();
   const {
     register,
@@ -36,6 +37,10 @@ export default function Login() {
       console.error(err);
     }
   };
+  const monkeSee = () => {
+    setShowPassword((prev) => !prev);
+  };
+
 
   return (
     <>
@@ -87,11 +92,17 @@ export default function Login() {
               >
                 <input
                   {...register("password")}
-                  type={"password"}
+                   type={showPassword ? "text" : "password"}
                   className="input input-info"
                   required
                   placeholder="Password"
                 />
+                <span
+                className="absolute top-11 right-5 text-lg cursor-pointer"
+                onClick={monkeSee}
+              >
+                {showPassword ? "( ͡° ͜ʖ ͡°)" : "(͠≖ ͜ʖ͠≖)"}
+              </span>
               </InputLayout>
               <div>
                 <button
