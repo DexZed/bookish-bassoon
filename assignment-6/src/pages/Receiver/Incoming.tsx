@@ -1,15 +1,10 @@
-// TODO: ADD functionality and styling
-
 import Skeleton from "../../components/Skeleton";
 import { useAppSelector } from "../../features/app/hooks";
 import {
   useApproveParcelMutation,
   useGetIncomingQuery,
 } from "../../features/receiver/receiverApiSlice";
-import {
-  showErrorAlert,
-  showSuccessAlert,
-} from "../../utilities/utils";
+import { showErrorAlert, showSuccessAlert } from "../../utilities/utils";
 import CustomErrorPage from "../AppError";
 
 function Incoming() {
@@ -32,7 +27,7 @@ function Incoming() {
       console.error(error);
     }
   }
- 
+
   return (
     <>
       <>

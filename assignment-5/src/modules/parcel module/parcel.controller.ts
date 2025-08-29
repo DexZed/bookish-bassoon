@@ -64,7 +64,7 @@ export default class ParcelController {
 
   getParcelHistory = asyncHandler(async (req: Request, res: Response) => {
     const { receiver, status } = req.query;
-
+   // console.log("getParcelHistory query params:", receiver, status)
     if (!receiver)
       return res.status(400).json({ message: "receiver is required" });
 

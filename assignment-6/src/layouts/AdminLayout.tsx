@@ -10,7 +10,8 @@ export default function AdminLayout() {
   const location = useLocation();
   const hideDash =
     location.pathname.startsWith("/admin/users") ||
-    location.pathname.startsWith("/admin/parcels");
+    location.pathname.startsWith("/admin/parcels") ||
+    location.pathname.startsWith("/admin/status"); 
   const adminLinks = (
     <>
       <li>

@@ -75,7 +75,7 @@ function AllParcels() {
                         <button onClick={() => handleUnblock(parcel._id)} disabled={!parcel.isBlocked} className="btn btn-info btn-outline btn-xs rounded-full">
                           Unblock
                         </button>
-                        <Link to={`/status/${parcel._id}`} className="btn btn-primary btn-outline btn-xs rounded-full">
+                        <Link to={`/admin/status/${parcel._id}`} className="btn btn-primary btn-outline btn-xs rounded-full">
                           Update
                         </Link>
                       </td>

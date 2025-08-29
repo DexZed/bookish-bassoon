@@ -41,7 +41,6 @@ export default function Login() {
     setShowPassword((prev) => !prev);
   };
 
-
   return (
     <>
       {isLoading ? (
@@ -90,19 +89,21 @@ export default function Login() {
                   errors.password && `${errors.password?.message}`
                 }
               >
-                <input
-                  {...register("password")}
-                   type={showPassword ? "text" : "password"}
-                  className="input input-info"
-                  required
-                  placeholder="Password"
-                />
-                <span
-                className="absolute top-11 right-5 text-lg cursor-pointer"
-                onClick={monkeSee}
-              >
-                {showPassword ? "( ͡° ͜ʖ ͡°)" : "(͠≖ ͜ʖ͠≖)"}
-              </span>
+                <label className="input">
+                  <input
+                    {...register("password")}
+                    type={showPassword ? "text" : "password"}
+                    className="input input-info"
+                    required
+                    placeholder="Password"
+                  />
+                  <span
+                    className="text-md text-amber-500 cursor-pointer"
+                    onClick={monkeSee}
+                  >
+                    {showPassword ? "( ͡° ͜ʖ ͡°)" : "(͠≖ ͜ʖ͠≖)"}
+                  </span>
+                </label>
               </InputLayout>
               <div>
                 <button

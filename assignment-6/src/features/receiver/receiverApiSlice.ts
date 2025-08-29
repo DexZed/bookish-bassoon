@@ -16,8 +16,8 @@ export const receiverApiSlice = apiSlice.injectEndpoints({
         }),
         invalidatesTags: ["Receiver"]
     }),
-    getHistory: builder.query<ParcelsResponse,undefined>({
-    query: () => "parcel/receiver/history",
+    getHistory: builder.query<ParcelsResponse,{id:string,status:string}>({
+    query: ({id,status}) => `parcel/receiver/history?receiver=${id}&status=${status}`,
         providesTags: ["Receiver"],
   })
   }),

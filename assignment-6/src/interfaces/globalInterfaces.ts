@@ -113,3 +113,10 @@ export interface ParcelResponse {
   message: string;
   parcel: Parcel;
 }
+export const  StatusLogSchema = z.object({
+  status: z.string(),
+  location: z.string(),
+  note: z.string()
+  
+}) 
+export type StatusLogFields = z.infer<typeof StatusLogSchema>;
