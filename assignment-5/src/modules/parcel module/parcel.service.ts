@@ -39,7 +39,7 @@ export default class ParcelService {
       throw new NotFoundException("Parcel not found");
     }
 
-    const invalidStatuses = new Set(["Requested", "Dispatched", "In Transit"]);
+    const invalidStatuses = new Set(["Dispatched"]);
     if (invalidStatuses.has(parcelData.status)) {
       throw new BadRequestException(
         `${parcelData.status} status cannot be cancelled`,

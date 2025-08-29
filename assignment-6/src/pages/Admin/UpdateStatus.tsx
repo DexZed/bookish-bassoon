@@ -11,7 +11,7 @@ import { useUpdateStatusMutation } from "../../features/parcel/parcelApiSlice";
 
 function UpdateStatus() {
   const { parcelId } = useParams();
-  const [statusUpdate] = useUpdateStatusMutation()
+  const [statusUpdate] = useUpdateStatusMutation();
   const {
     register,
     handleSubmit,
@@ -21,7 +21,6 @@ function UpdateStatus() {
     resolver: zodResolver(StatusLogSchema),
   });
   const onSubmit = async (data: StatusLogFields) => {
-    console.log(data);
     try {
       await statusUpdate({ id: parcelId as string, body: data }).unwrap();
       showSuccessAlert("Success", "Parcel Status Updated successfully");
@@ -77,14 +76,15 @@ function UpdateStatus() {
             >
               <textarea
                 {...register("note")}
-                
                 placeholder="Additional Note"
                 className="invalid-status textarea textarea-primary"
                 required
               />
             </InputLayout>
             <div className="mt-3 flex flex-col gap-2 justify-center items-center">
-              <span className="text-amber-500 text-center">{errors.root?.message}</span>
+              <span className="text-amber-500 text-center">
+                {errors.root?.message}
+              </span>
               <button
                 disabled={isSubmitting}
                 className="btn btn-secondary w-full btn-outline rounded-2xl"
@@ -92,7 +92,6 @@ function UpdateStatus() {
               >
                 {isSubmitting ? "Loading..." : "Update Status"}
               </button>
-              
             </div>
           </fieldset>
         </form>
