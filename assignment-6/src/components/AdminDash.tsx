@@ -1,10 +1,11 @@
 import { useAppSelector } from "../features/app/hooks";
+import Kpi from "./Kpi";
 
 function AdminDash() {
   const selector = useAppSelector((state) => state.auth);
   return (
     <>
-      <main className="h-dvh flex justify-center items-center">
+      <main className="h-dvh flex justify-center items-center flex-col gap-5">
         <div className="stack size-64 ">
           <div className="border-base-content card bg-base-100 border text-center rotate-12">
             <div className="card-body -rotate-12 flex justify-center items-center">
@@ -19,6 +20,7 @@ function AdminDash() {
             <div className="card-body"></div>
           </div>
         </div>
+        <Kpi/>
       </main>
     </>
   );
