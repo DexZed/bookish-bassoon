@@ -1,24 +1,17 @@
 import { useAppSelector } from "../features/app/hooks";
-import { useGetParcelsQuery } from "../features/parcel/parcelApiSlice";
-import { useGetUsersQuery } from "../features/users/userApiSlice";
+import { useGetSenderParcelsQuery } from "../features/sender/senderApiSlice";
 import CustomErrorPage from "../pages/AppError";
 import { percentageRatio, StatDate } from "../utilities/utils";
 import BarChartTable from "./BarChartTable";
 import Skeleton from "./Skeleton";
 
-function AdminDash() {
+function SenderDash() {
   const selector = useAppSelector((state) => state.auth);
-  const { data, isLoading, error } = useGetParcelsQuery(undefined);
-  const { data: users } = useGetUsersQuery(undefined);
+  const { data, error, isLoading } = useGetSenderParcelsQuery(
+    selector.id as string
+  );
   const totalParcels = data?.parcels.length;
   const startDate = data?.parcels[0]?.createdAt;
-  const totalUsers = users?.users.length;
-  const senderCount = users?.users.filter(
-    (user) => user.role === "sender"
-  ).length;
-  const receiverCount = users?.users.filter(
-    (user) => user.role === "receiver"
-  ).length;
   const endDate = data?.parcels[data?.parcels.length - 1]?.createdAt;
   const cancelledParcels = data?.parcels.filter(
     (parcel) => parcel.status === "Cancelled"
@@ -29,17 +22,12 @@ function AdminDash() {
   const inTransitParcels = data?.parcels.filter(
     (parcel) => parcel.status === "In Transit"
   ).length;
-  const pendingParcels = data?.parcels.filter(
-    (parcel) => parcel.status === "Pending"
-  ).length;
-  const statusData = [
+    const statusData = [
     { name: "Cancelled", Parcel: cancelledParcels as number },
     { name: "Delivered", Parcel: deliveredParcels as number },
     { name: "In Transit", Parcel: inTransitParcels as number },
-    { name: "Pending", Parcel: pendingParcels as number },
     { name: "Total Parcels", Parcel: totalParcels as number },
   ];
-
   return (
     <>
       {isLoading ? (
@@ -104,45 +92,21 @@ function AdminDash() {
                       ></path>
                     </svg>
                   </div>
-                  <div className="stat-title">Total Senders</div>
-                  <div className="stat-value text-center">{senderCount}</div>
+                  <div className="stat-title">Total Cancelled</div>
+                  <div className="stat-value text-center">
+                    {cancelledParcels}
+                  </div>
                   <div className="stat-desc text-center">
                     {percentageRatio(
-                      senderCount as number,
-                      totalUsers as number
-                    )}
-                  </div>
-                </div>
-
-                <div className="stat">
-                  <div className="stat-figure text-secondary">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      className="inline-block h-8 w-8 stroke-current"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth="2"
-                        d="M5 8h14M5 8a2 2 0 110-4h14a2 2 0 110 4M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8m-9 4h4"
-                      ></path>
-                    </svg>
-                  </div>
-                  <div className="stat-title">Total Receivers</div>
-                  <div className="stat-value text-center">{receiverCount}</div>
-                  <div className="stat-desc text-center">
-                    {percentageRatio(
-                      receiverCount as number,
-                      totalUsers as number
+                      cancelledParcels as number,
+                      totalParcels as number
                     )}
                   </div>
                 </div>
               </div>
             </aside>
             <article className="w-full h-64">
-              <BarChartTable data={statusData} dataKey="Parcel"></BarChartTable>
+              <BarChartTable data={statusData} dataKey="Parcel"/>
             </article>
           </main>
         </>
@@ -151,4 +115,4 @@ function AdminDash() {
   );
 }
 
-export default AdminDash;
+export default SenderDash;
