@@ -1,17 +1,44 @@
 import { useAppSelector } from "../features/app/hooks";
 import { useGetParcelsQuery } from "../features/parcel/parcelApiSlice";
+import { useGetUsersQuery } from "../features/users/userApiSlice";
 import CustomErrorPage from "../pages/AppError";
 import { percentageRatio, StatDate } from "../utilities/utils";
+import BarChartTable from "./BarChartTable";
 import Skeleton from "./Skeleton";
 
 function AdminDash() {
   const selector = useAppSelector((state) => state.auth);
   const { data, isLoading, error } = useGetParcelsQuery(undefined);
+  const { data: users } = useGetUsersQuery(undefined);
   const totalParcels = data?.parcels.length;
   const startDate = data?.parcels[0]?.createdAt;
+  const totalUsers = users?.users.length;
+  const senderCount = users?.users.filter(
+    (user) => user.role === "sender"
+  ).length;
+  const receiverCount = users?.users.filter(
+    (user) => user.role === "receiver"
+  ).length;
   const endDate = data?.parcels[data?.parcels.length - 1]?.createdAt;
-  const cancelledParcels = data?.parcels.filter((parcel) => parcel.status === "Cancelled").length;
-  const deliveredParcels= data?.parcels.filter((parcel) => parcel.status === "Delivered").length;
+  const cancelledParcels = data?.parcels.filter(
+    (parcel) => parcel.status === "Cancelled"
+  ).length;
+  const deliveredParcels = data?.parcels.filter(
+    (parcel) => parcel.status === "Delivered"
+  ).length;
+  const inTransitParcels = data?.parcels.filter(
+    (parcel) => parcel.status === "In Transit"
+  ).length;
+  const pendingParcels = data?.parcels.filter(
+    (parcel) => parcel.status === "Pending"
+  ).length;
+ const statusData=[
+  {name:"Cancelled",Parcel:cancelledParcels as number},
+  {name:"Delivered",Parcel:deliveredParcels as number},
+  {name:"In Transit",Parcel:inTransitParcels as number},
+  {name:"Pending",Parcel:pendingParcels as number},
+  {name:"Total Parcels",Parcel:totalParcels as number}
+ ]
   return (
     <>
       {isLoading ? (
@@ -21,7 +48,7 @@ function AdminDash() {
       ) : (
         <>
           <main className="h-dvh flex justify-center items-center flex-col gap-10">
-            <div className="stack size-64 ">
+            <div className="stack size-64 mt-10 md:mt-0">
               <div className="border-base-content card bg-base-100 border text-center rotate-12">
                 <div className="card-body -rotate-12 flex justify-center items-center">
                   <div className="flex flex-col gap-2">
@@ -55,7 +82,9 @@ function AdminDash() {
                   </div>
                   <div className="stat-title">Total Parcels</div>
                   <div className="stat-value text-center">{totalParcels}</div>
-                  <div className="stat-desc">{StatDate(startDate)} - {StatDate(endDate)}</div>
+                  <div className="stat-desc">
+                    {StatDate(startDate)} - {StatDate(endDate)}
+                  </div>
                 </div>
 
                 <div className="stat">
@@ -74,9 +103,14 @@ function AdminDash() {
                       ></path>
                     </svg>
                   </div>
-                  <div className="stat-title">Cancelled Parcels</div>
-                  <div className="stat-value text-center">{cancelledParcels}</div>
-                  <div className="stat-desc text-center">{percentageRatio(cancelledParcels as number, totalParcels as number)}</div>
+                  <div className="stat-title">Total Senders</div>
+                  <div className="stat-value text-center">{senderCount}</div>
+                  <div className="stat-desc text-center">
+                    {percentageRatio(
+                      senderCount as number,
+                      totalUsers as number
+                    )}
+                  </div>
                 </div>
 
                 <div className="stat">
@@ -95,12 +129,22 @@ function AdminDash() {
                       ></path>
                     </svg>
                   </div>
-                  <div className="stat-title">Delivered Parcels</div>
-                  <div className="stat-value text-center">{deliveredParcels}</div>
-                  <div className="stat-desc text-center">{percentageRatio(deliveredParcels as number, totalParcels as number)}</div>
+                  <div className="stat-title">Total Receivers</div>
+                  <div className="stat-value text-center">
+                    {receiverCount}
+                  </div>
+                  <div className="stat-desc text-center">
+                    {percentageRatio(
+                      receiverCount as number,
+                      totalUsers as number
+                    )}
+                  </div>
                 </div>
               </div>
             </aside>
+            <article className="w-full h-64">
+              <BarChartTable data={statusData} dataKey="Parcel"></BarChartTable>
+            </article>
           </main>
         </>
       )}
