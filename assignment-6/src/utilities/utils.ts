@@ -59,6 +59,16 @@ export function formatDate(isoString?: string, locale: string = "en-US") {
   });
 }
 
+export function StatDate(isoString?: string, locale: string = "en-US") {
+  if (!isoString) return "";
+  const date = new Date(isoString);
+
+  return date.toLocaleDateString(locale, {
+    month: "short", // "August"
+    day: "numeric", // 5
+  });
+}
+
 export async function fetchUser(url: string): Promise<User | null> {
   try {
     const response = await axios.get<{ message: string; user: User }>(url);
@@ -67,4 +77,8 @@ export async function fetchUser(url: string): Promise<User | null> {
     console.error(error);
     return null;
   }
+}
+export function percentageRatio(value: number, total: number){
+  const result = (value / total) * 100;
+  return result.toFixed(2)+'%';
 }
