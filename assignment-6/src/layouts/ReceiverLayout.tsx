@@ -1,15 +1,14 @@
 import { Suspense } from "react";
 import { Link, Outlet, useLocation } from "react-router";
 import Skeleton from "../components/Skeleton";
-import { useAppSelector } from "../features/app/hooks";
 import AppContainer from "../components/Container";
-import Dash from "../components/Dash";
 import Footer from "../components/Footer";
 import SideBar from "../components/SideBar";
+import ReceiverDash from "../components/ReceiverDash";
 // TODO: Fix styling and update route components
 
 export default function ReceiverLayout() {
-  const selector = useAppSelector((state) => state.auth);
+  
   const location = useLocation();
   const hideDash =
     location.pathname.startsWith("/receiver/incoming") ||
@@ -28,7 +27,7 @@ export default function ReceiverLayout() {
     <AppContainer>
         <SideBar navLinks={receiverLinks}>
           <Suspense fallback={<Skeleton />}>
-            {!hideDash && <Dash userData={selector}/>}
+            {!hideDash && <ReceiverDash/>}
             <Outlet />
           </Suspense>
         </SideBar>
