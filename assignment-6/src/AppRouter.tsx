@@ -15,7 +15,7 @@ const About = lazy(() => import("./pages/About"));
 const Contact = lazy(() => import("./pages/Contact"));
 const Login = lazy(() => import("./pages/Login"));
 const Register = lazy(() => import("./pages/Register"));
-
+const SearchParcels = lazy(() => import("./pages/SearchParcels"));
 const CreateParcel = lazy(() => import("./pages/Sender/CreateParcel"));
 const Parcels = lazy(() => import("./pages/Sender/Parcels"));
 
@@ -25,7 +25,6 @@ const DeliveryHistory = lazy(() => import("./pages/Receiver/History"));
 const ManageUsers = lazy(() => import("./pages/Admin/Users"));
 const ManageParcels = lazy(() => import("./pages/Admin/AllParcels"));
 
-const Tracking = lazy(() => import("./pages/Tracking"));
 const NotFound = lazy(() => import("./pages/ErrorPage"));
 const AppRouter = createBrowserRouter([
     {
@@ -37,7 +36,7 @@ const AppRouter = createBrowserRouter([
       { path: "contact", element: <Suspense fallback={<Skeleton/>}><Contact /></Suspense> },
       { path: "login", element: <Suspense fallback={<Skeleton/>}><Login /></Suspense> },
       { path: "register", element: <Suspense fallback={<Skeleton/>}><Register /></Suspense> },
-      { path: "tracking/:trackingId", element: <Suspense fallback={<Skeleton/>}><Tracking /></Suspense> },
+      { path: "search", element: <Suspense fallback={<Skeleton/>}><SearchParcels/></Suspense> },
     
       ]
     },
@@ -123,15 +122,6 @@ const AppRouter = createBrowserRouter([
           ),
         },
       ],
-    },
-
-    {
-      path: "/tracking/:trackingId",
-      element: (
-        <Suspense fallback={<Skeleton/>}>
-          <Tracking />
-        </Suspense>
-      ),
     },
     {
       path: "*",

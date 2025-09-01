@@ -14,6 +14,46 @@ class IndexRoute {
 
   private configureRoutes(): void {
     this.router.get(
+      "/search-parcels",
+      asyncHandler(async (req: Request, res: Response) => {
+        const { trackingId, sender, receiver, status } = req.query;
+
+        // Sorting sanitization
+        const sortDateParam = (
+          req.query.createdAt as string | undefined
+        )?.toLowerCase();
+        const sortDate: 1 | -1 =
+          sortDateParam === "asc" || sortDateParam === "1" ? 1 : -1;
+
+        const page = parseInt(req.query.page as string) || 1;
+        const limit = parseInt(req.query.limit as string) || 3;
+        const skip = (page - 1) * limit;
+
+        // Build dynamic query
+        let query: Record<string, any> = {};
+        if (trackingId) query.trackingId = trackingId;
+        if (sender)
+          query.sender = new mongoose.Types.ObjectId(sender as string);
+        if (receiver)
+          query.receiver = new mongoose.Types.ObjectId(receiver as string);
+        if (status) query.status = status;
+        console.log(query);
+        const parcels = await Parcel.find(query)
+          .skip(skip)
+          .limit(limit)
+          .sort({ createdAt: sortDate });
+
+        res.json({
+          message: "Parcels fetched successfully",
+          page,
+          limit,
+          total: parcels.length,
+          parcels,
+        });
+      })
+    );
+
+    this.router.get(
       "/user/:identifier",
       asyncHandler(async (req: Request, res: Response) => {
         const { identifier } = req.params;

@@ -1,3 +1,5 @@
+import { Link } from "react-router";
+
 // TODO: Add styling and proper component
 export default function Home() {
   return (
@@ -18,7 +20,7 @@ export default function Home() {
               excepturi exercitationem quasi. In deleniti eaque aut repudiandae
               et a id nisi.
             </p>
-            <button className="btn btn-primary">Get Started</button>
+            <Link to={'/search'} className="btn btn-primary btn-outline">Search Parcels</Link>
           </div>
         </div>
       </div>
