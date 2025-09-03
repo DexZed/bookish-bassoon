@@ -82,3 +82,32 @@ export function percentageRatio(value: number, total: number){
   const result = (value / total) * 100;
   return result.toFixed(2)+'%';
 }
+
+// utils/validateTrackingId.js
+export function validateTrackingId(value:string) {
+  if (!value.startsWith("TRK-")) {
+    return "Must start with TRK-";
+  }
+
+  const regex = /^TRK-(\d{8})-(\d{6})$/;
+  const match = value.match(regex);
+  if (!match) {
+    return "Format must be TRK-YYYYMMDD-xxxxxx";
+  }
+
+  const dateStr = match[1]; // YYYYMMDD
+  const year = parseInt(dateStr.substring(0, 4), 10);
+  const month = parseInt(dateStr.substring(4, 6), 10) - 1; // zero-based
+  const day = parseInt(dateStr.substring(6, 8), 10);
+
+  const date = new Date(year, month, day);
+  if (
+    date.getFullYear() !== year ||
+    date.getMonth() !== month ||
+    date.getDate() !== day
+  ) {
+    return "Date part (YYYYMMDD) is invalid";
+  }
+
+  return true;
+}

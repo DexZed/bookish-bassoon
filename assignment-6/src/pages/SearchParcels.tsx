@@ -2,6 +2,7 @@ import { useForm, type SubmitHandler } from "react-hook-form";
 import InputLayout from "../components/InputLayout";
 import SelectorLayout from "../components/SelectorLayout";
 import type { SearchFields } from "../interfaces/globalInterfaces";
+import { validateTrackingId } from "../utilities/utils";
 
 type Props = {};
 
@@ -15,6 +16,7 @@ function SearchParcels({}: Props) {
   } = useForm<SearchFields>();
   const onSubmit: SubmitHandler<SearchFields> = async (data) => {
     console.log(data);
+    reset();
     try {
     } catch (error) {
       setError("root", {
@@ -41,7 +43,7 @@ function SearchParcels({}: Props) {
                   }
                 >
                   <input
-                    {...register("trackingId")}
+                    {...register("trackingId",{validate:validateTrackingId})}
                     type="text"
                     className="input input-accent"
                     placeholder="TRK-YYYYMMDD-xxxxxx"
