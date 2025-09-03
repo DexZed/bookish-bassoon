@@ -122,7 +122,7 @@ export const  StatusLogSchema = z.object({
 export type StatusLogFields = z.infer<typeof StatusLogSchema>;
 
 export interface SearchFields {
-  trackingId:string,
-  status:string,
-  sort:string
+  trackingId?:string,
+  status?:string,
+  sort?:string
 }

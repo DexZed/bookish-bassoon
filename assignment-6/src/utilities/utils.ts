@@ -84,8 +84,8 @@ export function percentageRatio(value: number, total: number){
 }
 
 // utils/validateTrackingId.js
-export function validateTrackingId(value:string) {
-  if (!value.startsWith("TRK-")) {
+export function validateTrackingId(value?:string) {
+  if (!value?.startsWith("TRK-")) {
     return "Must start with TRK-";
   }
 
