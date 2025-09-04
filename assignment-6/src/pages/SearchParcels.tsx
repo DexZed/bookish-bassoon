@@ -46,7 +46,7 @@ function SearchParcels({}: Props) {
 
     // NOTE: This is a placeholder for your actual API call.
     // Replace the URL and logic with your actual backend endpoint.
-    console.log(`Fetching: ${BASE_URL}/search-parcels?${params.toString()}`);
+    // console.log(`Fetching: ${BASE_URL}/search-parcels?${params.toString()}`);
     const response = await axios.get(
       `${BASE_URL}/search-parcels?${params.toString()}`
     );
@@ -77,7 +77,6 @@ function SearchParcels({}: Props) {
   ) => {
     const { name, value } = e.target;
     setSearchQuery((prev) => ({ ...prev, [name]: value }));
-    console.log(searchQuery);
   };
   // Triggers the search when the form is submitted
   const handleSearch = (e: React.FormEvent<HTMLFormElement>) => {
@@ -85,11 +84,10 @@ function SearchParcels({}: Props) {
     // Set the active filters to the current form values, which will trigger the query to re-fetch.
     setActiveFilters(searchQuery);
   };
-  console.log(data);
 
   return (
     <>
-      <main>
+      <main className="h-dvh">
         <aside>
           <form onSubmit={handleSearch}>
             <fieldset>
@@ -100,7 +98,7 @@ function SearchParcels({}: Props) {
                 <InputLayout description="Tracking ID">
                   <input
                     name="trackingId"
-                    value={searchQuery.trackingId}
+                    value={searchQuery.trackingId ?? ""}
                     onChange={handleInputChange}
                     type="text"
                     className="input input-accent"
@@ -110,7 +108,7 @@ function SearchParcels({}: Props) {
                 <SelectorLayout description="Status">
                   <select
                     name="status"
-                    value={searchQuery.status}
+                    value={searchQuery.status ?? ""}
                     onChange={handleInputChange}
                     className="select select-primary"
                     required
@@ -128,7 +126,7 @@ function SearchParcels({}: Props) {
                 <SelectorLayout description="Sort">
                   <select
                     name="sort"
-                    value={searchQuery.sort}
+                    value={searchQuery.sort ?? ""}
                     onChange={handleInputChange}
                     className="select select-secondary "
                     required
@@ -140,7 +138,7 @@ function SearchParcels({}: Props) {
                 </SelectorLayout>
                 <div className="flex place-self-center translate-y-3">
                   <button type="submit" className="btn btn-primary btn-outline">
-                     {isFetching ? 'Searching...' : 'Search'}
+                    {isFetching ? "Searching..." : "Search"}
                   </button>
                 </div>
               </div>
@@ -183,8 +181,15 @@ function SearchParcels({}: Props) {
                       {group?.parcels?.map((parcel: Parcel, j: number) => (
                         <tr className="hover:bg-base-300" key={j}>
                           <th>{parcel.trackingId}</th>
-                          <td>{parcel.sender}</td>
-                          <td>{parcel.receiver}</td>
+                          <td>
+                            
+                            <div className="tooltip" data-tip={parcel.sender}>
+                              {parcel.sender.slice(0, 5) + "..."}
+                            </div>
+                          </td>
+                          <td><div className="tooltip" data-tip={parcel.receiver}>
+                              {parcel.receiver.slice(0, 5) + "..."}
+                            </div></td>
                           <td>{parcel.status}</td>
                           <td>{parcel.fee}</td>
                           <td>{parcel.type}</td>
@@ -201,7 +206,7 @@ function SearchParcels({}: Props) {
           </>
         )}
 
-        <div>
+        <div className=" flex justify-center items-center m-4">
           <button
             onClick={() => fetchNextPage()}
             disabled={!hasNextPage || isFetching}
