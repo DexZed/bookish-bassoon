@@ -50,13 +50,8 @@ export default class RefreshTokenService {
       validatedConfig.ACCESS_TOKEN,
       { expiresIn: "1h" },
     );
-    const userObject = {
-      name: user?.name,
-      email: user?.email,
-      role: user?.role,
-      accessToken,
-    };
+    
     //console.log("user object", userObject);
-    return userObject;
+    return { accessToken };
   }
 }

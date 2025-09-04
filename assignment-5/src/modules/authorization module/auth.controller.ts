@@ -24,7 +24,7 @@ export default class AuthController {
     const user = await this.authService.login(data.email, data.password);
     const accessToken = jwt.sign(
       {
-        userName: user?.name,
+        name: user?.name,
         email: user?.email,
         role: user?.role,
       },
