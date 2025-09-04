@@ -16,39 +16,40 @@ class IndexRoute {
     this.router.get(
       "/search-parcels",
       asyncHandler(async (req: Request, res: Response) => {
-        const { trackingId, sender, receiver, status } = req.query;
+        const { trackingId, sender, receiver, status, sort } = req.query;
 
         // Sorting sanitization
-        const sortDateParam = (
-          req.query.createdAt as string | undefined
-        )?.toLowerCase();
-        const sortDate: 1 | -1 =
-          sortDateParam === "asc" || sortDateParam === "1" ? 1 : -1;
-
-        const page = parseInt(req.query.page as string) || 1;
-        const limit = parseInt(req.query.limit as string) || 3;
-        const skip = (page - 1) * limit;
+        const sortParam = (req.query.sort as string | undefined)?.toLowerCase();
+        const sortOrder: 1 | -1 = sortParam === "asc" ? 1 : -1;
+        const page = parseInt(req.query.page as string) || 0;
+        const limit = parseInt(req.query.limit as string) || 10;
+        const skip = page * limit;
 
         // Build dynamic query
         let query: Record<string, any> = {};
-        if (trackingId) query.trackingId = trackingId;
+        if (trackingId)
+          query.trackingId = { $regex: trackingId, $options: "i" };
         if (sender)
           query.sender = new mongoose.Types.ObjectId(sender as string);
         if (receiver)
           query.receiver = new mongoose.Types.ObjectId(receiver as string);
         if (status) query.status = status;
-        console.log(query);
-        const parcels = await Parcel.find(query)
-          .skip(skip)
-          .limit(limit)
-          .sort({ createdAt: sortDate });
 
+        const [parcels, totalParcels] = await Promise.all([
+          Parcel.find(query)
+            .sort({ createdAt: sortOrder }) // Use the corrected sortOrder
+            .skip(skip)
+            .limit(limit),
+          // CHANGE 4: Get the *actual total count* of documents matching the filter.
+          Parcel.countDocuments(query),
+        ]);
+        const hasNextPage = skip + parcels.length < totalParcels;
         res.json({
           message: "Parcels fetched successfully",
-          page,
-          limit,
-          total: parcels.length,
+          // CHANGE 6: Send back the data structure the frontend expects.
           parcels,
+          total: totalParcels,
+          nextCursor: hasNextPage ? page + 1 : null, // Send next page number or null
         });
       })
     );
