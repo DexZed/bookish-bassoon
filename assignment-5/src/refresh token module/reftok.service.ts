@@ -52,7 +52,7 @@ export default class RefreshTokenService {
         role: decoded.role,
       },
       validatedConfig.ACCESS_TOKEN,
-      { expiresIn: "2hr" },
+      { expiresIn: "1d" },
     );
     
     //console.log("user object", userObject);

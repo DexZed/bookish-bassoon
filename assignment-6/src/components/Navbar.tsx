@@ -4,8 +4,6 @@ import { useState, useEffect } from "react";
 import { useAppSelector } from "../features/app/hooks";
 import LogoutButton from "./LogoutButton";
 // eslint-disable-next-line
-;
-
 function Navbar() {
   const [theme, setTheme] = useState("light");
   const userSelector = useAppSelector((state) => state.auth);
@@ -33,6 +31,12 @@ function Navbar() {
       </li>
       <li>
         <Link to="/contact">📞 Contact</Link>
+      </li>
+      <li>
+        <Link to="/features">🔧 Features</Link>
+      </li>
+      <li>
+        <Link to="/faq">❓ FAQ</Link>
       </li>
       <li>
         <Link to="/login">🔑 Login</Link>
@@ -134,4 +138,3 @@ function Navbar() {
 }
 
 export default Navbar;
-
