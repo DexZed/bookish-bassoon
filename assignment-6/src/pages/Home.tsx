@@ -2,25 +2,52 @@ import { Link } from "react-router";
 
 // TODO: Add styling and proper component
 export default function Home() {
+  const features = [{
+    name:"Register",
+    description:"Register as a sender or receiver to get started",
+    link:<><Link to={"/register"} className="btn btn-primary btn-outline">Register</Link></>
+  },
+{
+  name:"Login",
+  description:"login and go to your dashboard",
+  link:<><Link to={"/login"} className="btn btn-secondary btn-outline">Login</Link></>
+},
+{
+  name:"Search",
+  description:"Search for parcels",
+  link:<><Link to={"/search"} className="btn btn-info btn-outline">Search</Link></>
+}]
   return (
     <>
       <div
         className="hero min-h-screen rounded-xl"
-        style={{
-          backgroundImage:
-            "url(https://picjumbo.com/wp-content/uploads/modern-futuristic-abstract-liquid-3d-lines-background-free-image.jpg)",
-        }}
+        
       >
-        <div className="hero-overlay"></div>
-        <div className="hero-content text-neutral-content text-center">
+        
+        <div className="hero-content  text-center">
           <div className="max-w-md">
             <h1 className="mb-5 text-5xl font-bold">Hello there</h1>
             <p className="mb-5">
-              Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda
-              excepturi exercitationem quasi. In deleniti eaque aut repudiandae
-              et a id nisi.
+              Welcome to ParcelXpress, your one stop platform to handle all your
+              parcel needs.
             </p>
-            <Link to={'/search'} className="btn btn-primary btn-outline">Search Parcels</Link>
+          </div>
+        </div>
+      </div>
+      <div className="hero bg-base-200 min-h-screen mt-5">
+        <div className="hero-content text-center flex flex-col gap-6">
+          <h2 className="text-3xl font-bold text-center my-4">Where to Start</h2>
+         <div className="flex  flex-wrap justify-center gap-4">
+            {features.map((feature, index) => (
+              <div key={index} className="card bg-neutral text-neutral-content w-96 card-xl">
+              <div className="card-body items-center text-center">
+                
+                <h2 className="card-title">{feature.name}</h2>
+                <p>{feature.description}</p>
+                <div>{feature.link}</div>
+              </div>
+            </div>
+            ))}
           </div>
         </div>
       </div>
