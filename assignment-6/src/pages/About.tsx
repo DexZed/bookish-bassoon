@@ -3,144 +3,120 @@
 export default function About() {
   return (
     <>
-      <div className="bg-black">
-        <section
-          id="features"
-          className="relative block px-6 py-10 md:py-20 md:px-10  border-t border-b border-neutral-900 bg-neutral-900/30"
-        >
-          <div className="relative mx-auto max-w-5xl text-center">
-            <span className="text-gray-400 my-3 flex items-center justify-center font-medium uppercase tracking-wider">
-              Why choose us
-            </span>
-            <h2 className="block w-full bg-gradient-to-b from-white to-gray-400 bg-clip-text font-bold text-transparent text-3xl sm:text-4xl">
-              Seamless Parcel Delivery Services That Match Your Needs
-            </h2>
-            <p className="mx-auto my-4 w-full max-w-xl bg-transparent text-center font-medium leading-relaxed tracking-wide text-gray-400">
-              Our services allow creating ,receiving ,managing ,tracking and analytics of all your packages and deliveries
-            </p>
+      <section className="h-dvh flex justify-center items-center flex-col gap-4">
+        <section className="relative bg-gradient-to-r from-purple-100 via-blue-100 to-green-100 py-16 px-8 overflow-hidden">
+          <div className="absolute inset-0 w-full h-full -z-10">
+            <svg
+              className="w-full h-full"
+              viewBox="0 0 1440 800"
+              xmlns="http://www.w3.org/2000/svg"
+              preserveAspectRatio="none"
+            >
+              <defs>
+                <pattern
+                  id="dots"
+                  patternUnits="userSpaceOnUse"
+                  width="40"
+                  height="40"
+                  patternTransform="rotate(45)"
+                >
+                  <circle cx="10" cy="10" r="2" fill="#3B82F6" opacity="0.1" />
+                </pattern>
+              </defs>
+              <rect width="1440" height="800" fill="url(#dots)" />
+            </svg>
           </div>
 
-          <div className="relative mx-auto max-w-7xl z-10 grid grid-cols-1 gap-10 pt-14 sm:grid-cols-2 lg:grid-cols-3">
-            <div className="rounded-md border border-neutral-800 bg-neutral-900/50 p-8 text-center shadow">
-              <div
-                className="button-text mx-auto flex h-12 w-12 items-center justify-center rounded-md border "
-                style={{
-                  backgroundImage:
-                    "linear-gradient(rgb(80, 70, 229) 0%, rgb(43, 49, 203) 100%)",
-                  borderColor: "rgb(93, 79, 240)",
-                }}
-              >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="icon icon-tabler icon-tabler-color-swatch"
-                  width="24"
-                  height="24"
-                  viewBox="0 0 24 24"
-                  strokeWidth="2"
-                  stroke="currentColor"
-                  fill="none"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                >
-                  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                  <path d="M19 3h-4a2 2 0 0 0 -2 2v12a4 4 0 0 0 8 0v-12a2 2 0 0 0 -2 -2"></path>
-                  <path d="M13 7.35l-2 -2a2 2 0 0 0 -2.828 0l-2.828 2.828a2 2 0 0 0 0 2.828l9 9"></path>
-                  <path d="M7.3 13h-2.3a2 2 0 0 0 -2 2v4a2 2 0 0 0 2 2h12"></path>
-                  <line x1="17" y1="17" x2="17" y2="17.01"></line>
-                </svg>
-              </div>
-              <h3 className="mt-6 text-gray-400">Creation</h3>
-              <p className="my-4 mb-0 font-normal leading-relaxed tracking-wide text-gray-400">
-                Intuitive interface for creating your parcel for your intended delivery.
+          <div className="max-w-7xl mx-auto relative z-20 grid md:grid-cols-2 gap-12 items-center">
+            <div className="p-8 bg-white bg-opacity-90 rounded-xl shadow-lg backdrop-blur-lg hover:scale-105 transform transition duration-300 ease-in-out">
+              <h2 className="text-4xl font-extrabold text-gray-800 mb-4">
+                About Us
+              </h2>
+              <p className="text-gray-600 mb-6 text-lg">
+                We provide innovative delivery experiences that satisfies your
+                business needs
+                and inspire your audience. Our passionate team leverages
+                creativity and cutting-edge technology to bring your expectations to
+                life.
               </p>
+              <div className="space-y-6">
+                <div className="flex items-center space-x-4 p-4 bg-gradient-to-tr from-purple-200 via-blue-200 to-green-200 rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300">
+                  <div className="p-3 bg-white rounded-full shadow-lg hover:scale-110 transform transition duration-300">
+                    <svg
+                      className="w-6 h-6 text-blue-600"
+                      fill="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path d="M17 20v-2a4 4 0 00-4-4H9a4 4 0 00-4 4v2H17z" />
+                      <circle cx="12" cy="8" r="4" />
+                    </svg>
+                  </div>
+                  <div>
+                    <h3 className="text-xl font-semibold text-gray-700">
+                      Dedicated Team
+                    </h3>
+                    <p className="text-gray-500 text-sm">
+                      A passionate group of experts committed to delivering
+                      excellence in every aspect.
+                    </p>
+                  </div>
+                </div>
+
+                <div className="flex items-center space-x-4 p-4 bg-gradient-to-tr from-purple-200 via-blue-200 to-green-200 rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300">
+                  <div className="p-3 bg-white rounded-full shadow-lg hover:scale-110 transform transition duration-300">
+                    <svg
+                      className="w-6 h-6 text-yellow-500"
+                      fill="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path d="M9 21h6v-1H9v1zm3-18a4 4 0 00-4 4c0 1.38.56 2.63 1.46 3.54A5.978 5.978 0 009 12h6a5.978 5.978 0 00-1.46-3.46A4 4 0 0015 7a4 4 0 00-4-4z" />
+                    </svg>
+                  </div>
+                  <div>
+                    <h3 className="text-xl font-semibold text-gray-700">
+                      Innovative Approach
+                    </h3>
+                    <p className="text-gray-500 text-sm">
+                      We embrace creativity and technology to craft unique
+                      solutions tailored for you.
+                    </p>
+                  </div>
+                </div>
+
+                <div className="flex items-center space-x-4 p-4 bg-gradient-to-tr from-purple-200 via-blue-200 to-green-200 rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300">
+                  <div className="p-3 bg-white rounded-full shadow-lg hover:scale-110 transform transition duration-300">
+                    <svg
+                      className="w-6 h-6 text-green-600"
+                      fill="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path d="M16 14c-1.33 0-2.53.53-3.41 1.39A4.993 4.993 0 0012 20c1.33 0 2.53-.53 3.41-1.39A4.993 4.993 0 0016 14zM8 14c-1.33 0-2.53.53-3.41 1.39A4.993 4.993 0 004 20c1.33 0 2.53-.53 3.41-1.39A4.993 4.993 0 008 14zM12 4c-2.21 0-4 1.79-4 4 0 1.66 1.34 3 3 3h2c1.66 0 3-1.34 3-3 0-2.21-1.79-4-4-4z" />
+                    </svg>
+                  </div>
+                  <div>
+                    <h3 className="text-xl font-semibold text-gray-700">
+                      Customer Centric
+                    </h3>
+                    <p className="text-gray-500 text-sm">
+                      Your satisfaction is our priority — we listen, adapt, and
+                      deliver beyond expectations.
+                    </p>
+                  </div>
+                </div>
+              </div>
             </div>
 
-            <div className="rounded-md border border-neutral-800 bg-neutral-900/50 p-8 text-center shadow">
-              <div
-                className="button-text mx-auto flex h-12 w-12 items-center justify-center rounded-md border "
-                style={{
-                  backgroundImage:
-                    "linear-gradient(rgb(80, 70, 229) 0%, rgb(43, 49, 203) 100%)",
-                  borderColor: "rgb(93, 79, 240)",
-                }}
-              >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="icon icon-tabler icon-tabler-bolt"
-                  width="24"
-                  height="24"
-                  viewBox="0 0 24 24"
-                  strokeWidth="2"
-                  stroke="currentColor"
-                  fill="none"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                >
-                  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                  <polyline points="13 3 13 10 19 10 11 21 11 14 5 14 13 3"></polyline>
-                </svg>
-              </div>
-              <h3 className="mt-6 text-gray-400">Broad Reach</h3>
-              <p className="my-4 mb-0 font-normal leading-relaxed tracking-wide text-gray-400">
-                We build our services to reach as far as possible, fast delivery so that your parcels reach thier destination in time.
-              </p>
-            </div>
-
-            <div className="rounded-md border border-neutral-800 bg-neutral-900/50 p-8 text-center shadow">
-              <div
-                className="button-text mx-auto flex h-12 w-12 items-center justify-center rounded-md border "
-                style={{
-                  backgroundImage:
-                    "linear-gradient(rgb(80, 70, 229) 0%, rgb(43, 49, 203) 100%)",
-                  borderColor: "rgb(93, 79, 240)",
-                }}
-              >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="icon icon-tabler icon-tabler-tools"
-                  width="24"
-                  height="24"
-                  viewBox="0 0 24 24"
-                  strokeWidth="2"
-                  stroke="currentColor"
-                  fill="none"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                >
-                  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                  <path d="M3 21h4l13 -13a1.5 1.5 0 0 0 -4 -4l-13 13v4"></path>
-                  <line x1="14.5" y1="5.5" x2="18.5" y2="9.5"></line>
-                  <polyline points="12 8 7 3 3 7 8 12"></polyline>
-                  <line x1="7" y1="8" x2="5.5" y2="9.5"></line>
-                  <polyline points="16 12 21 17 17 21 12 16"></polyline>
-                  <line x1="16" y1="17" x2="14.5" y2="18.5"></line>
-                </svg>
-              </div>
-              <h3 className="mt-6 text-gray-400">Fully Tracked</h3>
-              <p className="my-4 mb-0 font-normal leading-relaxed tracking-wide text-gray-400">
-                Everything you need to track your parcel, highly intuitive. Clear data analysis and visualization.
-              </p>
+            <div className="relative p-4">
+              <div className="absolute inset-0 bg-gradient-to-br from-purple-400 via-blue-400 to-green-400 rounded-xl shadow-lg transform hover:scale-105 transition-transform duration-300"></div>
+              <img
+                src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+                alt="About Us"
+                className="relative rounded-xl shadow-xl object-cover w-full h-full hover:opacity-90 transition-opacity duration-300"
+              />
             </div>
           </div>
-
-          <div
-            className="absolute bottom-0 left-0 z-0 h-1/3 w-full border-b"
-            style={{
-              backgroundImage:
-                "linear-gradient(to right top, rgba(79, 70, 229, 0.2) 0%, transparent 50%, transparent 100%)",
-              borderColor: "rgba(92, 79, 240, 0.2)",
-            }}
-          ></div>
-          <div
-            className="absolute bottom-0 right-0 z-0 h-1/3 w-full"
-            style={{
-              backgroundImage:
-                "linear-gradient(to left top, rgba(220, 38, 38, 0.2) 0%, transparent 50%, transparent 100%)",
-              borderColor: "rgba(92, 79, 240, 0.2)",
-            }}
-          ></div>
         </section>
-      </div>
+      </section>
     </>
   );
 }
