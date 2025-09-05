@@ -14,9 +14,11 @@ const baseQuery = fetchBaseQuery({
   credentials: "include",
   prepareHeaders: (headers, { getState }) => {
     const state = getState() as RootState;
+    // console.log("State:", state);
     const token = state.auth.accessToken;
+    // console.log("Token:", token);
     if (token) {
-      headers.set("authorization", `Bearer ${token}`);
+      headers.set("Authorization", `Bearer ${token}`);
     }
     return headers;
   },
@@ -29,20 +31,20 @@ const baseQueryWithReAuth = async (
 ) => {
   let result = await baseQuery(args, api, extraOptions);
   // send refresh token to get new access token
-  if (result.error?.status === 401) {
-    console.log("Token expired. Attempting to refresh...");
+  if (result.error?.status === 403) {
+    // console.log("Token expired. Attempting to refresh...");
     const refreshResult = await baseQuery("/refresh", api, extraOptions);
     console.info("New Access Token:", refreshResult);
     if (refreshResult.data) {
-       console.log("Successfully received new access token.");
+       // console.log("Successfully received new access token.");
         const newAccessToken = (refreshResult.data as { accessToken: string }).accessToken;
       const state = api.getState() as RootState;
       const user = state.auth;
       console.info("User State:", user);
       // store new token
-      api.dispatch(setAuthData({ ...user, accessToken: newAccessToken }));
+      api.dispatch(setAuthData({ accessToken: newAccessToken }));
       // retry the original query with new access token
-       console.log("Retrying the original request with the new token.");
+       // console.log("Retrying the original request with the new token.");
       result = await baseQuery(args, api, extraOptions);
     } else {
        console.error("Failed to refresh token. Logging out.");

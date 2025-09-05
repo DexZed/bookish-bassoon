@@ -15,14 +15,17 @@ export default class RefreshTokenService {
 
   async refreshToken(req: Request, _?: Response) {
     const cookies = req.cookies;
-
+    // console.log("Cookies:", cookies);
     if (!cookies?.jwt)
-      return null;
+    { // console.log("No cookies found at refreshToken");
+      return null;}
     const refreshToken = cookies.jwt;
-
+    // console.log("refreshToken:", refreshToken);
     const user = await this.userRepository.findByRefreshToken(refreshToken);
-
+    // console.log("user:", user);
+    // console.log("check if Refresh token at jwt and refresh token at user object", refreshToken ===user?.refreshToken)
     if (!user) {
+      // console.log("User not found at refreshToken");
       return null;
     }
 
@@ -30,14 +33,15 @@ export default class RefreshTokenService {
 
     try {
       decoded = jwt.verify(refreshToken, validatedConfig.REFRESH_TOKEN) as JwtPayload;
-      // console.log(decoded);
+       // console.log(decoded);
     }
     catch (error: any) {
-      // console.error("Error verifying refresh token:", error);
+       console.error("Error verifying refresh token:", error);
       return null;
     }
 
     if (user?.email !== decoded.email) {
+      // console.log("Email mismatch at refreshToken");
       return null;
     };
 
@@ -48,7 +52,7 @@ export default class RefreshTokenService {
         role: decoded.role,
       },
       validatedConfig.ACCESS_TOKEN,
-      { expiresIn: "1h" },
+      { expiresIn: "2hr" },
     );
     
     //console.log("user object", userObject);

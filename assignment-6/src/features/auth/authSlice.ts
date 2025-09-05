@@ -16,13 +16,13 @@ export const authSlice = createSlice({
     name:"auth",
     initialState,
     reducers:{
-        setAuthData(state,action:PayloadAction<AuthState>){
-            state.id = action.payload.id;
-            state.name = action.payload.name;
-            state.email = action.payload.email;
-            state.role = action.payload.role;
-            state.accessToken = action.payload.accessToken;
-            state.isBlocked = action.payload.isBlocked;
+        setAuthData(state,action:PayloadAction<Partial<AuthState>>){
+            state.id = action.payload.id ?? state.id;
+            state.name = action.payload.name ?? state.name;
+            state.email = action.payload.email ?? state.email;
+            state.role = action.payload.role ?? state.role;
+            state.accessToken = action.payload.accessToken ?? state.accessToken;
+            state.isBlocked = action.payload.isBlocked ?? state.isBlocked;
         },
         clearAuthData(state){
             state.id = null;

@@ -15,12 +15,12 @@ export class ExceptionHandler {
     });
 
     process.on("SIGINT", () => {
-      console.log("SIGINT received");
+      // console.log("SIGINT received");
       ExceptionHandler.shutdown(0);
     });
 
     process.on("SIGTERM", () => {
-      console.log("SIGTERM received");
+      // console.log("SIGTERM received");
       ExceptionHandler.shutdown(0);
     });
   }
@@ -30,7 +30,7 @@ export class ExceptionHandler {
       return;
     ExceptionHandler.shuttingDown = true;
 
-    console.log("Shutting down gracefully...");
+    // console.log("Shutting down gracefully...");
 
     MongoConnection.getInstance().disconnect();
     setTimeout(() => {

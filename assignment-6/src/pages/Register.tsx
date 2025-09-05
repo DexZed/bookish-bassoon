@@ -18,7 +18,7 @@ function Register() {
   const onSubmit: SubmitHandler<RegistrationFields> = async (data) => {
     try {
       await new Promise((resolve) => setTimeout(resolve, 1000));
-      console.log(data);
+      // console.log(data);
       throw new Error("Random error message");
     } catch (error) {
       console.error(error);
