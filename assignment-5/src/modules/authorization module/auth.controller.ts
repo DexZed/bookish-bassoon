@@ -22,7 +22,7 @@ export default class AuthController {
 
   loginUser = asyncHandler(async (req: Request, res: Response) => {
     const data = req.body;
-    console.log(data);
+    //console.log(data);
     const user = await this.authService.login(data.email, data.password);
     const accessToken = jwt.sign(
       {
