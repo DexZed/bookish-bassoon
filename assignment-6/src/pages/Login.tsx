@@ -1,5 +1,3 @@
-// TODO: ADD functionality and styling
-
 import InputLayout from "../components/InputLayout";
 import { useForm, type SubmitHandler } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -49,7 +47,7 @@ export default function Login() {
         </>
       ) : error ? (
         <>
-          <CustomErrorPage />
+          <CustomErrorPage error={JSON.stringify(error)}/>
         </>
       ) : (
         <>

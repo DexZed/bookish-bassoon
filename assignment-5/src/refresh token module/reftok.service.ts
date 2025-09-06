@@ -5,6 +5,7 @@ import jwt from "jsonwebtoken";
 
 import validatedConfig from "../config/validate";
 import UserRepository from "../modules/User Module/repository/user.repository";
+import { ACCESS_TOKEN_EXPIRES_IN } from "../utils/utility";
 
 
 export default class RefreshTokenService {
@@ -52,7 +53,7 @@ export default class RefreshTokenService {
         role: decoded.role,
       },
       validatedConfig.ACCESS_TOKEN,
-      { expiresIn: "1d" },
+      { expiresIn: ACCESS_TOKEN_EXPIRES_IN },
     );
     
     //console.log("user object", userObject);

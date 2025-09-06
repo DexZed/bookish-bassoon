@@ -5,6 +5,7 @@ import jwt from "jsonwebtoken";
 import validatedConfig from "../../config/validate";
 import asyncHandler from "../../utils/asynchandler";
 import AuthService from "./auth.service";
+import { ACCESS_TOKEN_EXPIRES_IN } from "../../utils/utility";
 
 export default class AuthController {
   private readonly authService: AuthService;
@@ -21,6 +22,7 @@ export default class AuthController {
 
   loginUser = asyncHandler(async (req: Request, res: Response) => {
     const data = req.body;
+    console.log(data);
     const user = await this.authService.login(data.email, data.password);
     const accessToken = jwt.sign(
       {
@@ -30,7 +32,7 @@ export default class AuthController {
       },
       validatedConfig.ACCESS_TOKEN,
       {
-        expiresIn: "1d", // change this to 1hr after testing
+        expiresIn: ACCESS_TOKEN_EXPIRES_IN, // change this to 1hr after testing
       }
     );
     res.cookie("jwt", user?.refreshToken, {

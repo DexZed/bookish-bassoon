@@ -18,7 +18,7 @@ const jwtVerify = asyncHandler(
     }
      
     const token = authHeader.split(" ")[1];
-    jwt.verify(token, validatedConfig.ACCESS_TOKEN, (err: any, decoded: any) => {
+   const decoded = jwt.verify(token, validatedConfig.ACCESS_TOKEN, (err: any, decoded: any) => {
       if (err) {
         console.error(err);
         console.info("decoded", decoded)
@@ -28,6 +28,8 @@ const jwtVerify = asyncHandler(
       req.user = decoded;
       next();
     });
+
+
   },
 );
 export default jwtVerify;

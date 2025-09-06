@@ -2,6 +2,7 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { setAuthData, clearAuthData } from "../../auth/authSlice";
 import type { BaseQueryApi, FetchArgs } from "@reduxjs/toolkit/query";
 import type { RootState } from "../store";
+import { axiosBaseQuery } from "../axios/axiosInstance";
 
 const rawBaseUrl = import.meta.env.VITE_BASE_URL?.trim();
 const BASE_URL = rawBaseUrl
@@ -31,8 +32,17 @@ const baseQueryWithReAuth = async (
 ) => {
   let result = await baseQuery(args, api, extraOptions);
   // send refresh token to get new access token
-  if (result.error?.status === 403) {
+  if (result.error?.status === 401 || result.error?.status === 403) {
     // console.log("Token expired. Attempting to refresh...");
+    // if((extraOptions as any)?._retry){
+    //    console.error("Endless loop detected: already retried once for this request");
+    //     api.dispatch(clearAuthData());
+    //     return {
+    //       error:{
+    //         status:"RETRY_LOOP",data:"Endless loop detected: already retried once for this request"
+    //       }
+    //     }
+    //   }
     const refreshResult = await baseQuery("/refresh", api, extraOptions);
     console.info("New Access Token:", refreshResult);
     if (refreshResult.data) {
