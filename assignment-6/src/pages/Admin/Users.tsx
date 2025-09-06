@@ -1,32 +1,25 @@
-// TODO: ADD functionality and styling
+import { useState } from "react";
 import Skeleton from "../../components/Skeleton";
-
 import {
   useBlockUserMutation,
   useGetUsersQuery,
   useUnblockUserMutation,
 } from "../../features/users/userApiSlice";
 import { showErrorAlert, showSuccessAlert } from "../../utilities/utils";
-
 import CustomErrorPage from "../AppError";
 
 function Users() {
-  const { data, isLoading, error } = useGetUsersQuery(undefined,
-    {
-      refetchOnMountOrArgChange: true,
-      refetchOnReconnect: true,
-    }
-  );
+  const { data, isLoading, error } = useGetUsersQuery(undefined, {
+    refetchOnMountOrArgChange: true,
+    refetchOnReconnect: true,
+  });
   const [block] = useBlockUserMutation();
   const [unblock] = useUnblockUserMutation();
-  
-
-
+  const [visibleCount, setVisibleCount] = useState(3);
   async function handleBlockUser(id: string) {
     try {
       await block(id).unwrap();
       showSuccessAlert("Success", "User blocked successfully");
-
     } catch (error) {
       console.error(error);
       showErrorAlert("Error", error as string);
@@ -37,12 +30,13 @@ function Users() {
     try {
       await unblock(id).unwrap();
       showSuccessAlert("Success", "User unblocked successfully");
- 
     } catch (error) {
       console.error(error);
       showErrorAlert("Error", error as string);
     }
   }
+  const users = data?.users || [];
+  const visibleUsers = users.slice(0, visibleCount);
 
   return (
     <>
@@ -72,7 +66,7 @@ function Users() {
                 </thead>
                 <tbody>
                   {/* row 1 */}
-                  {data?.users.map((user, idx) => (
+                  {visibleUsers.map((user, idx) => (
                     <tr key={idx}>
                       <th>{idx + 1}</th>
                       <td>{user.name}</td>
@@ -98,6 +92,11 @@ function Users() {
                   ))}
                 </tbody>
               </table>
+              <div className="flex justify-center items-center m-4 gap-2">
+                <button disabled={visibleCount >= users.length} className="btn btn-outline btn-info rounded-full" onClick={() => setVisibleCount((prev) => prev + 10)}>
+                  Load More
+                </button>
+              </div>
             </div>
           </article>
         </>
