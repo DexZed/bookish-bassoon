@@ -17,17 +17,17 @@ class UserRoute {
   private initRoutes(): void {
     this.router.get(
       "/",
-      //verifyRoles(allowedUserRoles.admin),
+      verifyRoles(allowedUserRoles.admin),
       this.usercontroller.findAll
     );
     this.router.patch(
       "/block/:id",
-      //verifyRoles(allowedUserRoles.admin),
+      verifyRoles(allowedUserRoles.admin),
       this.usercontroller.blockUser
     );
     this.router.patch(
       "/unblock/:id",
-      //verifyRoles(allowedUserRoles.admin),
+      verifyRoles(allowedUserRoles.admin),
       this.usercontroller.unblockUser
     );
   }

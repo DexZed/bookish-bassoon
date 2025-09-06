@@ -59,7 +59,7 @@ export default class App {
         },
         credentials: true,
         allowedHeaders: ["Content-Type", "Authorization"],
-        methods: ["GET", "POST", "PUT", "DELETE"],
+        methods: ["GET", "POST", "PUT", "DELETE","PATCH"],
       })
     );
     this.app.use(helmet());
@@ -80,7 +80,7 @@ export default class App {
     this.app.use((req, _res, next) => {
       next(new NotFoundException(`Route ${req.originalUrl} not found`));
     });
-     //this.app.use(globalErrorHandler);
+     this.app.use(globalErrorHandler);
   }
 
   public initServer(): void {

@@ -26,12 +26,12 @@ const routes: RouteDefinition[] = [
   },
   {
     path: `${GLOBAL_PREFIX}/users`,
-    //middleware: [jwtVerify],
+    middleware: [jwtVerify],
     controller: userRoute,
   },
   {
     path: `${GLOBAL_PREFIX}/parcel`,
-   // middleware: [jwtVerify],
+    middleware: [jwtVerify],
     controller: parcelRoute,
   },
 ];
