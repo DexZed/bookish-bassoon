@@ -1,7 +1,6 @@
 import { Suspense } from "react";
 import { Link, Outlet, useLocation } from "react-router";
 import Skeleton from "../components/Skeleton";
-import AppContainer from "../components/Container";
 import Footer from "../components/Footer";
 import SideBar from "../components/SideBar";
 import ReceiverDash from "../components/ReceiverDash";

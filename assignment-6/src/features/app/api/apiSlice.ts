@@ -2,8 +2,6 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { setAuthData, clearAuthData } from "../../auth/authSlice";
 import type { BaseQueryApi, FetchArgs } from "@reduxjs/toolkit/query";
 import type { RootState } from "../store";
-import { axiosBaseQuery } from "../axios/axiosInstance";
-
 const rawBaseUrl = import.meta.env.VITE_BASE_URL?.trim();
 const BASE_URL = rawBaseUrl
   ? rawBaseUrl.replace(/\/+$/, "")
@@ -46,18 +44,19 @@ const baseQueryWithReAuth = async (
     const refreshResult = await baseQuery("/refresh", api, extraOptions);
     console.info("New Access Token:", refreshResult);
     if (refreshResult.data) {
-       // console.log("Successfully received new access token.");
-        const newAccessToken = (refreshResult.data as { accessToken: string }).accessToken;
+      // console.log("Successfully received new access token.");
+      const newAccessToken = (refreshResult.data as { accessToken: string })
+        .accessToken;
       const state = api.getState() as RootState;
       const user = state.auth;
       console.info("User State:", user);
       // store new token
       api.dispatch(setAuthData({ accessToken: newAccessToken }));
       // retry the original query with new access token
-       // console.log("Retrying the original request with the new token.");
+      // console.log("Retrying the original request with the new token.");
       result = await baseQuery(args, api, extraOptions);
     } else {
-       console.error("Failed to refresh token. Logging out.");
+      console.error("Failed to refresh token. Logging out.");
       api.dispatch(clearAuthData());
     }
   }

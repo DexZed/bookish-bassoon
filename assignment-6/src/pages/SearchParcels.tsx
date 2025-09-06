@@ -7,7 +7,7 @@ import { useState } from "react";
 import { useInfiniteQuery } from "@tanstack/react-query";
 import React from "react";
 import { formatDate } from "../utilities/utils";
-type Props = {};
+
 interface ApiResponse {
   parcels: Parcel[];
   nextCursor?: number | null; // The API should return the next page number/cursor, or null/undefined if it's the last page.
@@ -15,7 +15,7 @@ interface ApiResponse {
 
 const BASE_URL = import.meta.env.VITE_BASE_URL || "http://localhost:3000";
 const PARCEL_LIMIT = 3;
-function SearchParcels({}: Props) {
+function SearchParcels() {
   const [searchQuery, setSearchQuery] = useState<SearchFields>({
     trackingId: "",
     status: "",
@@ -182,14 +182,15 @@ function SearchParcels({}: Props) {
                         <tr className="hover:bg-base-300" key={j}>
                           <th>{parcel.trackingId}</th>
                           <td>
-                            
                             <div className="tooltip" data-tip={parcel.sender}>
                               {parcel.sender.slice(0, 5) + "..."}
                             </div>
                           </td>
-                          <td><div className="tooltip" data-tip={parcel.receiver}>
+                          <td>
+                            <div className="tooltip" data-tip={parcel.receiver}>
                               {parcel.receiver.slice(0, 5) + "..."}
-                            </div></td>
+                            </div>
+                          </td>
                           <td>{parcel.status}</td>
                           <td>{parcel.fee}</td>
                           <td>{parcel.type}</td>

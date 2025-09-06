@@ -8,9 +8,7 @@ import { StatDate, percentageRatio } from "../utilities/utils";
 import BarChartTable from "./BarChartTable";
 import Skeleton from "./Skeleton";
 
-type Props = {};
-
-function ReceiverDash({}: Props) {
+function ReceiverDash() {
   const selector = useAppSelector((state) => state.auth);
   const { data, isLoading, error } = useGetIncomingQuery(selector.id as string);
 
@@ -22,7 +20,7 @@ function ReceiverDash({}: Props) {
   const startDate = data?.parcels[0]?.createdAt;
   const endDate = data?.parcels[data?.parcels.length - 1]?.createdAt;
   const deliveredParcels = received?.parcels.length;
-    const inTransitParcels = data?.parcels.filter(
+  const inTransitParcels = data?.parcels.filter(
     (parcel) => parcel.status === "In Transit"
   ).length;
   const statusData = [
@@ -113,7 +111,9 @@ function ReceiverDash({}: Props) {
                 </div>
               </div>
             </aside>
-            <article className="w-full h-64"><BarChartTable data={statusData} dataKey="Parcel"/></article>
+            <article className="w-full h-64">
+              <BarChartTable data={statusData} dataKey="Parcel" />
+            </article>
           </main>
         </>
       )}

@@ -2,7 +2,6 @@ import { Suspense } from "react";
 import { Outlet, Link, useLocation } from "react-router";
 import Skeleton from "../components/Skeleton";
 import SideBar from "../components/SideBar";
-import AppContainer from "../components/Container";
 import AdminDash from "../components/AdminDash";
 import Footer from "../components/Footer";
 export default function AdminLayout() {

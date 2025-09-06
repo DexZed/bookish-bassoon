@@ -80,14 +80,14 @@ function Users() {
                       <td>{user.role}</td>
                       <td className="flex gap-2">
                         <button
-                          onClick={() => handleUnblockUser(user.id)}
+                          onClick={() => handleUnblockUser(user._id)}
                           className="btn btn-accent btn-outline rounded-full btn-xs"
                           disabled={!user.isBlocked}
                         >
                           Unblock
                         </button>
                         <button
-                          onClick={() => handleBlockUser(user.id)}
+                          onClick={() => handleBlockUser(user._id)}
                           className="btn btn-error btn-outline rounded-full btn-xs"
                           disabled={user.isBlocked}
                         >

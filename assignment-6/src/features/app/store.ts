@@ -1,5 +1,4 @@
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
-
 import { setupListeners } from "@reduxjs/toolkit/query";
 import { apiSlice } from "./api/apiSlice";
 import { authSlice } from "../auth/authSlice";
@@ -18,6 +17,7 @@ const loadState = (): PersistedState | undefined => {
     if (serializedState === null) return undefined;
     return JSON.parse(serializedState) as PersistedState;
   } catch (error) {
+    console.error("Error loading state from localStorage:", error);
     return undefined;
   }
 };
@@ -27,6 +27,7 @@ const saveState = (state: PersistedState): void => {
     const serializedState = JSON.stringify(state);
     localStorage.setItem("state", serializedState);
   } catch (error) {
+    console.error("Error saving state to localStorage:", error);
     // ignore write errors
   }
 };

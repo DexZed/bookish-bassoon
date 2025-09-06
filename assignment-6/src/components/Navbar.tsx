@@ -3,7 +3,7 @@ import { Link } from "react-router";
 import { useState, useEffect } from "react";
 import { useAppSelector } from "../features/app/hooks";
 import LogoutButton from "./LogoutButton";
-// eslint-disable-next-line
+
 function Navbar() {
   const [theme, setTheme] = useState("light");
   const userSelector = useAppSelector((state) => state.auth);

@@ -2,7 +2,7 @@ import { Outlet, useLocation } from "react-router";
 import "./App.css";
 import Footer from "./components/Footer";
 import Navbar from "./components/Navbar";
-import AppContainer from "./components/Container";
+
 
 function App() {
   const location = useLocation();
