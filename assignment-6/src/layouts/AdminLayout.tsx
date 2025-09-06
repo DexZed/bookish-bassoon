@@ -6,12 +6,11 @@ import AppContainer from "../components/Container";
 import AdminDash from "../components/AdminDash";
 import Footer from "../components/Footer";
 export default function AdminLayout() {
-
   const location = useLocation();
   const hideDash =
     location.pathname.startsWith("/admin/users") ||
     location.pathname.startsWith("/admin/parcels") ||
-    location.pathname.startsWith("/admin/status"); 
+    location.pathname.startsWith("/admin/status");
   const adminLinks = (
     <>
       <li>
@@ -24,15 +23,13 @@ export default function AdminLayout() {
   );
   return (
     <>
-      <AppContainer>
-        <SideBar navLinks={adminLinks}>
-          <Suspense fallback={<Skeleton />}>
-            {!hideDash && <AdminDash />}
-            <Outlet />
-          </Suspense>
-        </SideBar>
-        <Footer />
-      </AppContainer>
+      <SideBar navLinks={adminLinks}>
+        <Suspense fallback={<Skeleton />}>
+          {!hideDash && <AdminDash />}
+          <Outlet />
+        </Suspense>
+      </SideBar>
+      <Footer />
     </>
   );
 }

@@ -8,11 +8,10 @@ import ReceiverDash from "../components/ReceiverDash";
 // TODO: Fix styling and update route components
 
 export default function ReceiverLayout() {
-  
   const location = useLocation();
   const hideDash =
     location.pathname.startsWith("/receiver/incoming") ||
-    location.pathname.startsWith("/receiver/history") 
+    location.pathname.startsWith("/receiver/history");
   const receiverLinks = (
     <>
       <li>
@@ -24,14 +23,14 @@ export default function ReceiverLayout() {
     </>
   );
   return (
-    <AppContainer>
-        <SideBar navLinks={receiverLinks}>
-          <Suspense fallback={<Skeleton />}>
-            {!hideDash && <ReceiverDash/>}
-            <Outlet />
-          </Suspense>
-        </SideBar>
-        <Footer />
-      </AppContainer>
+    <>
+      <SideBar navLinks={receiverLinks}>
+        <Suspense fallback={<Skeleton />}>
+          {!hideDash && <ReceiverDash />}
+          <Outlet />
+        </Suspense>
+      </SideBar>
+      <Footer />
+    </>
   );
 }

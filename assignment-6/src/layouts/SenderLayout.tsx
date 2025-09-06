@@ -24,15 +24,13 @@ export default function SenderLayout() {
   );
   return (
     <>
-      <AppContainer>
-        <SideBar navLinks={senderLinks}>
-          <Suspense fallback={<Skeleton />}>
-            {!hideDash && <SenderDash/>}
-            <Outlet />
-          </Suspense>
-        </SideBar>
-        <Footer />
-      </AppContainer>
+      <SideBar navLinks={senderLinks}>
+        <Suspense fallback={<Skeleton />}>
+          {!hideDash && <SenderDash />}
+          <Outlet />
+        </Suspense>
+      </SideBar>
+      <Footer />
     </>
   );
 }

@@ -3,10 +3,15 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import InputLayout from "../components/InputLayout";
 import { RegistrationSchema, type RegistrationFields } from "../interfaces/globalInterfaces";
 import SelectorLayout from "../components/SelectorLayout";
+import { useRegisterUserMutation } from "../features/public/publicApiSlice";
+import { showErrorAlert, showSuccessAlert } from "../utilities/utils";
+import { useNavigate } from "react-router";
 
 ;
 // TODO: Add api calls and sweet alert
 function Register() {
+  const navigate = useNavigate();
+  const [registerUser] = useRegisterUserMutation();
   const {
     register,
     handleSubmit,
@@ -17,11 +22,12 @@ function Register() {
   });
   const onSubmit: SubmitHandler<RegistrationFields> = async (data) => {
     try {
-      await new Promise((resolve) => setTimeout(resolve, 1000));
-      // console.log(data);
-      throw new Error("Random error message");
+      await registerUser(data).unwrap();
+      showSuccessAlert("Success", "User registered successfully")
+      navigate("/login");
     } catch (error) {
       console.error(error);
+      showErrorAlert("Something went wrong!", error as string);
       setError("root", {
         message: "Random error message",
       });

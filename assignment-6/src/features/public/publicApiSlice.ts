@@ -10,9 +10,16 @@ export const publicApiSlice = createApi({
     getUser: builder.query<UserResponse, string>({
       query: (email) => `/user/${email}`,
     }),
+    registerUser: builder.mutation({
+      query: (user) => ({
+        url: "api/v1/auth/register",
+        method: "POST",
+        body: user,
+      }),
+    })
   }),
 });
 
-export const { useGetUserQuery } = publicApiSlice;
+export const { useGetUserQuery, useRegisterUserMutation } = publicApiSlice;
 
 

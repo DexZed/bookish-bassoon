@@ -8,20 +8,17 @@ function App() {
   const location = useLocation();
 
   // Hide global navbar for dashboards
-  const hideNavbar = location.pathname.startsWith("/sender")
-    || location.pathname.startsWith("/receiver")
-    || location.pathname.startsWith("/admin");
+  const hideNavbar =
+    location.pathname.startsWith("/sender") ||
+    location.pathname.startsWith("/receiver") ||
+    location.pathname.startsWith("/admin");
   return (
     <>
-      <AppContainer>
-        {!hideNavbar && (
-        <Navbar></Navbar>
-      )}
-       <main>
+      {!hideNavbar && <Navbar></Navbar>}
+      <main>
         <Outlet />
       </main>
       <Footer></Footer>
-      </AppContainer>
     </>
   );
 }
