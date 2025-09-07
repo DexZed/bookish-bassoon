@@ -31,7 +31,7 @@ const baseQueryWithReAuth = async (
 ) => {
   let result = await baseQuery(args, api, extraOptions);
   // send refresh token to get new access token
-  if (result.error?.status === 401 || result.error?.status === 403) {
+  if (result.error?.status === 401) {
     // console.log("Token expired. Attempting to refresh...");
     // if((extraOptions as any)?._retry){
     //    console.error("Endless loop detected: already retried once for this request");

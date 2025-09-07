@@ -24,14 +24,15 @@ export default function RefreshProvider({ children }: RefreshProps) {
     try {
       const response = await fetch("/refresh", {
         method: "GET",
-        credentials: "include",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${accessToken}`,
-        },
+       // credentials: "include",
+        // headers: {
+        //   "Content-Type": "application/json",
+        //   Authorization: `Bearer ${accessToken}`,
+        // },
       });
       if (!response.ok) throw new Error("Refresh failed");
       const data = await response.json();
+      console.log("data",data)
       if (data.accessToken) {
         dispatch(setAuthData({ accessToken: data.accessToken }));
       } else {
