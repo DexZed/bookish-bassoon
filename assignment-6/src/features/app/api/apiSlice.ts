@@ -2,6 +2,7 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { setAuthData, clearAuthData } from "../../auth/authSlice";
 import type { BaseQueryApi, FetchArgs } from "@reduxjs/toolkit/query";
 import type { RootState } from "../store";
+//import { axiosBaseQuery } from "../../../context/refreshContext";
 const rawBaseUrl = import.meta.env.VITE_BASE_URL?.trim();
 const BASE_URL = rawBaseUrl
   ? rawBaseUrl.replace(/\/+$/, "")
