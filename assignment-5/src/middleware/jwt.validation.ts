@@ -11,6 +11,7 @@ const jwtVerify = asyncHandler(
   async (req: RequestExtend, res: Response, next: NextFunction) => {
     const authHeaderRaw = req.headers.authorization || req.headers.Authorization;
     const authHeader = Array.isArray(authHeaderRaw) ? authHeaderRaw[0] : authHeaderRaw;
+    console.log("req object",req.headers)
     //console.log(authHeader);
     if (!authHeader?.startsWith("Bearer ")) {
       console.log("Unauthorized at jwtVerify");
@@ -23,7 +24,7 @@ const jwtVerify = asyncHandler(
         //console.error(err);
         //console.info("decoded", decoded)
         //console.log("Forbidden at jwtVerify");
-        return res.status(403).json({ message: "Forbidden" });
+        return res.status(401).json({ message: "Invalid or expired token" });
       }
       req.user = decoded;
       next();
