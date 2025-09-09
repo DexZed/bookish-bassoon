@@ -164,7 +164,7 @@ const AppRouter = createBrowserRouter([
   {
     path: "/admin",
     element: (
-      <Private featureFlag={false} allowedRoles={["admin"]}>
+      <Private allowedRoles={["admin"]}>
         <AdminLayout />
       </Private>
     ),

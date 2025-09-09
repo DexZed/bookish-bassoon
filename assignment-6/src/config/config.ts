@@ -1,0 +1,1 @@
+export const BYPASS_PTOTECTED_ROUTE=true;

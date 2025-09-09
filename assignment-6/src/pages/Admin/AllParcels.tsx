@@ -3,11 +3,13 @@ import Skeleton from "../../components/Skeleton";
 import { useBlockParcelMutation, useGetParcelsQuery, useUnblockParcelMutation } from "../../features/parcel/parcelApiSlice";
 import { showErrorAlert, showSuccessAlert } from "../../utilities/utils";
 import CustomErrorPage from "../AppError";
+import { useState } from "react";
 
 function AllParcels() {
   const { data, isLoading, error } = useGetParcelsQuery(undefined);
   const [block] = useBlockParcelMutation();
   const [unblock] = useUnblockParcelMutation();
+  const [visibleCount, setVisibleCount] = useState(3);
   async function handleBlock(id: string) {
     try {
       await block(id).unwrap();
@@ -27,6 +29,9 @@ function AllParcels() {
     }
      
   }
+  const parcels = data?.parcels || [];
+  const visibleParcels = parcels.slice(0, visibleCount);
+
   return (
     <>
       {isLoading ? (
@@ -58,7 +63,7 @@ function AllParcels() {
                   </tr>
                 </thead>
                 <tbody>
-                  {data?.parcels.map((parcel, idx) => (
+                  {visibleParcels.map((parcel, idx) => (
                     <tr key={idx}>
                       <th>{parcel.trackingId}</th>
                       <td>{parcel.sender}</td>
@@ -83,8 +88,16 @@ function AllParcels() {
                   ))}
                 </tbody>
               </table>
+               <div className="flex justify-center items-center m-4 gap-2">
+                <button disabled={visibleCount >= parcels.length} className="btn btn-outline btn-info rounded-full" onClick={() => setVisibleCount((prev) => prev + 10)}>
+                  Load More
+                </button>
+              </div>
+            
             </div>
+            
           </article>
+          
         </>
       )}
     </>

@@ -1,14 +1,16 @@
 import { Navigate, useLocation } from "react-router";
 import { useAppSelector } from "../features/app/hooks";
 import { showErrorAlert } from "../utilities/utils";
+import { BYPASS_PTOTECTED_ROUTE } from "../config/config";
 
 
-type Props = {featureFlag?: boolean, children: React.ReactNode; allowedRoles?: string[] };
+type Props = { children: React.ReactNode; allowedRoles?: string[] };
 
-function Private({ featureFlag,children }: Props) {
+function Private({ children }: Props) {
   const location = useLocation();
   const { isBlocked, role } = useAppSelector((state) => state.auth);
-  if (!featureFlag) {
+  console.log("Private hit:", { BYPASS_PTOTECTED_ROUTE, isBlocked, role });
+  if (BYPASS_PTOTECTED_ROUTE) {
     return children;
   }
   if (isBlocked) {
