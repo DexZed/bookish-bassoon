@@ -24,28 +24,28 @@ function Navbar() {
   const links = (
     <>
       <li>
-        <Link to="/">🏠 Home</Link>
+        <Link id="home" to="/">🏠 Home</Link>
       </li>
       <li>
-        <Link to="/about">ℹ️ About</Link>
+        <Link id="about" to="/about">ℹ️ About</Link>
       </li>
       <li>
-        <Link to="/contact">📞 Contact</Link>
+        <Link id="contact" to="/contact">📞 Contact</Link>
       </li>
       <li>
-        <Link to="/features">🔧 Features</Link>
+        <Link id="features" to="/features">🔧 Features</Link>
       </li>
       <li>
-        <Link to="/faq">❓ FAQ</Link>
+        <Link id="faq" to="/faq">❓ FAQ</Link>
       </li>
       <li>
-        <Link to="/login">🔑 Login</Link>
+        <Link id="login" to="/login">🔑 Login</Link>
       </li>
       <li>
-        <Link to="/register">➕ Register</Link>
+        <Link id="register" to="/register">➕ Register</Link>
       </li>
       <li>
-        <label className="swap swap-rotate">
+        <label id="theme" className="swap swap-rotate">
           {/* this hidden checkbox controls the state */}
           <input
             name="theme"
@@ -57,6 +57,7 @@ function Navbar() {
 
           {/* sun icon */}
           <svg
+
             className="swap-off h-10 w-10 fill-current"
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 24 24"
@@ -81,7 +82,7 @@ function Navbar() {
       <div className="navbar bg-base-100 shadow-sm">
         <div className="navbar-start">
           <div className="dropdown">
-            <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
+            <div id='dropdown-menu' tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 className="h-5 w-5"
