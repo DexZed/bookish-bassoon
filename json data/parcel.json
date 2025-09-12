@@ -1,0 +1,72 @@
+{
+  "_id": {
+    "$oid": "68909f1b896376e00d038bf8"
+  },
+  "trackingId": "TRK-20250804-938472",
+  "sender": {
+    "$oid": "68909a2eb9802ca415f08bbb"
+  },
+  "receiver": {
+    "$oid": "68909a48b9802ca415f08bbe"
+  },
+  "type": "Document",
+  "weight": 3.2,
+  "pickupAddress": "1478 Willow Crossing, Eastonville, TX 73301",
+  "deliveryAddress": "Suite 310, 909 Elmwood Ave, Brookhaven, NY 11719",
+  "status": "In Transit",
+  "fee": 75,
+  "deliveryDate": {
+    "$date": "2026-08-07T00:00:00.000Z"
+  },
+  "isBlocked": false,
+  "createdAt": {
+    "$date": "2025-08-04T11:52:59.808Z"
+  },
+  "updatedAt": {
+    "$date": "2025-08-29T12:40:58.605Z"
+  },
+  "statusLogs": [
+    {
+      "status": "Requested",
+      "location": "Main Branch, Eastonville",
+      "note": "Pickup scheduled by sender",
+      "_id": {
+        "$oid": "6890b92bf2814526859c192d"
+      },
+      "createdAt": {
+        "$date": "2025-08-04T13:44:11.901Z"
+      },
+      "updatedAt": {
+        "$date": "2025-08-04T13:44:11.901Z"
+      }
+    },
+    {
+      "status": "Approved",
+      "location": "Eastonville Sorting Center",
+      "note": "Verified and packed for shipment",
+      "_id": {
+        "$oid": "6890b985be1b11ba540e7ea6"
+      },
+      "createdAt": {
+        "$date": "2025-08-04T13:45:41.786Z"
+      },
+      "updatedAt": {
+        "$date": "2025-08-04T13:45:41.786Z"
+      }
+    },
+    {
+      "status": "Dispatched",
+      "location": "Interstate Hub - Dallas, TX",
+      "note": "Loaded onto transport truck",
+      "_id": {
+        "$oid": "68ad83327e5b80daa9d04b2d"
+      },
+      "createdAt": {
+        "$date": "2025-08-26T09:49:38.165Z"
+      },
+      "updatedAt": {
+        "$date": "2025-08-26T09:49:38.165Z"
+      }
+    }
+  ]
+}
