@@ -15,7 +15,7 @@ export default function Home() {
 {
   name:"Search",
   description:"Search for parcels",
-  link:<><Link to={"/search"} className="btn btn-info btn-outline">Search</Link></>
+  link:<><Link id="search-link" to={"/search"} className="btn btn-info btn-outline">Search</Link></>
 }]
   return (
     <>

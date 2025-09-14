@@ -123,7 +123,7 @@ function SearchParcels() {
                     <option value={"Returned"}>Returned</option>
                   </select>
                 </SelectorLayout>
-                <SelectorLayout description="Sort">
+                <SelectorLayout description="Sort By Date">
                   <select
                     name="sort"
                     value={searchQuery.sort ?? ""}

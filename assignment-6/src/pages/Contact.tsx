@@ -58,9 +58,15 @@ function Contact() {
               <div className="card-body">
                 <fieldset className="fieldset flex flex-col gap-4">
                   <label className="label">Name</label>
-                  <input type="text" className="input" placeholder="Jhon Doe" />
+                  <input
+                    name="name"
+                    type="text"
+                    className="input"
+                    placeholder="Jhon Doe"
+                  />
                   <label className="label">Email</label>
                   <input
+                    name="email"
                     type="email"
                     className="input"
                     placeholder="jhondoe@gmail.com"
