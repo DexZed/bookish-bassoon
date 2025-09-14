@@ -9,7 +9,7 @@ type Props = { children: React.ReactNode; allowedRoles?: string[] };
 function Private({ children }: Props) {
   const location = useLocation();
   const { isBlocked, role } = useAppSelector((state) => state.auth);
-  console.log("Private hit:", { BYPASS_PTOTECTED_ROUTE, isBlocked, role });
+  // console.log("Private hit:", { BYPASS_PTOTECTED_ROUTE, isBlocked, role });
   if (BYPASS_PTOTECTED_ROUTE) {
     return children;
   }

@@ -1,0 +1,58 @@
+{
+  "_id": {
+    "$oid": "68bd81b0adb11b4c51007cac"
+  },
+  "trackingId": "TRK-20261223-751324",
+  "sender": {
+    "$oid": "68bc3e41cf08240c68c27752"
+  },
+  "receiver": {
+    "$oid": "68bc3df7cf08240c68c2773f"
+  },
+  "type": "Document",
+  "weight": 16.4,
+  "pickupAddress": "6598 Jerome Street, Elliott, Nevada",
+  "deliveryAddress": "Unit 801, Highlawn Avenue, Corinne, South Dakota",
+  "status": "Approved",
+  "fee": 350,
+  "deliveryDate": {
+    "$date": "1970-01-01T00:00:00.000Z"
+  },
+  "isBlocked": true,
+  "createdAt": {
+    "$date": "2024-01-27T10:28:08.000Z"
+  },
+  "updatedAt": {
+    "$date": "2025-10-15T18:53:23.000Z"
+  },
+  "statusLogs": [
+    {
+      "status": "Dispatched",
+      "location": "Main Branch, Fingerville",
+      "note": "aute irure culpa ea ex",
+      "_id": {
+        "$oid": "68bd81b0ccd36e2a0f337fe9"
+      },
+      "createdAt": {
+        "$date": "2025-03-25T12:53:43.000Z"
+      },
+      "updatedAt": {
+        "$date": "2025-08-17T15:18:15.000Z"
+      }
+    },
+    {
+      "status": "Approved",
+      "location": "Hub - NY, Glasgow",
+      "note": "cupidatat Lorem deserunt minim fugiat",
+      "_id": {
+        "$oid": "68bd81b0739ab7235e0149ba"
+      },
+      "createdAt": {
+        "$date": "2025-02-25T16:17:02.000Z"
+      },
+      "updatedAt": {
+        "$date": "2025-11-21T12:49:22.000Z"
+      }
+    }
+  ]
+}
