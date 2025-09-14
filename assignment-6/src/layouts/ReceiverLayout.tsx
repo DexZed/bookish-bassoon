@@ -14,6 +14,9 @@ export default function ReceiverLayout() {
   const receiverLinks = (
     <>
       <li>
+        <Link to="/receiver">🏠 Dashboard</Link>
+      </li>
+      <li>
         <Link to="/receiver/incoming">📨 Incoming</Link>
       </li>
       <li>

@@ -13,6 +13,9 @@ export default function AdminLayout() {
   const adminLinks = (
     <>
       <li>
+        <Link to="/admin">📊 Dashboard</Link>
+      </li>
+      <li>
         <Link to="/admin/users">👤 Users</Link>
       </li>
       <li>

@@ -111,3 +111,9 @@ export function validateTrackingId(value?:string) {
 
   return true;
 }
+export function logNormalisation(value:number){
+  if(value===0){
+    throw new Error("Value cannot be zero")
+  }
+  return Math.log(value).toFixed(2);
+}

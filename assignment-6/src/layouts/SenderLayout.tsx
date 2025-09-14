@@ -14,6 +14,9 @@ export default function SenderLayout() {
   const senderLinks = (
     <>
       <li>
+        <Link to="/sender">🏠 Dashboard</Link>
+      </li>
+      <li>
         <Link to="/sender/create">➕ Create Parcel</Link>
       </li>
       <li>
