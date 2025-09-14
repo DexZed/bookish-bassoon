@@ -4,6 +4,7 @@ import {
   useApproveParcelMutation,
   useGetIncomingQuery,
 } from "../../features/receiver/receiverApiSlice";
+import usePaginate from "../../hooks/paginate";
 import { showErrorAlert, showSuccessAlert } from "../../utilities/utils";
 import CustomErrorPage from "../AppError";
 
@@ -27,7 +28,9 @@ function Incoming() {
       console.error(error);
     }
   }
-
+ const { visibleData, isdisabled, handleLoadMore } = usePaginate(
+    data?.parcels
+  );
   return (
     <>
       <>
@@ -59,7 +62,7 @@ function Incoming() {
                     </tr>
                   </thead>
                   <tbody>
-                    {data?.parcels.map((parcel, idx) => (
+                    {visibleData.map((parcel, idx) => (
                       <tr key={idx}>
                         <th>{parcel.trackingId}</th>
                         <td>{parcel.sender}</td>
@@ -79,6 +82,15 @@ function Incoming() {
                     ))}
                   </tbody>
                 </table>
+                <div className="flex justify-center items-center m-4 gap-2">
+                  <button
+                    disabled={isdisabled}
+                    className="btn btn-outline btn-info rounded-full"
+                    onClick={handleLoadMore}
+                  >
+                    Load More
+                  </button>
+                </div>
               </div>
             </article>
           </>

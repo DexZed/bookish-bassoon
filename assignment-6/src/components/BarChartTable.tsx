@@ -42,7 +42,7 @@ function BarChartTable({ data, dataKey }: Props) {
   const CustomToolTip = ({ active, payload, label }:any) => {
     const isVisible = active && payload && payload.length;
   return (
-    <div className="card bg-base-100 shadow-xl rounded-3xl flex flex-col justify-center items-center gap-2 m-2" style={{ visibility: isVisible ? 'visible' : 'hidden' }}>
+    <div className="card w-full h-full bg-base-100 shadow-xl rounded-xl flex flex-col justify-center items-center gap-2 m-6" style={{ visibility: isVisible ? 'visible' : 'hidden' }}>
       {isVisible && (
         <>
           <p className="label">{`${label} : ${payload[0].value}`}</p>

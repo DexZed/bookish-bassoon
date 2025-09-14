@@ -1,6 +1,7 @@
 import Skeleton from "../../components/Skeleton";
 import { useAppSelector } from "../../features/app/hooks";
 import { useGetHistoryQuery } from "../../features/receiver/receiverApiSlice";
+import usePaginate from "../../hooks/paginate";
 import CustomErrorPage from "../AppError";
 
 function History() {
@@ -9,6 +10,9 @@ function History() {
     id: selector.id as string,
     status: "Delivered",
   });
+  const { visibleData, isdisabled, handleLoadMore } = usePaginate(
+    data?.parcels
+  );
   return (
     <>
       <>
@@ -39,7 +43,7 @@ function History() {
                     </tr>
                   </thead>
                   <tbody>
-                    {data?.parcels.map((parcel, idx) => (
+                    {visibleData.map((parcel, idx) => (
                       <tr key={idx}>
                         <th>{parcel.trackingId}</th>
                         <td>{parcel.sender}</td>
@@ -51,6 +55,15 @@ function History() {
                     ))}
                   </tbody>
                 </table>
+                <div className="flex justify-center items-center m-4 gap-2">
+                  <button
+                    disabled={isdisabled}
+                    className="btn btn-outline btn-info rounded-full"
+                    onClick={handleLoadMore}
+                  >
+                    Load More
+                  </button>
+                </div>
               </div>
             </article>
           </>
