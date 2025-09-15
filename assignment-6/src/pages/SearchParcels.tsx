@@ -1,6 +1,6 @@
 import axios from "axios";
 import InputLayout from "../components/InputLayout";
-import SelectorLayout from "../components/SelectorLayout";
+import SelectorLayout from "../components/selectorLayout";
 import type { Parcel, SearchFields } from "../interfaces/globalInterfaces";
 
 import { useState } from "react";

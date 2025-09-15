@@ -1,7 +1,7 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm, type SubmitHandler } from "react-hook-form";
 import InputLayout from "../../components/InputLayout";
-import SelectorLayout from "../../components/SelectorLayout";
+import SelectorLayout from "../../components/selectorLayout";
 import {
   ParcelSchema,
   type ParcelData,

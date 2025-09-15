@@ -2,7 +2,7 @@ import { useForm, type SubmitHandler } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import InputLayout from "../components/InputLayout";
 import { RegistrationSchema, type RegistrationFields } from "../interfaces/globalInterfaces";
-import SelectorLayout from "../components/SelectorLayout";
+import SelectorLayout from "../components/selectorLayout";
 import { useRegisterUserMutation } from "../features/public/publicApiSlice";
 import { showErrorAlert, showSuccessAlert } from "../utilities/utils";
 import { useNavigate } from "react-router";
