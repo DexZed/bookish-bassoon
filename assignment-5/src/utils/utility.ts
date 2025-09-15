@@ -33,6 +33,6 @@ export const parcelSearchSchema = z.object({
 export type ParcelSearchDTO = z.infer<typeof parcelSearchSchema>;
 
 
-export const whitelist = ["http://localhost:5173"];
+export const whitelist = ["http://localhost:5173","https://parcel-express.web.app"];
 
 export const ACCESS_TOKEN_EXPIRES_IN = "2m";
