@@ -32,11 +32,26 @@ function AdminDash() {
   const pendingParcels = data?.parcels.filter(
     (parcel) => parcel.status === "Pending"
   ).length;
+  const dispatchedParcels = data?.parcels.filter(
+    (parcel) => parcel.status === "Dispatched"
+  ).length;
+  const approvedParcels = data?.parcels.filter(
+    (parcel) => parcel.status === "Approved"
+  ).length;
+  const returnedPArcels = data?.parcels.filter(
+    (parcel) => parcel.status === "Returned"
+  ).length;
+
   const statusData = [
+    { name: "Returned", Parcel: returnedPArcels as number },
     { name: "Cancelled", Parcel: cancelledParcels as number },
     { name: "Delivered", Parcel: deliveredParcels as number },
     { name: "In Transit", Parcel: inTransitParcels as number },
     { name: "Pending", Parcel: pendingParcels as number },
+
+    { name: "Dispatched", Parcel: dispatchedParcels as number },
+    { name: "Approved", Parcel: approvedParcels as number },
+
     { name: "Total Parcels", Parcel: totalParcels as number },
   ];
 
@@ -48,7 +63,7 @@ function AdminDash() {
         <CustomErrorPage />
       ) : (
         <>
-          <main className="h-dvh flex justify-center items-center flex-col gap-10">
+          <main className="h-dvh flex justify-center items-center flex-col gap-10 m-6">
             <div className="stack size-64 mt-10 md:mt-0">
               <div className="border-base-content card bg-base-100 border text-center rotate-12">
                 <div className="card-body -rotate-12 flex justify-center items-center">

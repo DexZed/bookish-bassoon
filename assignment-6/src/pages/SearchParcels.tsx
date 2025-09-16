@@ -88,7 +88,7 @@ function SearchParcels() {
 
   return (
     <>
-      <main className="h-dvh">
+      <main className="h-full">
         <aside>
           <form onSubmit={handleSearch}>
             <fieldset>

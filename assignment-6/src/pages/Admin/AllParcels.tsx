@@ -5,11 +5,15 @@ import { showErrorAlert, showSuccessAlert } from "../../utilities/utils";
 import CustomErrorPage from "../AppError";
 import { useState } from "react";
 
+
 function AllParcels() {
   const { data, isLoading, error } = useGetParcelsQuery(undefined);
   const [block] = useBlockParcelMutation();
   const [unblock] = useUnblockParcelMutation();
   const [visibleCount, setVisibleCount] = useState(3);
+  const parcels = data?.parcels || [];
+  const visibleParcels = parcels.slice(0, visibleCount);
+  
   async function handleBlock(id: string) {
     try {
       await block(id).unwrap();
@@ -29,8 +33,7 @@ function AllParcels() {
     }
      
   }
-  const parcels = data?.parcels || [];
-  const visibleParcels = parcels.slice(0, visibleCount);
+  
 
   return (
     <>

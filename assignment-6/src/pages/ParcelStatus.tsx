@@ -21,10 +21,10 @@ function ParcelStatus() {
     },
   });
   const parcel = data?.parcels[0] as Parcel;
-  // console.log(data);
-  // const { data: sender } = useGetUserByIdQuery(parcel.sender as string);
-  // const { data: receiver } = useGetUserByIdQuery(parcel.receiver as string);
-  
+  console.log(data);
+  const { data: sender } = useGetUserByIdQuery(parcel?.sender as string);
+  const { data: receiver } = useGetUserByIdQuery(parcel?.receiver as string);
+
   return (
     <>
       {isLoading ? (
@@ -53,12 +53,12 @@ function ParcelStatus() {
                   <li>
                     <span>Tracking ID: {parcel.trackingId}</span>
                   </li>
-                  {/* <li>
+                  <li>
                     <span>Sender: {sender?.user.name}</span>
                   </li>
                   <li>
                     <span>Receiver: {receiver?.user.name}</span>
-                  </li> */}
+                  </li>
                   <li>
                     <span>Status: {parcel.status}</span>
                   </li>
@@ -82,30 +82,33 @@ function ParcelStatus() {
                 </ul>
                 <div>
                   <h3 className="text-center mt-6">Status Logs</h3>
-                  {parcel.statusLogs.slice().sort(
-                    (a, b) =>
-                      new Date(b.updatedAt).getTime() -
-                      new Date(a.updatedAt).getTime()
-                  ).map((log, i) => (
-                    <div
-                      key={i}
-                      className="collapse collapse-arrow bg-base-100 border border-base-300"
-                    >
-                      <input
-                        type="radio"
-                        name="my-accordion-2"
-                        defaultChecked
-                      />
-                      <div className="collapse-title font-semibold">
-                        Updated Date : {formatDate(log.updatedAt)}
+                  {parcel.statusLogs
+                    .slice()
+                    .sort(
+                      (a, b) =>
+                        new Date(b.updatedAt).getTime() -
+                        new Date(a.updatedAt).getTime()
+                    )
+                    .map((log, i) => (
+                      <div
+                        key={i}
+                        className="collapse collapse-arrow bg-base-100 border border-base-300"
+                      >
+                        <input
+                          type="radio"
+                          name="my-accordion-2"
+                          defaultChecked
+                        />
+                        <div className="collapse-title font-semibold">
+                          Updated Date : {formatDate(log.updatedAt)}
+                        </div>
+                        <div className="collapse-content text-sm">
+                          Status : {log.status} <br /> Location : {log.location}{" "}
+                          <br />
+                          Description : {log.note}
+                        </div>
                       </div>
-                      <div className="collapse-content text-sm">
-                        Status : {log.status} <br /> Location : {log.location}{" "}
-                        <br />
-                        Description : {log.note}
-                      </div>
-                    </div>
-                  ))}
+                    ))}
                 </div>
                 <div className="mt-6">
                   <Link to={"/search"} className="btn btn-neutral btn-block">
