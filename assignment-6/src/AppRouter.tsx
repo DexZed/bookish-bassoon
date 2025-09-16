@@ -16,7 +16,7 @@ const Contact = lazy(() => import("./pages/Contact"));
 const Login = lazy(() => import("./pages/Login"));
 const Features = lazy(() => import("./pages/Features"));
 const FAQ = lazy(() => import("./pages/FAQ"));
-
+const ParcelStatus = lazy(() => import("./pages/ParcelStatus"));
 const Register = lazy(() => import("./pages/Register"));
 const SearchParcels = lazy(() => import("./pages/SearchParcels"));
 const CreateParcel = lazy(() => import("./pages/Sender/CreateParcel"));
@@ -79,6 +79,14 @@ const AppRouter = createBrowserRouter([
         element: (
           <Suspense fallback={<Skeleton />}>
             <SearchParcels />
+          </Suspense>
+        ),
+      },
+      {
+        path: "parcel-status/:trkID",
+        element: (
+          <Suspense fallback={<Skeleton />}>
+            <ParcelStatus />
           </Suspense>
         ),
       },

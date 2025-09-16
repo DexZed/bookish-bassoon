@@ -7,6 +7,7 @@ import { useState } from "react";
 import { useInfiniteQuery } from "@tanstack/react-query";
 import React from "react";
 import { formatDate } from "../utilities/utils";
+import { Link } from "react-router";
 
 interface ApiResponse {
   parcels: Parcel[];
@@ -173,6 +174,7 @@ function SearchParcels() {
                     <th>Pickup Address</th>
                     <th>Delivery Address</th>
                     <th>Created At</th>
+                    <th>Action</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -197,6 +199,7 @@ function SearchParcels() {
                           <td>{parcel.pickupAddress}</td>
                           <td>{parcel.deliveryAddress}</td>
                           <td>{formatDate(parcel.createdAt)}</td>
+                          <td><Link className="btn btn-info btn-outline rounded-2xl" to={/parcel-status/ + parcel.trackingId}>Status</Link></td>
                         </tr>
                       ))}
                     </React.Fragment>

@@ -16,10 +16,13 @@ export const publicApiSlice = createApi({
         method: "POST",
         body: user,
       }),
-    })
+    }),
+    getUserById: builder.query<UserResponse, string>({
+      query: (id) => `/user/${id}`,
+    }),
   }),
 });
 
-export const { useGetUserQuery, useRegisterUserMutation } = publicApiSlice;
+export const { useGetUserQuery, useRegisterUserMutation, useGetUserByIdQuery } = publicApiSlice;
 
 
