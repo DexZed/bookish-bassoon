@@ -124,6 +124,7 @@ export default class ParcelService {
   }
 
   async blockParcel(id: string): Promise<IParcel | null> {
+    
     const parcel = await this.parcelRepository.update(id, {
       isBlocked: true,
     });

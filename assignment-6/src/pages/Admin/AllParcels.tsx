@@ -16,6 +16,7 @@ function AllParcels() {
   
   async function handleBlock(id: string) {
     try {
+      
       await block(id).unwrap();
       showSuccessAlert("Parcel Blocked", "Parcel Blocked Successfully");
     } catch (error) {

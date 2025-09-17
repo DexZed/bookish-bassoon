@@ -22,7 +22,7 @@ export class GenericRepository<T extends mongoose.Document> implements BaseRepos
     return await this.model.findById(id).exec();
   }
 
-  async update(id: string, data: Partial<T>): Promise<T | null> {
+  async update(id: string | mongoose.Types.ObjectId, data: Partial<T>): Promise<T | null> {
     return await this.model.findByIdAndUpdate(id, data, { new: true }).exec();
   }
 

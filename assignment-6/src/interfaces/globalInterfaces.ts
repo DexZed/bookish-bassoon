@@ -47,7 +47,7 @@ export type LoginFields = z.infer<typeof LoginSchema>;
 
 // Interface for a single user object
 export interface User {
-  _id: string;
+  id: string;
   name: string;
   email: string;
   role: string;

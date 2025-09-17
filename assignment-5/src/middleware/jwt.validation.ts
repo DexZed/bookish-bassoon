@@ -11,10 +11,10 @@ const jwtVerify = asyncHandler(
   async (req: RequestExtend, res: Response, next: NextFunction) => {
     const authHeaderRaw = req.headers.authorization || req.headers.Authorization;
     const authHeader = Array.isArray(authHeaderRaw) ? authHeaderRaw[0] : authHeaderRaw;
-    console.log("req object",req.headers)
+    //console.log("req object",req.headers)
     //console.log(authHeader);
     if (!authHeader?.startsWith("Bearer ")) {
-      console.log("Unauthorized at jwtVerify");
+      //console.log("Unauthorized at jwtVerify");
       return res.status(401).json({ message: "Unauthorized" });
     }
      

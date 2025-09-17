@@ -36,8 +36,7 @@ function Users() {
     }
   }
   const users = data?.users || [];
-  const visibleUsers = users.slice(0, visibleCount);
-
+  const visibleUsers = users?.slice(0, visibleCount);
   return (
     <>
       {isLoading ? (
@@ -66,34 +65,44 @@ function Users() {
                 </thead>
                 <tbody>
                   {/* row 1 */}
-                  {visibleUsers.map((user, idx) => (
-                    <tr key={idx}>
-                      <th>{idx + 1}</th>
-                      <td>{user.name}</td>
-                      <td>{user.email}</td>
-                      <td>{user.role}</td>
-                      <td className="flex gap-2">
-                        <button
-                          onClick={() => handleUnblockUser(user._id)}
-                          className="btn btn-accent btn-outline rounded-full btn-xs"
-                          disabled={!user.isBlocked}
-                        >
-                          Unblock
-                        </button>
-                        <button
-                          onClick={() => handleBlockUser(user._id)}
-                          className="btn btn-error btn-outline rounded-full btn-xs"
-                          disabled={user.isBlocked}
-                        >
-                          Block
-                        </button>
-                      </td>
-                    </tr>
-                  ))}
+                  {visibleUsers?.map((user, idx) => {
+                    console.log(user);
+                    return (
+                      <tr key={idx}>
+                        <th>{idx + 1}</th>
+                        <td>{user.name}</td>
+                        <td>{user.email}</td>
+                        <td>{user.role}</td>
+                        <td className="flex gap-2">
+                          <button
+                            onClick={() => {
+                              console.log(user.id);
+                              handleUnblockUser(user.id);
+                            }}
+                            className="btn btn-accent btn-outline rounded-full btn-xs"
+                            disabled={!user.isBlocked}
+                          >
+                            Unblock
+                          </button>
+                          <button
+                            onClick={() => handleBlockUser(user.id)}
+                            className="btn btn-error btn-outline rounded-full btn-xs"
+                            disabled={user.isBlocked}
+                          >
+                            Block
+                          </button>
+                        </td>
+                      </tr>
+                    );
+                  })}
                 </tbody>
               </table>
               <div className="flex justify-center items-center m-4 gap-2">
-                <button disabled={visibleCount >= users.length} className="btn btn-outline btn-info rounded-full" onClick={() => setVisibleCount((prev) => prev + 10)}>
+                <button
+                  disabled={visibleCount >= users.length}
+                  className="btn btn-outline btn-info rounded-full"
+                  onClick={() => setVisibleCount((prev) => prev + 10)}
+                >
                   Load More
                 </button>
               </div>
