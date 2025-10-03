@@ -26,13 +26,16 @@ function CreateParcels() {
   const selector = useAppSelector((state) => state.auth);
   const onSubmit: SubmitHandler<ParcelFields> = async (data) => {
     const receiverData = await fetchUser(data.receiver);
+    console.log(receiverData);
+
     const parcelData: Partial<ParcelData> = {
       ...data,
       sender: selector.id as string,
       receiver: receiverData?._id as string,
     };
-
+    console.log(parcelData);
     try {
+
       await addParcel(parcelData).unwrap();
       showSuccessAlert("Success","Parcel created successfully");
     } catch (error) {

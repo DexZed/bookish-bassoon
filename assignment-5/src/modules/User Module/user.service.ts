@@ -13,7 +13,7 @@ export default class UserService {
     const allUser = await this.userRepository.findAll();
     const serializedUsers = allUser.map(user =>
       ({
-        id: user.id,
+        _id: user.id,
         name: user.name,
         email: user.email,
         role: user.role,

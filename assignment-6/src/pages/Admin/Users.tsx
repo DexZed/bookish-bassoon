@@ -17,6 +17,7 @@ function Users() {
   const [unblock] = useUnblockUserMutation();
   const [visibleCount, setVisibleCount] = useState(3);
   async function handleBlockUser(id: string) {
+    console.log(id);
     try {
       await block(id).unwrap();
       showSuccessAlert("Success", "User blocked successfully");
@@ -75,7 +76,7 @@ function Users() {
                         <td className="flex gap-2">
                           <button
                             onClick={() => {
-                              handleUnblockUser(user.id);
+                              handleUnblockUser(user._id);
                             }}
                             className="btn btn-accent btn-outline rounded-full btn-xs"
                             disabled={!user.isBlocked}
@@ -83,7 +84,7 @@ function Users() {
                             Unblock
                           </button>
                           <button
-                            onClick={() => handleBlockUser(user.id)}
+                            onClick={() => handleBlockUser(user._id)}
                             className="btn btn-error btn-outline rounded-full btn-xs"
                             disabled={user.isBlocked}
                           >

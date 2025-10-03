@@ -8,6 +8,7 @@ import {
 } from "../../interfaces/globalInterfaces";
 import { showErrorAlert, showSuccessAlert } from "../../utilities/utils";
 import { useUpdateStatusMutation } from "../../features/parcel/parcelApiSlice";
+import SelectorLayout from "../../components/selectorLayout";
 
 function UpdateStatus() {
   const { parcelId } = useParams();
@@ -46,18 +47,25 @@ function UpdateStatus() {
             <legend className="text-center text-gray-400">
               Status Log Update for: {parcelId}
             </legend>
-            <InputLayout
+            <SelectorLayout
               description="Status"
               errorDescription={errors.status && `${errors.status.message}`}
             >
-              <input
+              <select
                 {...register("status")}
-                type="text"
-                placeholder="Status"
-                className="invalid-status input input-primary"
+                className="invalid-status select select-accent w-full"
                 required
-              />
-            </InputLayout>
+              >
+                <option disabled>Set Status</option>
+                <option value={"Requested"}>Requested</option>
+                <option value="Dispatched">Dispatched</option>
+                <option value="In Transit">In Transit</option>
+                <option value="Delivered">Delivered</option>
+                <option value="Cancelled">Cancelled</option>
+                <option value="Returned">Returned</option>
+                <option value="Approved">Approved</option>
+              </select>
+            </SelectorLayout>
             <InputLayout
               description="Location"
               errorDescription={errors.location && `${errors.location.message}`}

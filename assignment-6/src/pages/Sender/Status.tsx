@@ -54,33 +54,44 @@ function Status() {
                       Delivery Date : {formatDate(data?.parcel.deliveryDate)}
                     </span>
                   </li>
-                  <li className="opacity-50">
-                    <ul className="list bg-base-100 rounded-box shadow-md">
-                      <li className="p-4 pb-2 text-xs opacity-60 tracking-wide">
-                        Status Logs
-                      </li>
-                      {data?.parcel.statusLogs.map((log, idx) => (
-                        <li className="list-row flex" key={idx}>
-                          <div className="flex gap-2 flex-col">
-                            <div>Status</div>
-                            <div className="text-xs uppercase font-semibold opacity-60">
-                              {log.status}
-                            </div>
-                            <div>Location</div>
-                            <div className="text-xs uppercase font-semibold opacity-60">
-                              {log.location}
-                            </div>
-                          </div>
-                          <p className="list-col-wrap text-xs">
-                            Note : {log.note}
-                          </p>
-                        </li>
-                      ))}
-                    </ul>
-                  </li>
                 </ul>
+                <div>
+                  <h3 className="text-center mt-6">Status Logs</h3>
+                  {data?.parcel.statusLogs
+                    .slice()
+                    .sort(
+                      (a, b) =>
+                        new Date(b.updatedAt).getTime() -
+                        new Date(a.updatedAt).getTime()
+                    )
+                    .map((log, i) => (
+                      <div
+                        key={i}
+                        className="collapse collapse-arrow bg-base-100 border border-base-300"
+                      >
+                        <input
+                          type="radio"
+                          name="my-accordion-2"
+                          defaultChecked
+                        />
+                        <div className="collapse-title font-semibold">
+                          Updated Date : {formatDate(log.updatedAt)}
+                        </div>
+                        <div className="collapse-content text-sm">
+                          Status : {log.status} <br /> Location : {log.location}{" "}
+                          <br />
+                          Description : {log.note}
+                        </div>
+                      </div>
+                    ))}
+                </div>
                 <div className="mt-6">
-                  <Link to={'/sender/parcels'} className="btn btn-info btn-outline w-full">Go Back</Link >
+                  <Link
+                    to={"/sender/parcels"}
+                    className="btn btn-info btn-outline w-full"
+                  >
+                    Go Back
+                  </Link>
                 </div>
               </div>
             </div>
