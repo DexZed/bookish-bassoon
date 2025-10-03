@@ -80,7 +80,7 @@ function Status() {
                   </li>
                 </ul>
                 <div className="mt-6">
-                  <Link to={'/sender/parcels'} className="btn btn-neutral btn-outline invert w-full">Go Back</Link >
+                  <Link to={'/sender/parcels'} className="btn btn-info btn-outline w-full">Go Back</Link >
                 </div>
               </div>
             </div>

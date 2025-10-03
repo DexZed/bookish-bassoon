@@ -8,6 +8,7 @@ import type { IParcel } from "./parcelSchema/parcel.schema";
 import { BadRequestException, NotFoundException } from "../../global-handler/httpexception";
 import { trackIdGenerator } from "../../utils/utility";
 import ParcelRepository from "./parcelRepository/repository";
+import Parcel from "./parcelSchema/parcel.schema";
 
 export default class ParcelService {
   private parcelRepository: ParcelRepository;
@@ -59,10 +60,14 @@ export default class ParcelService {
   }
 
   // Receiver Only api routes
-  async getParcelsByReceiver(id: string): Promise<IParcel[] | null> {
-    const receiverParcels = await this.parcelRepository.getParcelsByReceiver(
-      id,
-    );
+  async getParcelsReceiver(id: string): Promise<IParcel[] | null> {
+
+    // const receiverParcels = await this.parcelRepository.getParcelsByReceiver(
+    //   id,
+    // );
+    const receiverParcels = await Parcel.find({
+      receiver: id,
+    });
     if (receiverParcels.length === 0) {
       throw new NotFoundException("No parcels found for this receiver or no parcel with 'In Transit' status found for this receiver yet");
     }

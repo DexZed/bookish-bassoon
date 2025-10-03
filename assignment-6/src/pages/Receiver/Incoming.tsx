@@ -28,8 +28,8 @@ function Incoming() {
       console.error(error);
     }
   }
- const { visibleData, isdisabled, handleLoadMore } = usePaginate(
-    data?.parcels
+  const { visibleData, isdisabled, handleLoadMore } = usePaginate(
+    data?.parcels.filter((parcel) => parcel.status === "In Transit")
   );
   return (
     <>

@@ -1,16 +1,16 @@
 {
   "result": [
     {
-      "name": "Administrator Smith",
-      "email": "Administrator.Smith5@gmail.com",
-      "password": "TSM6GtCadGjANZD",
+      "name": "Admin Smith",
+      "email": "Admin.Smith@gmail.com",
+      "password": "Adminsmith123",
       "role": "admin"
     },
     {
       "name": "Neva86",
       "email": "Lew32@yahoo.com",
       "password": "ySCT8_DmbBqEZI9",
-      "role": "receiver"
+      "role": "sender"
     },
     {
       "name": "Emery.Mann9",

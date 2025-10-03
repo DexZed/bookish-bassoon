@@ -46,7 +46,8 @@ export default class ParcelController {
   // receiver api calls
   getParcelsByReceiver = asyncHandler(async (req: Request, res: Response) => {
     const { id } = req.params;
-    const parcels = await this.parcelService.getParcelsByReceiver(id);
+    // console.log("getParcelsByReceiver id:", id);
+    const parcels = await this.parcelService.getParcelsReceiver(id);
     res.status(200).json({ message: "Parcels fetched successfully", parcels });
   });
 
@@ -64,7 +65,7 @@ export default class ParcelController {
 
   getParcelHistory = asyncHandler(async (req: Request, res: Response) => {
     const { receiver, status } = req.query;
-   // console.log("getParcelHistory query params:", receiver, status)
+    console.log("getParcelHistory query params:", receiver, status)
     if (!receiver)
       return res.status(400).json({ message: "receiver is required" });
 

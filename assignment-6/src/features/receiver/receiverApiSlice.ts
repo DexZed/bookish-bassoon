@@ -5,7 +5,7 @@ import { apiSlice } from "../app/api/apiSlice";
 export const receiverApiSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
     getIncoming: builder.query<ParcelsResponse,string>({
-        query: (id) => `parcel/receiver/${id}`,
+        query: (_id) => `parcel/receiver/${_id}`,
         providesTags: ["Receiver"],
     }),
     approveParcel: builder.mutation({

@@ -66,7 +66,6 @@ function Users() {
                 <tbody>
                   {/* row 1 */}
                   {visibleUsers?.map((user, idx) => {
-                    console.log(user);
                     return (
                       <tr key={idx}>
                         <th>{idx + 1}</th>
@@ -76,7 +75,6 @@ function Users() {
                         <td className="flex gap-2">
                           <button
                             onClick={() => {
-                              console.log(user.id);
                               handleUnblockUser(user.id);
                             }}
                             className="btn btn-accent btn-outline rounded-full btn-xs"

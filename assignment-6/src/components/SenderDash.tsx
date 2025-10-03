@@ -10,6 +10,7 @@ function SenderDash() {
   const { data, error, isLoading } = useGetSenderParcelsQuery(
     selector.id as string
   );
+  console.log(data);
   const totalParcels = data?.parcels.length;
   const startDate = data?.parcels[0]?.createdAt;
   const endDate = data?.parcels[data?.parcels.length - 1]?.createdAt;
