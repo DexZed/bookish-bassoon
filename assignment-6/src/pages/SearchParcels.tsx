@@ -8,6 +8,7 @@ import { useInfiniteQuery } from "@tanstack/react-query";
 import React from "react";
 import { formatDate } from "../utilities/utils";
 import { Link } from "react-router";
+import Skeleton from "../components/Skeleton";
 
 interface ApiResponse {
   parcels: Parcel[];
@@ -149,7 +150,7 @@ function SearchParcels() {
 
         {status === "pending" ? (
           <>
-            <div>Loading...</div>
+            <Skeleton/>
           </>
         ) : status === "error" ? (
           <>
@@ -223,7 +224,7 @@ function SearchParcels() {
               : "Nothing more to load"}
           </button>
         </div>
-        <div>{isFetching && !isFetchingNextPage ? "Fetching..." : null}</div>
+        <div className="text-center m-4">{isFetching && !isFetchingNextPage ? "Fetching..." : null}</div>
       </main>
     </>
   );
