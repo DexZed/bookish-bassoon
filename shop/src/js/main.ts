@@ -1,12 +1,24 @@
 import '../css/style.css'
-import { setupCounter } from './counter'
+import Footer from './footer';
+import Hero from './hero';
+import Navbar from './Navbar';
 
 
-document.querySelector<HTMLDivElement>('#app')!.innerHTML = `
-  <div>
-    Hello Vite!
+export interface UISection {
+  render():string;
+}
 
-  </div>
-`
+function buildUi(ui: UISection[]) {
+  const app = document.querySelector<HTMLDivElement>("#app")!;
+  app.replaceChildren(
+    ...ui.map(section => {
+      const el = document.createElement("div");
+      el.innerHTML = section.render();
+      return el.firstElementChild!;
+    }),
+  );
+}
 
-setupCounter(document.querySelector<HTMLButtonElement>('#counter')!)
+const UI: UISection[] = [Navbar(),Hero(),Footer()];
+
+buildUi(UI);
