@@ -3,7 +3,10 @@ import bannerImage from '../../public/banner-image.png'
 
 export default function Hero():UISection{
     return {
-    render: () => `
+    render() {
+      const template = document.createElement('template');
+      // You can put as much HTML as you want here
+      template.innerHTML = `
     <section>
       <div
         class="hero min-h-screen"
@@ -24,6 +27,8 @@ export default function Hero():UISection{
         </div>
       </div>
     </section>
-`,
+`.trim();
+      return template.content.firstElementChild as HTMLElement;
+    }
   };
 }

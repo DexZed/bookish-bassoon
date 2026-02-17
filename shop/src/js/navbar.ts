@@ -1,9 +1,18 @@
 import type { UISection } from "./main";
-import logo from '../../public/logo.png'
+import logo from "../../public/logo.png";
 
 export default function Navbar(): UISection {
+  const links = `
+    <li>
+    <a href="/" class="text-purple-500" data-link>Home</a></li>
+        <li><a href="/products" data-link>Products</a></li>
+        <li><a href="/about" data-link>About</a></li>
+        <li><a href="/contact" data-link>Contact</a></li>
+  `;
   return {
-    render: () => `
+    render() {
+      const template = document.createElement("template");
+      template.innerHTML = `
     <section>
       <div class="navbar bg-base-100 shadow-sm">
         <div class="navbar-start">
@@ -28,12 +37,12 @@ export default function Navbar(): UISection {
               tabindex="-1"
               class="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow"
             >
-              <div class="navigation"></div>
+              ${links}
             </ul>
           </div>
           <div class="flex">
             <!-- Fix this later -->
-            <div class="w-10 h-10" style="background-image: url(${logo}); object-fit: cover; object-position: center"></div>
+            <div class="w-10 h-10 cover" style="background-image: url(${logo})"></div>
             <a
             class="btn btn-ghost text-xl text-purple-500 libre-baskerville"
             style="--font-weight: 700; --font-style: italic"
@@ -43,13 +52,18 @@ export default function Navbar(): UISection {
         </div>
         <div class="navbar-center hidden lg:flex">
           <ul class="menu menu-horizontal px-1">
-            <div class="navigation"></div>
+            ${links}
+          </ul>
         </div>
         <div class="navbar-end">
           <a class="btn">Button</a>
         </div>
       </div>
     </section>
-    `,
+    `.trim();
+
+      // Return the actual element
+      return template.content.firstElementChild as HTMLElement;
+    },
   };
 }
