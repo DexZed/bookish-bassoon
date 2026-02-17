@@ -56,7 +56,7 @@ export default function Navbar(): UISection {
           </ul>
         </div>
         <div class="navbar-end">
-          <a class="btn">Button</a>
+          <a class="btn btn-neutral btn-outline"><i class="fa-solid fa-cart-shopping"></i></a>
         </div>
       </div>
     </section>
