@@ -14,8 +14,8 @@ export default function Features():UISection{
         We provide the best shopping experience with top-notch services.
       </p>
     </section>
-    <section class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mt-10 place-items-center">
-      <div class="card w-96 bg-base-100 shadow-sm">
+    <section class="flex flex-col lg:flex-wrap lg:flex-row justify-center gap-4 mt-10 ">
+      <div class="card w-96 card-md bg-base-100 shadow-sm">
         <div class="card-body">
           <svg
             class="w-12 border-4 rounded-xl shadow-xl"
@@ -38,7 +38,7 @@ export default function Features():UISection{
           </div>
         </div>
       </div>
-      <div class="card w-96 bg-base-100 shadow-sm">
+      <div class="card w-96 card-md bg-base-100 shadow-sm">
         <div class="card-body">
           <svg
             class="w-12 border-4 rounded-xl shadow-xl"
@@ -60,7 +60,7 @@ export default function Features():UISection{
           </div>
         </div>
       </div>
-      <div class="card w-96 bg-base-100 shadow-sm">
+      <div class="card w-96 card-md bg-base-100 shadow-sm">
         <div class="card-body">
           <svg
             class="w-12 border-4 rounded-xl shadow-xl"
@@ -83,7 +83,7 @@ export default function Features():UISection{
           </div>
         </div>
       </div>
-      <div class="card w-96 bg-base-100 shadow-sm">
+      <div class="card w-96 card-md bg-base-100 shadow-sm">
         <div class="card-body">
           <svg
             class="w-12 border-4 rounded-xl shadow-xl"

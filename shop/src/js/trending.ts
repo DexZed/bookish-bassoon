@@ -7,7 +7,7 @@ export default function Trend(): UISection {
   return {
     render() {
       // 1. Create the container
-      const container = html`<section id="trend-section">
+      const container = html`<section id="trend-section" >
         <h2 class="text-3xl font-bold m-10 text-center md:text-left">Trending Now</h2>
         <div class="loader">Loading products...</div> 
       </section>`;
@@ -18,9 +18,11 @@ export default function Trend(): UISection {
         
         // 3. Find the container and swap the loader for actual cards
         const grid = html`
-          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mt-10 place-items-center">
+          
+          <div class="flex flex-col lg:flex-wrap lg:flex-row justify-center gap-4 m-10 ">
             ${trending.map(p => ProductCard(p).render())}
           </div>
+          
         `;
         
         container.querySelector('.loader')?.replaceWith(grid);
