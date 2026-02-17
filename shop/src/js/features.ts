@@ -14,7 +14,7 @@ export default function Features():UISection{
         We provide the best shopping experience with top-notch services.
       </p>
     </section>
-    <section class="flex flex-col lg:flex-wrap lg:flex-row justify-center gap-4 mt-10 ">
+    <section class="flex flex-col sm:flex-wrap sm:flex-row lg:flex-wrap lg:flex-row justify-center gap-4 mt-10 ">
       <div class="card w-96 card-md bg-base-100 shadow-sm">
         <div class="card-body">
           <svg

@@ -19,7 +19,7 @@ export default function Trend(): UISection {
         // 3. Find the container and swap the loader for actual cards
         const grid = html`
           
-          <div class="flex flex-col lg:flex-wrap lg:flex-row justify-center gap-4 m-10 ">
+          <div class="flex flex-col sm:flex-wrap sm:flex-row  lg:flex-wrap lg:flex-row justify-center gap-4 m-10 ">
             ${trending.map(p => ProductCard(p).render())}
           </div>
           
