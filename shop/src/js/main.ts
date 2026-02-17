@@ -2,6 +2,7 @@ import '../css/style.css'
 import Footer from './footer';
 import Navbar from './navbar';
 import router from './router/routes';
+import { AppStore } from './store/store';
 
 
 
@@ -25,6 +26,8 @@ function buildUi() {
 function Main() {
   // Listen for back/forward browser buttons
   window.addEventListener("popstate", buildUi);
+  // Subsrcibe to store
+  AppStore.subscribe(buildUi);
 
   document.addEventListener('DOMContentLoaded', () => {
     buildUi(); // Initial load
