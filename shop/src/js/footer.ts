@@ -1,10 +1,10 @@
 import type { UISection } from "./main";
+import { html } from "./utils";
 
 export default function Footer(): UISection {
   return {
     render() {
-      const template = document.createElement("template");
-      template.innerHTML = `
+      const section=html`
         <section>
           <footer
             class="footer sm:footer-horizontal bg-base-200 text-base-content p-10"
@@ -106,8 +106,8 @@ export default function Footer(): UISection {
             </nav>
           </footer>
         </section>
-    `.trim();
-      return template.content.firstElementChild as HTMLElement;
+    `;
+      return section;
     },
   };
 }

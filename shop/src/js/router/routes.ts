@@ -1,20 +1,12 @@
 import type { UISection } from "../main";
+import { html } from "../utils";
 
 interface Route {
   path: string;
-  view: () => UISection; // Explicitly require a UISection return
+  view: (params?: string[]) => UISection; // Explicitly require a UISection return
 }
 
 const routes: Route[] = [
-  { path: "/error", view: () => ({ render: () => {
-    const template = document.createElement('template');
-      template.innerHTML = `
-        <section class="hero">
-          Error Page
-        </section>
-      `.trim();
-      return template.content.firstElementChild as HTMLElement;
-  } }) },
   { path: "/", view: () => ({ render: () => {
     const template = document.createElement('template');
       template.innerHTML = `
@@ -31,6 +23,18 @@ const routes: Route[] = [
       template.innerHTML = `
         <section class="hero">
          Products Page
+        </section>
+      `.trim();
+      return template.content.firstElementChild as HTMLElement;
+  } }),
+  },
+  {
+    path: "/products/:id",
+    view: (params: string[]|undefined) => ({ render: () => {
+    const template = document.createElement('template');
+      template.innerHTML = `
+        <section class="hero">
+         Products Page Id: ${params?.[0]} 
         </section>
       `.trim();
       return template.content.firstElementChild as HTMLElement;
@@ -62,30 +66,33 @@ const routes: Route[] = [
   },
 ];
 
-// export default async function router() {
+export function getRouteParams(routePath: string) {
+  const currentPath = location.pathname;
+  
+  // Replace :param with a regex capture group
+  const regex = new RegExp("^" + routePath.replace(/:[^\s/]+/g, "([^/]+)") + "$");
+  const match = currentPath.match(regex);
 
-//   // Test each route for matches
-//   const potentialMatches = routes.map((route) => {
-//     return {
-//       route: route,
-//       isMatch: location.pathname === route.path,
-//     };
-//   });
-//   console.log(potentialMatches);
-
-//   let match = potentialMatches.find((potentialMatch) => potentialMatch.isMatch);
-//   if (!match) {
-//     match = {
-//       route: routes[0],
-//       isMatch: true,
-//     };
-//   }
-
-// }
-
+  if (match) {
+    // Extract the values
+    return match.slice(1); 
+  }
+  return null;
+}
 export default function router(): UISection {
-  const match = routes.find((r) => location.pathname === r.path);
-
-  // Always return a UISection, even if there's no match (fallback to error)
-  return match ? match.view() : routes[0].view();
+ for (const route of routes) {
+    const params = getRouteParams(route.path);
+    if (params) {
+      // Pass the params (like product ID) to the view
+      return route.view(params); 
+    }
+  }
+  return { render: () => {
+    const section = html`
+        <section class="hero">
+          Error Page
+        </section>
+      `;
+      return section;
+  } };
 }

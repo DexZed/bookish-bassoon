@@ -1,5 +1,6 @@
 import type { UISection } from "./main";
 import logo from "../../public/logo.png";
+import { html } from "./utils";
 
 export default function Navbar(): UISection {
   const links = `
@@ -11,8 +12,7 @@ export default function Navbar(): UISection {
   `;
   return {
     render() {
-      const template = document.createElement("template");
-      template.innerHTML = `
+      const section = html`
     <section>
       <div class="navbar bg-base-100 shadow-sm">
         <div class="navbar-start">
@@ -60,10 +60,9 @@ export default function Navbar(): UISection {
         </div>
       </div>
     </section>
-    `.trim();
+    `;
 
-      // Return the actual element
-      return template.content.firstElementChild as HTMLElement;
+      return section;
     },
   };
 }
