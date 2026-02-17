@@ -15,20 +15,22 @@ export default function Footer(): UISection {
               
             </nav>
             <nav>
-              <h6 class="footer-title ">Company</h6>
-              <a class="link link-hover">About us</a>
+              <h6 class="footer-title ">Quick links</h6>
+              <a class="link link-hover">Home</a>
+              <a class="link link-hover">Products</a>
+              <a class="link link-hover">About</a>
               <a class="link link-hover">Contact</a>
-              <a class="link link-hover">Jobs</a>
-              <a class="link link-hover">Press kit</a>
             </nav>
             <nav>
-              <h6 class="footer-title">Legal</h6>
-              <a class="link link-hover">Terms of use</a>
-              <a class="link link-hover">Privacy policy</a>
-              <a class="link link-hover">Cookie policy</a>
+              <h6 class="footer-title">Support</h6>
+              <a class="link link-hover">FAQ</a>
+              <a class="link link-hover">Shipping</a>
+              <a class="link link-hover">Returns</a>
+              <a class="link link-hover">Privacy</a>
             </nav>
             <form>
-              <h6 class="footer-title">Newsletter</h6>
+              <h6 class="footer-title">Subscribe to our newsletter</h6>
+              <p class="link link-hover libre-baskerville text-xs">The latest news, articles, and resources sent to your inbox weekly.</p>
               <fieldset class="w-80">
                 <label>Enter your email address</label>
                 <div class="join">

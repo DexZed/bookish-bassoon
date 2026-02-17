@@ -1,3 +1,6 @@
+import type { IProduct } from "./api/api";
+import Details from "./modal";
+
 // utils.ts
 export function html(strings: TemplateStringsArray, ...values: any[]): HTMLElement {
   const placeholders: Map<string, HTMLElement | HTMLElement[]> = new Map();
@@ -33,4 +36,18 @@ export function html(strings: TemplateStringsArray, ...values: any[]): HTMLEleme
   });
 
   return root;
+}
+
+export function openModal(product: IProduct) {
+  const modalContainer = document.querySelector("#modal-portal")!;
+  
+  // 1. Render the Details UISection
+  const detailsElement = Details(product).render();
+  
+  // 2. Clear old modal and inject new one
+  modalContainer.replaceChildren(detailsElement);
+  
+  // 3. Open it using the native <dialog> API
+  const dialog = detailsElement as HTMLDialogElement;
+  dialog.showModal();
 }
