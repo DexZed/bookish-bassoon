@@ -1,10 +1,15 @@
+import type { IProduct } from "../api/api";
+
 // store.ts
 type Listener = () => void;
 
 interface AppState {
   user: string;
   cartCount: number;
-  theme: 'light' | 'dark';
+  theme: "light" | "dark";
+  selectedCategory: string;
+  products: IProduct[]; // New: Cache storage
+  isLoading: boolean; // New: Loading state
 }
 
 class Store {
@@ -17,7 +22,10 @@ class Store {
     this._state = {
       user: "Guest",
       cartCount: 0,
-      theme: "light"
+      theme: "light",
+      selectedCategory: "all",
+      products: [],
+      isLoading: false,
     };
   }
 
@@ -44,9 +52,23 @@ class Store {
   }
 
   private notify(): void {
-    this.listeners.forEach(fn => fn());
+    this.listeners.forEach((fn) => fn());
+  }
+  public async fetchProducts() {
+    // Only fetch if we don't have them yet
+    if (this._state.isLoading || this._state.products.length > 0) {
+    return;
+  }
+    this.setState({ isLoading: true });
+    try {
+      const { getProducts } = await import("../api/api"); // Lazy load API
+      const data = await getProducts();
+      this.setState({ products: data, isLoading: false });
+    } catch (error) {
+      console.error("Failed to fetch", error);
+      this.setState({ isLoading: false });
+    }
   }
 }
-
 // Export the instance directly for easy use
 export const AppStore = Store.getInstance();

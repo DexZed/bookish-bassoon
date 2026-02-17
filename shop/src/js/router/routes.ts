@@ -1,5 +1,6 @@
 import Home from "../home";
 import type { UISection } from "../main";
+import Products from "../products";
 import { html } from "../utils";
 
 interface Route {
@@ -11,15 +12,7 @@ const routes: Route[] = [
   { path: "/", view:()=> Home()},
   {
     path: "/products",
-    view: () => ({ render: () => {
-    const template = document.createElement('template');
-      template.innerHTML = `
-        <section class="hero">
-         Products Page
-        </section>
-      `.trim();
-      return template.content.firstElementChild as HTMLElement;
-  } }),
+    view: () => Products(),
   },
   {
     path: "/products/:id",

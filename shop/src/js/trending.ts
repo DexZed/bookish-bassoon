@@ -30,7 +30,7 @@ export default function Trend(): UISection {
     },
   };
 }
-function ProductCard(product: IProduct): UISection {
+export function ProductCard(product: IProduct): UISection {
   return {
     render() {
       const section = html`
