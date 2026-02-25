@@ -26,7 +26,6 @@ export class Game {
       this.ctx.clearRect(0, 0, this.width, this.height);
       this.sprites.forEach((sprite) => {
         sprite.update();
-        sprite.draw(this.ctx);
       });
     };
     animate();
