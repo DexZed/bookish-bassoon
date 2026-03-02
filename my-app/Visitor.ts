@@ -1,6 +1,5 @@
 class DataVisitor<T> {
   constructor(private baseUrl: string) {}
-
   async visit(visitor: (data: T[]) => void) {
     let nextUrl = this.baseUrl;
     do {
@@ -21,5 +20,3 @@ export interface Pokemon {
 // visitor.visit((data) => {
 //   console.log(data);
 // });
-
-
