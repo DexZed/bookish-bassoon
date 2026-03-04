@@ -14,6 +14,8 @@ function App() {
             count={item.count}
             date={item.date}
             icon={item.icon}
+            image={item.backgroundImage}
+            key={item.title}
           />
         ))}
       </div>

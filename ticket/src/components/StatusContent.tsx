@@ -1,9 +1,14 @@
+import progress from '../assets/progress.png'
+import resolved from '../assets/progress.png'
+
+
 export const StatusContent = [
     {
         title: "In-Progress",
         count: 0,
         date: "Jan 1st - Feb 1st",
         style: "text-secondary",
+        backgroundImage:progress,
         icon: (
             <>
                 <div className="stat-figure text-secondary">
@@ -29,6 +34,7 @@ export const StatusContent = [
         count: 10,
         date: "Aug 1st - Dec 1st",
         style: "text-primary",
+        backgroundImage: resolved,
         icon: (
             <>
                 <div className="stat-figure text-primary">

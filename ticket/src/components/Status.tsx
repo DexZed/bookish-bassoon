@@ -5,9 +5,10 @@ type Props = {
   count: number;
   date: string;
   icon: JSX.Element;
+  image: string;
 };
 
-function Status({title, count, date, icon}: Props) {
+function Status({title, count, date, icon,image}: Props) {
   return (
     <>
       <div className="stats shadow">
