@@ -18,7 +18,7 @@ function Tickets(tcks: Props) {
       <div
         tabIndex={0}
         onClick={handleClick}
-        className="card card-sm bg-base-100 shadow-sm m-5 focus:border-sky-500 focus:outline focus:outline-sky-500 focus:shadow-pink-600 focus:shadow-lg"
+        className="card card-sm bg-base-100 shadow-lg shadow-blue-700 m-5 focus:border-sky-500 focus:outline focus:outline-sky-500 focus:shadow-pink-600 focus:shadow-lg "
       >
         <div className="card-body">
           <div className="flex justify-between">

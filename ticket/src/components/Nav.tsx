@@ -23,17 +23,26 @@ function Nav({}: Props) {
   const links = (
     <>
       <li>
-        <a>Item 1</a>
+        <a>Home</a>
       </li>
       <li>
-        <a>Item 2</a>
+        <a>FAQ</a>
       </li>
       <li>
-        <a>Item 3</a>
+        <a>Changelog</a>
+      </li>
+      <li>
+        <a>Blog</a>
+      </li>
+      <li>
+        <a>Download</a>
+      </li>
+      <li>
+        <a>Contact</a>
       </li>
       <li>
         <a>
-          <label className="swap swap-rotate w-6 h-6 m-1">
+          <label className="swap swap-rotate w-5 h-5 m-1">
             {/* this hidden checkbox controls the state */}
             <input
               type="checkbox"
@@ -95,14 +104,17 @@ function Nav({}: Props) {
               {links}
             </ul>
           </div>
-          <a className="btn btn-ghost text-xl">daisyUI</a>
+          <a className="btn btn-ghost text-xl">Ticket System</a>
         </div>
         <div className="navbar-center hidden lg:flex">
           <ul className="menu menu-horizontal px-1">{links}</ul>
         </div>
         <div className="navbar-end">
-          <a className="btn btn-ghost btn-outline bg-[linear-gradient(125.04deg,#632EE3_5.68%,#9F62F2_88.38%)] rounded-xl">
-            Button
+          <a className="btn btn-ghost btn-outline bg-[linear-gradient(125.04deg,#632EE3_5.68%,#9F62F2_88.38%)] rounded-xl border-black border-2">
+            <div className="flex gap-2 justify-center items-center">
+              <span className="font-bold text-xl text-white ">+</span>
+              <span className="text-white ">New Ticket</span>
+            </div>
           </a>
         </div>
       </div>

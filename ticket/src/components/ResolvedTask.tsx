@@ -7,8 +7,8 @@ type Props = {
 function ResolvedTask({ ticketTitle, conditionalRender }: Props) {
   return (
     <>
-      <div>
-        <div className="flex flex-col gap-3 my-2">
+      <div className="m-2">
+        <div className="flex flex-col gap-3 my-2 ">
           <h2 className="text-sm text-gray-700">Resolved Tasks</h2>
           <p className="text-xs text-gray-500 font-medium">
             No Resolved Tasks Yet
