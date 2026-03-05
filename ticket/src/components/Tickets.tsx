@@ -28,7 +28,7 @@ function Tickets({
           <div>
             <p className="text-sm text-gray-500 font-medium">{description}</p>
           </div>
-          <div className="flex justify-between mt-4 gap-5">
+          <div className="flex justify-between mt-4 gap-5 flex-wrap">
             <div className="card-actions grid grid-flow-col place-self-center ">
               <span className="text-xs text-gray-500 font-medium mr-2 ">
                 # {id.slice(0, 5) + "..."}

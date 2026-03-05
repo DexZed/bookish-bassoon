@@ -1,10 +1,17 @@
+import TicketsContainer from "./TicketsContainer"
+import TrackingContainer from "./TrackingContainer"
 
 
 type Props = {}
 
 function SectionLayout({}: Props) {
   return (
-    <div>SectionLayout</div>
+    <>
+    <section className="flex justify-around">
+      <TicketsContainer/>
+      <TrackingContainer/>
+      
+      </section></>
   )
 }
 
