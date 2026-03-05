@@ -7,9 +7,9 @@ type Props = {};
 function TrackingContainer({}: Props) {
   return (
     <>
-      <section className="flex flex-col w-1/4 mt-5 gap-5">
-        <TaskStatus conditionalRender={false}/>
-        <ResolvedTask conditionalRender={false}/>
+      <section className="flex flex-col w-96 mt-5 gap-5 bg-base-100 shadow-sm rounded-lg">
+        <TaskStatus />
+        <ResolvedTask/>
         </section>
     </>
   );

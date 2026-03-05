@@ -1,30 +1,48 @@
 import React from "react";
+import { useTicketStore } from "../state/store";
 
-type Props = {
-  ticketTitle?: string;
-  conditionalRender?: boolean;
-};
-function ResolvedTask({ ticketTitle, conditionalRender }: Props) {
+// type Props = {
+//   ticketTitle?: string;
+//   conditionalRender?: boolean;
+// };
+function ResolvedTask() {
+  const { resolvedTickets } = useTicketStore();
+  const length = resolvedTickets.length;
   return (
     <>
-      <div className="m-2">
+      <div className="m-2 card w-94">
         <div className="flex flex-col gap-3 my-2 ">
-          <h2 className="text-sm text-gray-700">Resolved Tasks</h2>
-          <p className="text-xs text-gray-500 font-medium">
-            No Resolved Tasks Yet
-          </p>
+          <h2 className="text-sm text-gray-500 text-center">Resolved Tasks</h2>
+          {length > 0 ? (
+            <></>
+          ) : (
+            <>
+              <p className="text-xs text-gray-500 font-medium text-center">
+                No Resolved Tasks Yet
+              </p>
+            </>
+          )}
         </div>
-        {conditionalRender ? (
-          <>
-            <div className="card w-96 bg-base-100 card-xs shadow-sm">
-              <div className="card-body">
-                <h2 className="card-title">{ticketTitle ?? "No Data"}</h2>
-              </div>
-            </div>
-          </>
-        ) : (
-          <></>
-        )}
+        <div className="flex flex-col gap-2">
+          {length > 0 ? (
+            <>
+              {resolvedTickets.map((ticket) => {
+                return (
+                  <div
+                    key={ticket.id}
+                    className="card w-90 card-xs shadow-sm bg-gray-400 mx-2 shadow-blue-700"
+                  >
+                    <div className="card-body">
+                      <h2 className="card-title">{ticket.title}</h2>
+                    </div>
+                  </div>
+                );
+              })}
+            </>
+          ) : (
+            <></>
+          )}
+        </div>
       </div>
     </>
   );

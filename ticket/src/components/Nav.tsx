@@ -47,7 +47,7 @@ function Nav({}: Props) {
             <input
               type="checkbox"
               className="theme-controller"
-              value="synthwave"
+              value="dark"
               onChange={toggleTheme}
               checked={false}
             />
