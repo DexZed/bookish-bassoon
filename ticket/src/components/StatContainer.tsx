@@ -13,7 +13,7 @@ function StatContainer({}: Props) {
     {
       title: "In-Progress",
       count: inProgressCount,
-      date: "Jan 1st - Feb 1st",
+      date: `Jan 1st,${new Date().getFullYear()} - Dec 1st, ${new Date().getFullYear()}`,
       style: "text-secondary",
       backgroundImage: "",
       icon: (
@@ -39,7 +39,7 @@ function StatContainer({}: Props) {
     {
       title: "Resolved",
       count: resolvedCount,
-      date: "Aug 1st - Dec 1st",
+      date: `Jan 1st,${new Date().getFullYear()} - Dec 1st, ${new Date().getFullYear()}`,
       style: "text-primary",
       backgroundImage: "",
       icon: (

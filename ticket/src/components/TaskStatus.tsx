@@ -12,7 +12,7 @@ function TaskStatus() {
     <>
       <div>
         <div className="flex flex-col gap-3 m-2 card w-94">
-          <h2 className="text-sm text-gray-500 text-center" >Task Status</h2>
+          <h2 className="text-sm text-gray-500 text-center">Task Status</h2>
           {length > 0 ? (
             <></>
           ) : (

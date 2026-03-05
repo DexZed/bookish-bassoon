@@ -1,7 +1,6 @@
 import ResolvedTask from "./ResolvedTask";
 import TaskStatus from "./TaskStatus";
 
-
 type Props = {};
 
 function TrackingContainer({}: Props) {
@@ -9,8 +8,9 @@ function TrackingContainer({}: Props) {
     <>
       <section className="flex flex-col w-96 mt-5 gap-5 bg-base-100 shadow-sm rounded-lg">
         <TaskStatus />
-        <ResolvedTask/>
-        </section>
+        <hr />
+        <ResolvedTask />
+      </section>
     </>
   );
 }
