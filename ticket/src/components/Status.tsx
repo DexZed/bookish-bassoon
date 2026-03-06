@@ -5,18 +5,22 @@ type Props = {
   count: number;
   date: string;
   icon: JSX.Element;
-  image: string;
+  backgroundGradient: string;
 };
 
-function Status({title, count, date, icon}: Props) {
+function Status({ title, count, date, icon,backgroundGradient }: Props) {
   return (
     <>
-      <div className="stats shadow-md shadow-violet-800 w-96">
-        <div className="stat">
-          {icon}
-          <div className="stat-title text-center">{title}</div>
-          <div className="stat-value text-center">{count}</div>
-          <div className="stat-desc text-center">{date}</div>
+      <div className={"stats shadow-md shadow-violet-800 w-125" + " " + backgroundGradient}>
+        <div className="flex justify-around">
+          <img src="./vector1.png" alt="vector" className="aspect-rectangle w-20"/>
+          <div className="stat">
+            {icon}
+            <div className="stat-title text-center">{title}</div>
+            <div className="stat-value text-center">{count}</div>
+            <div className="stat-desc text-center">{date}</div>
+          </div>
+           <img src="./vector1.png" alt="vector" className="aspect-rectangle w-20 transform -scale-x-100"/>
         </div>
       </div>
     </>
@@ -24,5 +28,3 @@ function Status({title, count, date, icon}: Props) {
 }
 
 export default Status;
-
-

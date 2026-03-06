@@ -6,4 +6,5 @@ export interface ITicket {
   priority: string;
   status: string;
   createdAt: string;
+  selected: boolean;
 }

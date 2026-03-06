@@ -56,19 +56,28 @@ class TicketStore {
   }
 
   toggleSelection(ticket: ITicket) {
-    const { selectedTickets } = this.snapshot;
-    const isSelected = selectedTickets.some((t) => t.id === ticket.id);
+    const { selectedTickets, tickets } = this.snapshot;
+    const isCurrentlySelected = selectedTickets.some((t) => t.id === ticket.id);
 
-    const nextSelection = isSelected
-      ? selectedTickets.filter((t) => t.id !== ticket.id) // Remove if exists
-      : [...selectedTickets, ticket]; // Add if new
+    // 1. Update the tracking array
+    const nextSelectedTickets = isCurrentlySelected
+      ? selectedTickets.filter((t) => t.id !== ticket.id)
+      : [...selectedTickets, { ...ticket, selected: true }];
+
+    // 2. Update the 'selected' field in the main tickets list
+    const nextTickets = tickets.map((t) => {
+      if (t.id === ticket.id) {
+        return { ...t, selected: !isCurrentlySelected };
+      }
+      return t;
+    });
 
     this.state$.next({
       ...this.snapshot,
-      selectedTickets: nextSelection,
+      tickets: nextTickets,
+      selectedTickets: nextSelectedTickets,
     });
   }
-  // Moves a ticket from the main list to resolved and clears selection
   resolveTicket(ticketId: string | number) {
     const { tickets, resolvedTickets, selectedTicket, selectedTickets } =
       this.snapshot;
@@ -76,59 +85,48 @@ class TicketStore {
     const ticketToResolve = tickets.find((t) => t.id === ticketId);
     if (!ticketToResolve) return;
 
-
-    const resolvedTicket = this.setResolvedStatus(ticketToResolve);
+    // Set status to Resolved AND selected to false
+    const resolvedTicket: ITicket = {
+      ...ticketToResolve,
+      status: "Resolved",
+      selected: false,
+    };
 
     this.state$.next({
       ...this.snapshot,
-
-      // 1. Remove from main tickets list
       tickets: tickets.filter((t) => t.id !== ticketId),
-
-      // 2. Add updated ticket to resolved list
       resolvedTickets: [...resolvedTickets, resolvedTicket],
-
-      // 3. Clear single selection if matches
       selectedTicket: selectedTicket?.id === ticketId ? null : selectedTicket,
-
-      // 4. Remove from multi-select array
       selectedTickets: selectedTickets.filter((t) => t.id !== ticketId),
     });
   }
-
   resolveAllSelected() {
     const { tickets, resolvedTickets, selectedTickets, selectedTicket } =
       this.snapshot;
-
-    // 1. If nothing is selected, do nothing
     if (selectedTickets.length === 0) return;
 
-    // 2. Get the IDs of the tickets to be moved
     const selectedIds = new Set(selectedTickets.map((t) => t.id));
 
-    // 4. Filter remaining tickets
+    // 1. Prepare the tickets for the resolved list (force selected: false)
+    const newlyResolved = selectedTickets.map((t) => ({
+      ...t,
+      status: "Resolved",
+      selected: false,
+    }));
+
+    // 2. Remove them from the active tickets list
     const remainingTickets = tickets.filter((t) => !selectedIds.has(t.id));
 
-    // 5. Update status for all selected tickets
-    const resolvedSelectedTickets = selectedTickets.map(this.setResolvedStatus);
-
-    // 6. Merge with resolved list
-    const newResolvedTickets = [...resolvedTickets, ...resolvedSelectedTickets];
-
-    // 7. Update State
     this.state$.next({
       ...this.snapshot,
       tickets: remainingTickets,
-      resolvedTickets: newResolvedTickets,
-      selectedTickets: [],
+      resolvedTickets: [...resolvedTickets, ...newlyResolved],
+      selectedTickets: [], // Clear tracking array
       selectedTicket:
         selectedTicket && selectedIds.has(selectedTicket.id)
           ? null
           : selectedTicket,
     });
-  }
-  private setResolvedStatus(ticket: ITicket): ITicket {
-    return { ...ticket, status: "Resolved" };
   }
   // Resets the store to the provided initial state
   reset() {

@@ -7,7 +7,7 @@ type Props = {}
 function SectionLayout({}: Props) {
   return (
     <>
-    <section className="flex justify-around">
+    <section className="flex flex-col-reverse md:flex-row justify-around">
       <TicketsContainer/>
       <TrackingContainer/>
       

@@ -1,3 +1,4 @@
+import { motion } from "motion/react";
 import type { ITicket } from "../interfaces/DataInterfaces";
 import { useTicketStore } from "../state/store";
 
@@ -15,7 +16,10 @@ function Tickets(tcks: Props) {
 
   return (
     <>
-      <div
+      <motion.div
+        whileHover={{scale:1.1}}
+        whileTap={{scale:0.95}}
+        exit={{opacity:0}}
         tabIndex={0}
         onClick={handleClick}
         className="card card-sm bg-base-100 shadow-lg shadow-blue-700 m-5 focus:border-sky-500 focus:outline focus:outline-sky-500 focus:shadow-pink-600 focus:shadow-lg "
@@ -54,7 +58,7 @@ function Tickets(tcks: Props) {
             </div>
           </div>
         </div>
-      </div>
+      </motion.div>
     </>
   );
 }
