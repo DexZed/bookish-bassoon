@@ -29,7 +29,7 @@
     "allowJs": false,
     "declaration": false,
     "noEmitOnError": false,
-    "outDir": "jsx-dist"
+    "outDir": "dist"
   },
   "include": ["src"]
 }
