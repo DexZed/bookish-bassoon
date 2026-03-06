@@ -7,7 +7,7 @@ type Props = {};
 function StatContainer({}: Props) {
   const { resolvedTickets, selectedTickets } = useTicketStore();
   const inProgressCount = selectedTickets.filter(
-    (ticket) => ticket.status === "In-Progress",
+    (ticket) => ticket.selected === true,
   ).length;
   const resolvedCount = resolvedTickets.length;
 

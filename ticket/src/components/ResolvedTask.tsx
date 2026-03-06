@@ -44,11 +44,11 @@ function ResolvedTask() {
                       }}
                       exit={{opacity:0}}
                       key={ticket.id}
-                      className="card w-90 card-xs shadow-sm  mx-2 shadow-blue-700 bg-gray-700"
+                      className="card w-90 card-xs shadow-sm  mx-2 shadow-blue-700"
         
                     >
                       <div className="card-body">
-                        <h2 className="line-through card-title">{ticket.title}</h2>
+                        <input type="text" value={ticket.title} className="input input-neutral w-full" disabled/>
                       </div>
                     </motion.div>
                   );

@@ -16,9 +16,9 @@ function Status({ title, count, date, icon,backgroundGradient }: Props) {
           <img src="./vector1.png" alt="vector" className="aspect-rectangle w-20"/>
           <div className="stat">
             {icon}
-            <div className="stat-title text-center">{title}</div>
-            <div className="stat-value text-center">{count}</div>
-            <div className="stat-desc text-center">{date}</div>
+            <div className="stat-title text-center text-white">{title}</div>
+            <div className="stat-value text-center text-white">{count}</div>
+            <div className="stat-desc text-center text-white">{date}</div>
           </div>
            <img src="./vector1.png" alt="vector" className="aspect-rectangle w-20 transform -scale-x-100"/>
         </div>

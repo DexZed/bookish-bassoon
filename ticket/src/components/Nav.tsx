@@ -106,16 +106,18 @@ function Nav({}: Props) {
           </div>
           <a className="btn btn-ghost text-xl">Ticket System</a>
         </div>
-        <div className="navbar-center hidden lg:flex">
-          <ul className="menu menu-horizontal px-1">{links}</ul>
-        </div>
-        <div className="navbar-end">
-          <a className="btn btn-ghost btn-outline bg-[linear-gradient(125.04deg,#632EE3_5.68%,#9F62F2_88.38%)] rounded-xl border-black border-2">
-            <div className="flex gap-2 justify-center items-center">
-              <span className="font-bold text-xl text-white ">+</span>
-              <span className="text-white ">New Ticket</span>
-            </div>
-          </a>
+        <div className="navbar-end hidden lg:flex">
+          <ul className="menu menu-horizontal px-1">
+            {links}
+            <li>
+              <a className="btn btn-ghost btn-outline bg-[linear-gradient(125.04deg,#632EE3_5.68%,#9F62F2_88.38%)] rounded-xl border-[#9F62F2] border-2">
+                <div className="flex gap-2 justify-center items-center">
+                  <span className="font-bold text-xl text-white ">+</span>
+                  <span className="text-white ">New Ticket</span>
+                </div>
+              </a>
+            </li>
+          </ul>
         </div>
       </div>
     </>
