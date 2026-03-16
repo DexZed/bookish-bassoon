@@ -1,0 +1,9 @@
+ /* <weight>: Use a value from 400 to 700
+ <uniquifier>: Use a unique and descriptive class name */
+
+.libre-baskerville {
+  font-family: "Libre Baskerville", serif;
+  font-optical-sizing: auto;
+  font-weight: variables(--font-weight, 400);
+  font-style: variables(--font-style, normal);
+}

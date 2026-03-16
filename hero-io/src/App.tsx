@@ -1,9 +1,18 @@
+import { Outlet } from "react-router";
 import "./App.css";
+import Footer from "./components/Footer";
+import Nav from "./components/Nav";
 
 function App() {
   return (
     <>
-      <section className="font-bold text-xl text-purple-500">Hello</section>
+      <main>
+        <Nav />
+        <section className="min-h-screen">
+          <Outlet />
+        </section>
+        <Footer />
+      </main>
     </>
   );
 }
