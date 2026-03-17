@@ -5,7 +5,7 @@ function Stats({}: Props) {
     <>
       <section className="flex flex-col items-center ">
         <div className="m-4">
-          <h2 className="text-2xl font-bold">Trusted By Millions, Built For You</h2>
+          <h2 className="">Trusted By Millions, Built For You</h2>
           
         </div>
         <div className="flex justify-center">

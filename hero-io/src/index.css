@@ -6,3 +6,32 @@
 }
 
 @custom-variant dark (&:where([data-theme="luxury"], [data-theme="luxury"] *));
+
+@layer base {
+  h1 {
+      @apply font-bold text-[clamp(20px,2vw,42px)] m-2 text-center;
+  }
+  h2 {
+    @apply font-semibold text-[clamp(14px,2vw,36px)] m-2 text-center text-gray-600;
+  }
+  h3 {
+    @apply font-medium text-xl m-2 ;
+  }
+
+  p {
+    @apply font-light m-2 text-[clamp(10px,1vw,20px)] text-gray-600;
+  }
+}
+
+@layer components {
+  .flex-centered-x {
+    @apply flex items-center justify-center;
+  }
+  .flex-centered-y {
+    @apply flex flex-col items-center justify-center;
+  }
+  .button-oulined {
+    @apply btn btn-outline shadow-xl rounded-md;
+  }
+
+  }

@@ -6,8 +6,8 @@ function Hero({}: Props) {
       <div className="hero bg-base-200 min-h-screen">
         <div className="hero-content text-center">
           <div className="max-w-md">
-            <h1 className="text-5xl font-bold">We Build <span className="text-amber-500">Productive</span> Apps</h1>
-            <p className="py-6">
+            <h1 className="">We Build <span className="text-amber-500">Productive</span> Apps</h1>
+            <p className="">
               At Hero.IO, we craft innovative apps designed to make everyday life simpler, smarter, and more exciting. Our Goal is to turn your ideas into reality.
             </p>
             <div className="flex gap-2 justify-around">
