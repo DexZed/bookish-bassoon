@@ -1,6 +1,13 @@
+import { numberFomatter } from "../lib/utils";
+import { useAppData } from "../store/State";
+
 type Props = {};
 
 function Stats({}: Props) {
+  const {state} = useAppData();
+  const dowloads = state.data.reduce((acc, curr) => acc + curr.downloads, 0);
+  const reviews = state.data.reduce((acc, curr) => acc + curr.ratings.reduce((acc, curr) => acc + curr.count, 0), 0);
+  const apps = state.data.length;
   return (
     <>
       <section className="flex flex-col items-center ">
@@ -26,8 +33,8 @@ function Stats({}: Props) {
                   ></path>
                 </svg>
               </div>
-              <div className="stat-title">Total Likes</div>
-              <div className="stat-value text-primary">25.6K</div>
+              <div className="stat-title">Total Downloads</div>
+              <div className="stat-value text-primary">{numberFomatter(dowloads)}</div>
               <div className="stat-desc">21% more than last month</div>
             </div>
 
@@ -47,8 +54,8 @@ function Stats({}: Props) {
                   ></path>
                 </svg>
               </div>
-              <div className="stat-title">Page Views</div>
-              <div className="stat-value text-secondary">2.6M</div>
+              <div className="stat-title">Total Reviews</div>
+              <div className="stat-value text-secondary">{numberFomatter(reviews)}</div>
               <div className="stat-desc">21% more than last month</div>
             </div>
 
@@ -68,9 +75,9 @@ function Stats({}: Props) {
                   ></path>
                 </svg>
               </div>
-              <div className="stat-value">86%</div>
-              <div className="stat-title">Tasks done</div>
-              <div className="stat-desc text-secondary">31 tasks remaining</div>
+              <div className="stat-title">Active Apps</div>
+              <div className="stat-value">{apps}</div>
+              <div className="stat-desc text-secondary">31 More will be added</div>
             </div>
           </div>
         </div>

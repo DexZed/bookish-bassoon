@@ -25,12 +25,12 @@ function CatalogueHome({}: Props) {
           <p>Explore all the Apps on the Market developed by us</p>
         </div>
         <div className="flex-centered-x flex-wrap lg:grid lg:grid-cols-4 gap-4 p-5">
-          {cards.map((card, index) => (
+          {cards.slice(0,8).map((card, index) => (
             <Card key={index} {...card} />
           ))}
         </div>
         <div className="flex-centered-x">
-          <Link to="/apps" className="button-oulined btn-info">
+          <Link to="/apps" className="button-oulined btn-accent">
             See All
           </Link>
         </div>
