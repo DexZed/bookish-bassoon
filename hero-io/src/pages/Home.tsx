@@ -1,3 +1,4 @@
+import CatalogueHome from "../components/CatalogueHome";
 import Hero from "../components/Hero";
 import Stats from "../components/Stats";
 
@@ -8,6 +9,7 @@ function Home({}: Props) {
     <>
       <Hero />
       <Stats />
+      <CatalogueHome />
     </>
   );
 }

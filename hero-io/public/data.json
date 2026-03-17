@@ -1,0 +1,386 @@
+[
+  {
+    "image": "https://source.unsplash.com/featured/?music,app",
+    "title": "BeatFlow Music",
+    "companyName": "SoundWave Inc.",
+    "id": 1,
+    "description": "Stream millions of songs with personalized playlists.",
+    "size": 45,
+    "reviews": 12034,
+    "ratingAvg": 4.5,
+    "downloads": 5000000,
+    "isInstalled": false,
+    "ratings": [
+      { "name": "1 star", "count": 500 },
+      { "name": "2 star", "count": 800 },
+      { "name": "3 star", "count": 2000 },
+      { "name": "4 star", "count": 4000 },
+      { "name": "5 star", "count": 4734 }
+    ]
+  },
+  {
+    "image": "https://source.unsplash.com/featured/?fitness,app",
+    "title": "FitTrack Pro",
+    "companyName": "Healthify Ltd.",
+    "id": 2,
+    "description": "Track workouts and stay fit with smart insights.",
+    "size": 60,
+    "reviews": 8450,
+    "ratingAvg": 4.3,
+    "downloads": 2000000,
+    "isInstalled": false,
+    "ratings": [
+      { "name": "1 star", "count": 300 },
+      { "name": "2 star", "count": 600 },
+      { "name": "3 star", "count": 1500 },
+      { "name": "4 star", "count": 3000 },
+      { "name": "5 star", "count": 3050 }
+    ]
+  },
+  {
+    "image": "https://source.unsplash.com/featured/?food,delivery",
+    "title": "QuickBite",
+    "companyName": "Foodies Hub",
+    "id": 3,
+    "description": "Order food from your favorite restaurants instantly.",
+    "size": 35,
+    "reviews": 22340,
+    "ratingAvg": 4.6,
+    "downloads": 10000000,
+    "isInstalled": false,
+    "ratings": [
+      { "name": "1 star", "count": 800 },
+      { "name": "2 star", "count": 1200 },
+      { "name": "3 star", "count": 3000 },
+      { "name": "4 star", "count": 8000 },
+      { "name": "5 star", "count": 9340 }
+    ]
+  },
+  {
+    "image": "https://source.unsplash.com/featured/?travel,app",
+    "title": "TripMate",
+    "companyName": "Wander Inc.",
+    "id": 4,
+    "description": "Plan your trips and explore new destinations.",
+    "size": 50,
+    "reviews": 6780,
+    "ratingAvg": 4.4,
+    "downloads": 1500000,
+    "isInstalled": false,
+    "ratings": [
+      { "name": "1 star", "count": 200 },
+      { "name": "2 star", "count": 500 },
+      { "name": "3 star", "count": 1200 },
+      { "name": "4 star", "count": 2500 },
+      { "name": "5 star", "count": 2380 }
+    ]
+  },
+  {
+    "image": "https://source.unsplash.com/featured/?finance,app",
+    "title": "MoneyWise",
+    "companyName": "FinTech Labs",
+    "id": 5,
+    "description": "Manage your finances and track expenses easily.",
+    "size": 40,
+    "reviews": 15400,
+    "ratingAvg": 4.2,
+    "downloads": 3000000,
+    "isInstalled": false,
+    "ratings": [
+      { "name": "1 star", "count": 900 },
+      { "name": "2 star", "count": 1300 },
+      { "name": "3 star", "count": 3000 },
+      { "name": "4 star", "count": 5000 },
+      { "name": "5 star", "count": 5200 }
+    ]
+  },
+  
+  {
+    "image": "https://source.unsplash.com/featured/?gaming,app",
+    "title": "BattleZone",
+    "companyName": "GameCore",
+    "id": 6,
+    "description": "Action-packed multiplayer shooting game.",
+    "size": 120,
+    "reviews": 45200,
+    "ratingAvg": 4.7,
+    "downloads": 20000000,
+    "isInstalled": false,
+    "ratings": [
+      { "name": "1 star", "count": 1000 },
+      { "name": "2 star", "count": 2000 },
+      { "name": "3 star", "count": 5000 },
+      { "name": "4 star", "count": 12000 },
+      { "name": "5 star", "count": 25200 }
+    ]
+  },
+  {
+    "image": "https://source.unsplash.com/featured/?chat,messaging",
+    "title": "ChatLoop",
+    "companyName": "Connectify",
+    "id": 7,
+    "description": "Fast and secure messaging platform.",
+    "size": 30,
+    "reviews": 30000,
+    "ratingAvg": 4.5,
+    "downloads": 25000000,
+    "isInstalled": false,
+    "ratings": [
+      { "name": "1 star", "count": 1200 },
+      { "name": "2 star", "count": 1800 },
+      { "name": "3 star", "count": 4000 },
+      { "name": "4 star", "count": 9000 },
+      { "name": "5 star", "count": 14000 }
+    ]
+  },
+  {
+    "image": "https://source.unsplash.com/featured/?education,learning",
+    "title": "Learnify",
+    "companyName": "EduTech",
+    "id": 8,
+    "description": "Learn new skills with expert courses.",
+    "size": 55,
+    "reviews": 9800,
+    "ratingAvg": 4.6,
+    "downloads": 4000000,
+    "isInstalled": false,
+    "ratings": [
+      { "name": "1 star", "count": 300 },
+      { "name": "2 star", "count": 500 },
+      { "name": "3 star", "count": 1200 },
+      { "name": "4 star", "count": 3500 },
+      { "name": "5 star", "count": 4300 }
+    ]
+  },
+  {
+    "image": "https://source.unsplash.com/featured/?photo,editor",
+    "title": "SnapEdit",
+    "companyName": "Pixel Labs",
+    "id": 9,
+    "description": "Edit photos with powerful tools.",
+    "size": 70,
+    "reviews": 21000,
+    "ratingAvg": 4.4,
+    "downloads": 8000000,
+    "isInstalled": false,
+    "ratings": [
+      { "name": "1 star", "count": 800 },
+      { "name": "2 star", "count": 1200 },
+      { "name": "3 star", "count": 3000 },
+      { "name": "4 star", "count": 7000 },
+      { "name": "5 star", "count": 9000 }
+    ]
+  },
+  {
+    "image": "https://source.unsplash.com/featured/?weather,app",
+    "title": "SkyCast",
+    "companyName": "WeatherTech",
+    "id": 10,
+    "description": "Accurate weather forecasts anytime.",
+    "size": 25,
+    "reviews": 6700,
+    "ratingAvg": 4.3,
+    "downloads": 1200000,
+    "isInstalled": false,
+    "ratings": [
+      { "name": "1 star", "count": 200 },
+      { "name": "2 star", "count": 400 },
+      { "name": "3 star", "count": 1200 },
+      { "name": "4 star", "count": 2500 },
+      { "name": "5 star", "count": 2400 }
+    ]
+  },
+
+  {
+    "image": "https://source.unsplash.com/featured/?notes,app",
+    "title": "NoteMaster",
+    "companyName": "Productive Inc.",
+    "id": 11,
+    "description": "Organize your notes efficiently.",
+    "size": 20,
+    "reviews": 5400,
+    "ratingAvg": 4.2,
+    "downloads": 900000,
+    "isInstalled": false,
+    "ratings": [
+      { "name": "1 star", "count": 200 },
+      { "name": "2 star", "count": 300 },
+      { "name": "3 star", "count": 900 },
+      { "name": "4 star", "count": 2000 },
+      { "name": "5 star", "count": 2000 }
+    ]
+  },
+  {
+    "image": "https://source.unsplash.com/featured/?shopping,ecommerce",
+    "title": "ShopEase",
+    "companyName": "RetailHub",
+    "id": 12,
+    "description": "Shop online with best deals.",
+    "size": 65,
+    "reviews": 18900,
+    "ratingAvg": 4.5,
+    "downloads": 7000000,
+    "isInstalled": false,
+    "ratings": [
+      { "name": "1 star", "count": 700 },
+      { "name": "2 star", "count": 900 },
+      { "name": "3 star", "count": 2500 },
+      { "name": "4 star", "count": 6000 },
+      { "name": "5 star", "count": 8800 }
+    ]
+  },
+  {
+    "image": "https://source.unsplash.com/featured/?video,streaming",
+    "title": "StreamFlix",
+    "companyName": "MediaWorks",
+    "id": 13,
+    "description": "Watch movies and series on demand.",
+    "size": 85,
+    "reviews": 32000,
+    "ratingAvg": 4.6,
+    "downloads": 15000000,
+    "isInstalled": false,
+    "ratings": [
+      { "name": "1 star", "count": 1000 },
+      { "name": "2 star", "count": 1500 },
+      { "name": "3 star", "count": 4000 },
+      { "name": "4 star", "count": 10000 },
+      { "name": "5 star", "count": 15500 }
+    ]
+  },
+  {
+    "image": "https://source.unsplash.com/featured/?maps,navigation",
+    "title": "NavGo",
+    "companyName": "GeoTech",
+    "id": 14,
+    "description": "Navigate easily with real-time maps.",
+    "size": 90,
+    "reviews": 11000,
+    "ratingAvg": 4.4,
+    "downloads": 6000000,
+    "isInstalled": false,
+    "ratings": [
+      { "name": "1 star", "count": 400 },
+      { "name": "2 star", "count": 700 },
+      { "name": "3 star", "count": 2000 },
+      { "name": "4 star", "count": 4000 },
+      { "name": "5 star", "count": 3900 }
+    ]
+  },
+  {
+    "image": "https://source.unsplash.com/featured/?calendar,productivity",
+    "title": "PlanIt",
+    "companyName": "TimeWorks",
+    "id": 15,
+    "description": "Schedule tasks and manage time.",
+    "size": 35,
+    "reviews": 7200,
+    "ratingAvg": 4.3,
+    "downloads": 2000000,
+    "isInstalled": false,
+    "ratings": [
+      { "name": "1 star", "count": 300 },
+      { "name": "2 star", "count": 500 },
+      { "name": "3 star", "count": 1500 },
+      { "name": "4 star", "count": 2500 },
+      { "name": "5 star", "count": 2400 }
+    ]
+  },
+
+  {
+    "image": "https://source.unsplash.com/featured/?security,app",
+    "title": "SecureVault",
+    "companyName": "SafeTech",
+    "id": 16,
+    "description": "Protect your data with encryption.",
+    "size": 40,
+    "reviews": 4300,
+    "ratingAvg": 4.5,
+    "downloads": 1000000,
+    "isInstalled": false,
+    "ratings": [
+      { "name": "1 star", "count": 100 },
+      { "name": "2 star", "count": 200 },
+      { "name": "3 star", "count": 800 },
+      { "name": "4 star", "count": 1500 },
+      { "name": "5 star", "count": 1700 }
+    ]
+  },
+  {
+    "image": "https://source.unsplash.com/featured/?podcast,audio",
+    "title": "PodStream",
+    "companyName": "AudioLabs",
+    "id": 17,
+    "description": "Listen to trending podcasts.",
+    "size": 28,
+    "reviews": 6100,
+    "ratingAvg": 4.4,
+    "downloads": 1800000,
+    "isInstalled": false,
+    "ratings": [
+      { "name": "1 star", "count": 200 },
+      { "name": "2 star", "count": 400 },
+      { "name": "3 star", "count": 1200 },
+      { "name": "4 star", "count": 2200 },
+      { "name": "5 star", "count": 2100 }
+    ]
+  },
+  {
+    "image": "https://source.unsplash.com/featured/?kids,education",
+    "title": "KidLearn",
+    "companyName": "BrightKids",
+    "id": 18,
+    "description": "Fun learning for kids.",
+    "size": 50,
+    "reviews": 3900,
+    "ratingAvg": 4.6,
+    "downloads": 900000,
+    "isInstalled": false,
+    "ratings": [
+      { "name": "1 star", "count": 100 },
+      { "name": "2 star", "count": 150 },
+      { "name": "3 star", "count": 600 },
+      { "name": "4 star", "count": 1400 },
+      { "name": "5 star", "count": 1650 }
+    ]
+  },
+  {
+    "image": "https://source.unsplash.com/featured/?banking,finance",
+    "title": "BankEase",
+    "companyName": "DigitalBank",
+    "id": 19,
+    "description": "Mobile banking made simple.",
+    "size": 75,
+    "reviews": 25000,
+    "ratingAvg": 4.3,
+    "downloads": 10000000,
+    "isInstalled": false,
+    "ratings": [
+      { "name": "1 star", "count": 1500 },
+      { "name": "2 star", "count": 2000 },
+      { "name": "3 star", "count": 5000 },
+      { "name": "4 star", "count": 8000 },
+      { "name": "5 star", "count": 8500 }
+    ]
+  },
+  {
+    "image": "https://source.unsplash.com/featured/?ai,assistant",
+    "title": "SmartAssist",
+    "companyName": "AI Labs",
+    "id": 20,
+    "description": "Your AI-powered personal assistant.",
+    "size": 95,
+    "reviews": 14000,
+    "ratingAvg": 4.7,
+    "downloads": 6000000,
+    "isInstalled": false,
+    "ratings": [
+      { "name": "1 star", "count": 400 },
+      { "name": "2 star", "count": 600 },
+      { "name": "3 star", "count": 2000 },
+      { "name": "4 star", "count": 5000 },
+      { "name": "5 star", "count": 6000 }
+    ]
+  }
+
+]
