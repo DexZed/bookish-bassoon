@@ -1,22 +1,22 @@
-import { from, map } from "rxjs";
+import { numberFomatter } from "../lib/utils";
 import { useAppData } from "../store/State";
 import Card from "./Card";
 import { Link } from "react-router";
-import { useObservableState } from "observable-hooks";
 
 type Props = {};
 
 function CatalogueHome({}: Props) {
   const { state } = useAppData();
-  const cardsData = state.data
+  const cardsData = state.data;
   const cards = cardsData.map((card) => ({
     title: card.title,
-    downloads: card.downloads,
-    ratings: card.ratings.reduce((acc,curr)=> acc+curr.count,0),
-    image: card.image
+    downloads: numberFomatter(card.downloads).toString(),
+    ratings: numberFomatter(
+      card.ratings.reduce((acc, curr) => acc + curr.count, 0),
+    ).toString(),
+    image: card.image,
   }));
-  console.log(cards);
-  
+
   return (
     <>
       <section className="flex-centered-y p-4">

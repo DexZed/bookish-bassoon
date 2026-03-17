@@ -2,8 +2,8 @@
 
 type Props = {
     title?:string,
-    downloads?:number,
-    ratings?:number,
+    downloads?:string,
+    ratings?:string,
     image?:string
 };
 
