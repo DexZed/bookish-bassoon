@@ -1,41 +1,59 @@
-class Database {
-  private data: Record<string, any> = {};
+import type { AppData } from "../interfaces/InterfaceDefinitions";
 
-  private static instance: Database;
+class Database<T> {
+  // The specific key used in localStorage
+  private readonly STORAGE_KEY = "data_storage";
+  private data: Partial<T>[] = [];
+  
+  private static instance: Database<any>;
 
-  private constructor() {}
-  public static getInstance(): Database {
+  private constructor() {
+    this.loadFromStorage();
+  }
+
+  public static getInstance<U>(): Database<U> {
     if (!Database.instance) {
-      Database.instance = new Database();
+      Database.instance = new Database<U>();
     }
     return Database.instance;
   }
-  public set(key: string, value: any): void {
-    this.data[key] = value;
-    localStorage.setItem(key, JSON.stringify(value));
-  }
-  public get(key: string): any {
-    return localStorage.getItem(key);
-  }
-  public has(key: string): boolean {
-    return key in this.data ? true : false;
+
+  private loadFromStorage(): void {
+    const stored = localStorage.getItem(this.STORAGE_KEY);
+    if (stored) {
+      try {
+        // Parse the object and extract the array
+        const parsed = JSON.parse(stored);
+        this.data = parsed.data_storage || [];
+      } catch (e) {
+        this.data = [];
+      }
+    }
   }
 
-  public delete(key: string): void {
-    localStorage.removeItem(key);
-    delete this.data[key];
+  private persist(): void {
+    // This creates the exact structure: {"data_storage": [...]}
+    const wrapper = { [this.STORAGE_KEY]: this.data };
+    localStorage.setItem(this.STORAGE_KEY, JSON.stringify(wrapper));
   }
-  public getAll(): Record<string, any> {
-    const data = localStorage.getItem("data");
-    if (data) {
-      this.data = JSON.parse(data);
-    }
+
+  // Adds a new partial item to the array
+  public add(value: Partial<T>): void {
+    this.data.push(value);
+    this.persist();
+  }
+
+  // Returns the entire array
+  public getAll(): Partial<T>[] {
     return this.data;
   }
+
   public clear(): void {
-    localStorage.clear();
-    this.data = {};
+    this.data = [];
+    localStorage.removeItem(this.STORAGE_KEY);
   }
 }
-const database = Database.getInstance();
+
+// Usage:
+const database = Database.getInstance<AppData>();
 export default database;
