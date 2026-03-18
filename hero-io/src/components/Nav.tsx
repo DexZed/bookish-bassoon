@@ -117,7 +117,7 @@ function Nav({}: Props) {
           <ul className="menu menu-horizontal px-1">{links}</ul>
         </div>
         <div className="navbar-end">
-          <a className="btn">
+          <a className="button-outlined">
             <svg
               className="w-6 aspect-square dark:invert"
               xmlns="http://www.w3.org/2000/svg"

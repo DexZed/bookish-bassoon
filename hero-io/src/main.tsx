@@ -6,6 +6,9 @@ import { createBrowserRouter } from "react-router";
 import { RouterProvider } from "react-router/dom";
 import ErrorPage from "./pages/ErrorPage.tsx";
 import Home from "./pages/Home.tsx";
+import Catalogue from "./pages/Catalogue.tsx";
+import Installations from "./pages/Installations.tsx";
+import Details from "./pages/Details.tsx";
 
 const router = createBrowserRouter([
   {
@@ -16,15 +19,15 @@ const router = createBrowserRouter([
       { index: true, element: <Home /> },
       {
         path: "/apps",
-        element: <div>Apps Not implemented</div>,
+        element: <Catalogue />,
       },
       {
         path: "/installation",
-        element: <div>Installation Not implemented</div>,
+        element: <Installations />,
       },
       {
         path: "/detail/:id",
-        element: <div>Detail Not implemented</div>,
+        element: <Details />,
       },
       {
         path: "/not-found",

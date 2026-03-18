@@ -30,7 +30,7 @@
   .flex-centered-y {
     @apply flex flex-col items-center justify-center;
   }
-  .button-oulined {
+  .button-outlined {
     @apply btn btn-outline shadow-xl rounded-md;
   }
 

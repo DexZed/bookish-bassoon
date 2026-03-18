@@ -30,7 +30,7 @@ function CatalogueHome({}: Props) {
           ))}
         </div>
         <div className="flex-centered-x">
-          <Link to="/apps" className="button-oulined btn-accent">
+          <Link to="/apps" className="button-outlined btn-accent">
             See All
           </Link>
         </div>
