@@ -1,5 +1,5 @@
 import { useParams } from "react-router";
-import type { AppData, RatingItem } from "../interfaces/InterfaceDefinitions";
+import type {RatingItem } from "../interfaces/InterfaceDefinitions";
 import { calculateAverage, numberFomatter } from "../lib/utils";
 import { useAppData } from "../store/State";
 
@@ -10,10 +10,10 @@ function Details() {
   return (
     <>
       <section className="flex-centered-y min-h-screen">
-        <div className="flex-centered-y md:flex-centered-x">
+        <div className="flex-centered-x gap-10 w-full p-10">
           <div>
             <img
-              className="w-xs h-xs"
+              className="w-xs h-xs sm:w-sm sm:h-sm lg:w-lg lg:h-lg"
               src={
                 app?.image ??
                 "https://operaparallele.org/wp-content/uploads/2023/09/Placeholder_Image.png"
@@ -22,16 +22,20 @@ function Details() {
             />
           </div>
           <div>
-            <h2>{app?.title}</h2>
-            <p>{app?.companyName}</p>
-          </div>
-          <div className="divider"></div>
-          <div>
-            <AppStats />
-          </div>
-          <div className="divider"></div>
-          <div>
-            <button className="button-outlined btn-accent m-4">Install</button>
+            <div className="flex-centered-y">
+              <h2>{app?.title}</h2>
+              <p>{app?.companyName}</p>
+            </div>
+            <div className="divider"></div>
+            <div>
+              <AppStats />
+            </div>
+            <div className="divider"></div>
+            <div>
+              <button className="button-outlined btn-accent m-4">
+                Install
+              </button>
+            </div>
           </div>
         </div>
         <div className="divider"></div>
@@ -89,9 +93,8 @@ function AppStats({ downloads, reviews, ratings }: StatProps) {
           <div className="stat-desc">Average Rating</div>
           <div className="stat-value">
             <div className="flex-centered-x gap-2">
-              {numberFomatter(averageRating)+"/5"}
+              {numberFomatter(averageRating) + "/5"}
               <StarRating rating={averageRating} />
-            
             </div>
           </div>
         </div>
