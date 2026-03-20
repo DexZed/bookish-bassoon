@@ -1,8 +1,8 @@
-interface RatingItem {
+export interface RatingItem {
   name: "1 star" | "2 star" | "3 star" | "4 star" | "5 star";
   count: number;
 }
- export interface AppData {
+export interface AppData {
   image: string;
   title: string;
   companyName: string;
