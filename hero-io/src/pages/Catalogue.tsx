@@ -1,9 +1,9 @@
-import { useEffect, useMemo } from "react";
+import { useEffect, useEffectEvent, useMemo, useState } from "react";
 import Card from "../components/Card";
 import { numberFomatter } from "../lib/utils";
 import { useAppData } from "../store/State";
-import { BehaviorSubject, combineLatestWith,debounceTime, map } from "rxjs";
-import { useObservableState } from "observable-hooks";
+import { BehaviorSubject,debounceTime } from "rxjs";
+
 
 type Props = {};
 
@@ -20,29 +20,29 @@ function Catalogue({}: Props) {
     image: card.image,
 })), [cardsData]);
   const count = cards.length;
-  const search$ = useMemo(() => new BehaviorSubject(""), []);
-  const searchText = useObservableState(search$, "");
-  const debouncedSearch$ = useMemo(() => search$.pipe(debounceTime(300)), [search$]);
-  const card$ = useMemo(() => new BehaviorSubject(cards), []);
+  const [searchText, setSearchText] = useState("");
+  const debouncedSearch = useEffectEvent(() => {
+    const subject = new BehaviorSubject("");
+    const subscription = subject.pipe(debounceTime(300)).subscribe((value) => {
+      setSearchText(value);
+    });
+    return () => subscription.unsubscribe();
+  });
   useEffect(() => {
-  card$.next(cards);
-}, [cards, card$]);
-  const filteredCards = useObservableState(
-    () =>
-      card$.pipe(
-        combineLatestWith(debouncedSearch$),
-        map(([cards, debouncedSearch]) =>
-          cards.filter((card) =>
-            card.title.toLowerCase().includes(debouncedSearch.toLowerCase()),
-          ),
-        ),
-      ),
-    cards,
-  );
+    debouncedSearch();
+  }, []);
+  const filteredCards = useMemo(() => {
+    if (!searchText) {
+      return cards;
+    }
+    return cards.filter((card) =>
+      card.title.toLowerCase().includes(searchText.toLowerCase()),
+    );
+  }, [cards, searchText]);
   const latestLength = filteredCards
-    ? filteredCards[0].length
+    ? filteredCards.length
     : count;
-   
+  
   return (
     <section className="flex-centered-y">
       <div className="flex-centered-y">
@@ -72,7 +72,7 @@ function Catalogue({}: Props) {
             <input
               type="search"
               value={searchText}
-              onChange={(e) => search$.next(e.target.value)}
+              onChange={(e) => setSearchText(e.target.value)}
               
               placeholder="Search"
             />
@@ -80,7 +80,7 @@ function Catalogue({}: Props) {
         </div>
       </div>
       <div className="flex-centered-x flex-wrap lg:grid lg:grid-cols-4 gap-4 mb-5">
-        {filteredCards[0].map((item, idx) => {
+        {filteredCards.map((item, idx) => {
           return <Card key={idx} {...item} />;
         })}
       </div>

@@ -9,6 +9,7 @@ function CatalogueHome({}: Props) {
   const { state } = useAppData();
   const cardsData = state.data;
   const cards = cardsData.map((card) => ({
+    id: card.id,
     title: card.title,
     downloads: numberFomatter(card.downloads).toString(),
     ratings: numberFomatter(
