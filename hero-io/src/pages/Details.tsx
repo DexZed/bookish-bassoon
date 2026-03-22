@@ -21,7 +21,7 @@ function Details() {
             />
           </figure>
           <div className="card-body">
-            <h2>{app?.title? app.title :"New album"}</h2>
+            <h2 className="md:text-start">{app?.title? app.title :"New album"}</h2>
             <h3 className="text-center md:text-start">Developed by: <span className="font-bold text-purple-600">{app?.companyName? app.companyName :"Daisy UI"}</span></h3>
             <div className="flex-centered-x gap-4 md:block">
               <AppStats downloads={app?.downloads}  ratings={app?.ratings} reviews={app?.reviews}/>
