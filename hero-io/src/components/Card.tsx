@@ -1,15 +1,21 @@
+import { useNavigate } from "react-router";
 
 
 type Props = {
+    id?:string,
     title?:string,
     downloads?:string,
     ratings?:string,
     image?:string
 };
 
-function Card({title,downloads,ratings,image}: Props) {
+function Card({title,downloads,ratings,image,id}: Props) {
+  const navigate = useNavigate();
+  function handleClick(id:string) {
+    navigate(`/detail/${id}`);
+  }
   return (
-    <div className="card bg-base-100 w-88 shadow-sm">
+    <div tabIndex={0} onClick={()=>handleClick(id!)} className="card bg-base-100 w-88 shadow-sm">
       <figure>
         <img
           className="w-88"

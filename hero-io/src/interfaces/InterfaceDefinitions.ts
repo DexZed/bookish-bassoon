@@ -6,7 +6,7 @@ export interface AppData {
   image: string;
   title: string;
   companyName: string;
-  id: number;
+  id: string;
   description: string;
   size: number;
   reviews: number;

@@ -21,10 +21,10 @@ function Installations({}: Props) {
           </div>
         </div>
         <div className="flex-centered-y w-full gap-4 p-10">
-          {[1, 2, 3].map(() => {
+          {[1, 2, 3].map((_,idx) => {
             return (
               <>
-                <div className="card card-xs lg:card-side bg-base-100 shadow-sm w-96 lg:w-full shadow-amber-500">
+                <div key={idx} className="card card-xs lg:card-side bg-base-100 shadow-sm w-96 lg:w-full shadow-amber-500">
                   <figure>
                     <img
                       className=" lg:w-30 aspect-square"

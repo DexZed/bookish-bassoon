@@ -1,49 +1,42 @@
 import { useParams } from "react-router";
-import type {RatingItem } from "../interfaces/InterfaceDefinitions";
+import type { RatingItem } from "../interfaces/InterfaceDefinitions";
 import { calculateAverage, numberFomatter } from "../lib/utils";
 import { useAppData } from "../store/State";
+import RatingGraph from "../components/RatingGraph";
 
 function Details() {
   const { id } = useParams();
   const { state } = useAppData();
   const app = state.data.find((a) => a.id.toString() === id);
+  console.log(app);
   return (
     <>
-      <section className="flex-centered-y min-h-screen">
-        <div className="flex-centered-x gap-10 w-full p-10">
-          <div>
+      <section className="min-h-screen flex-centered-y gap-4 p-10">
+        <div className="card lg:card-side bg-base-100 shadow-sm w-full card-xl" >
+          <figure className="w-96">
             <img
-              className="w-xs h-xs sm:w-sm sm:h-sm lg:w-lg lg:h-lg"
-              src={
-                app?.image ??
-                "https://operaparallele.org/wp-content/uploads/2023/09/Placeholder_Image.png"
-              }
-              alt={"Placeholder image"}
+              src={app?.image? app.image :"https://img.daisyui.com/images/stock/photo-1494232410401-ad00d5433cfa.webp"}
+              alt={app?.title? app.title :"Placeholder image"}
             />
-          </div>
-          <div>
-            <div className="flex-centered-y">
-              <h2>{app?.title}</h2>
-              <p>{app?.companyName}</p>
+          </figure>
+          <div className="card-body">
+            <h2>{app?.title? app.title :"New album"}</h2>
+            <h3 className="text-center md:text-start">Developed by: <span className="font-bold text-purple-600">{app?.companyName? app.companyName :"Daisy UI"}</span></h3>
+            <div className="flex-centered-x gap-4 md:block">
+              <AppStats downloads={app?.downloads}  ratings={app?.ratings} reviews={app?.reviews}/>
+
             </div>
-            <div className="divider"></div>
-            <div>
-              <AppStats />
-            </div>
-            <div className="divider"></div>
-            <div>
-              <button className="button-outlined btn-accent m-4">
-                Install
-              </button>
+            <div className="card-actions justify-center md:justify-start">
+              <button className="button-outlined btn-accent m-5 w-96">Install <span>( {app?.size} MB )</span></button>
             </div>
           </div>
         </div>
-        <div className="divider"></div>
-        <div></div>
-        <div className="divider"></div>
-        <div className="flex-centered-y md:justify-start p-5">
-          <h3>Description</h3>
-          <p>{app?.description}</p>
+        <div className="card lg:card-side bg-base-100 shadow-sm w-full card-xl">
+          <RatingGraph ratings={app?.ratings!}/>
+        </div>
+        <div className="card lg:card-side bg-base-100 shadow-sm w-full card-xl">
+          <div className="card-body flex-centerd-y"><h2>Description</h2>
+          <p className="text-center">{app?.description? app.description :"lorem ipsum dolor sit amet"}</p></div>
         </div>
       </section>
     </>
@@ -69,7 +62,7 @@ function AppStats({ downloads, reviews, ratings }: StatProps) {
 
   return (
     <>
-      <div className="stats stats-horizontal shadow">
+      <div className="stats stats-vertical lg:stats-horizontal shadow">
         <div className="stat place-items-center">
           <div className="stat-title m-3">
             <img
@@ -107,7 +100,7 @@ function AppStats({ downloads, reviews, ratings }: StatProps) {
               alt={"Placeholder image"}
             />
           </div>
-          <div className="stat-desc">Tottal Reviews</div>
+          <div className="stat-desc">Total Reviews</div>
           <div className="stat-value">{numberFomatter(reviews!)}</div>
         </div>
       </div>
