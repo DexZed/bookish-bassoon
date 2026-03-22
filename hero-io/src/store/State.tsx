@@ -7,6 +7,7 @@ import {
 } from "react";
 import type { AppData } from "../interfaces/InterfaceDefinitions";
 import { BehaviorSubject, catchError, from, map, of, switchMap } from "rxjs";
+import { useDatabase } from "../database/LocalDB";
 
 // 1. State & Reducer Setup
 type State = { data: AppData[]; loading: boolean; error: string | null };
@@ -46,7 +47,7 @@ export function AppContextProvider({
     loading: false,
     error: null,
   });
-
+  const {data} = useDatabase()
   useEffect(() => {
     // 3. The RxJS Pipeline
     const subscription = dataRequest$

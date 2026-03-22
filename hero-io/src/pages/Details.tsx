@@ -1,14 +1,23 @@
 import { useParams } from "react-router";
-import type { RatingItem } from "../interfaces/InterfaceDefinitions";
+import type { AppData, RatingItem } from "../interfaces/InterfaceDefinitions";
 import { calculateAverage, numberFomatter } from "../lib/utils";
 import { useAppData } from "../store/State";
 import RatingGraph from "../components/RatingGraph";
+import { useDatabase } from "../database/LocalDB";
+import { useState } from "react";
 
 function Details() {
   const { id } = useParams();
+  const [disabled, setDisabled] = useState(false);
   const { state } = useAppData();
+  const {addItem} = useDatabase();
   const app = state.data.find((a) => a.id.toString() === id);
-  console.log(app);
+  
+
+  function handleClick(item:Partial<AppData>){
+    addItem({...item, isInstalled:true});
+    setDisabled(true);
+  }
   return (
     <>
       <section className="min-h-screen flex-centered-y gap-4 p-10">
@@ -28,7 +37,7 @@ function Details() {
 
             </div>
             <div className="card-actions justify-center md:justify-start">
-              <button className="button-outlined btn-accent m-5 w-96">Install <span>( {app?.size} MB )</span></button>
+              <button disabled={disabled} onClick={()=>handleClick(app!)} className="button-outlined btn-accent m-5 w-96">Install <span>( {app?.size} MB )</span></button>
             </div>
           </div>
         </div>
@@ -45,6 +54,8 @@ function Details() {
 }
 
 export default Details;
+
+
 type StatProps = Partial<{
   downloads: number;
   reviews: number;

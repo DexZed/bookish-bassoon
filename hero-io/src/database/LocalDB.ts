@@ -44,7 +44,12 @@ class Database<T> {
   this.persist();
   this.notify();
 }
-
+  // Removes an item from the array
+  public remove(value: Partial<T>): void {
+    this.data = this.data.filter((item) => item !== value);
+    this.persist();
+    this.notify();
+  }
   // Returns the entire array
   public getAll(): Partial<T>[] {
     return this.data;
@@ -83,6 +88,7 @@ export function useDatabase() {
   return {
     data,
     addItem: database.add.bind(database),
+    removeItem: database.remove.bind(database),
     clearAll: database.clear.bind(database),
   };
 }
