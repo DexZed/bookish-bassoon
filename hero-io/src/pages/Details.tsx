@@ -15,8 +15,9 @@ function Details() {
         <div className="card lg:card-side bg-base-100 shadow-sm w-full card-xl" >
           <figure className="w-96">
             <img
-              src={app?.image? app.image :"https://img.daisyui.com/images/stock/photo-1494232410401-ad00d5433cfa.webp"}
-              alt={app?.title? app.title :"Placeholder image"}
+              className="aspect-square"
+              src={app?.image? `${app.image}` :"https://img.daisyui.com/images/stock/photo-1494232410401-ad00d5433cfa.webp"}
+              alt={app?.title? `${app.title}` :"Placeholder image"}
             />
           </figure>
           <div className="card-body">
