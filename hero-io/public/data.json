@@ -19,7 +19,7 @@
     ]
   },
   {
-    "image": "./demo-app (2).webp",
+    "image": "/demo-app (2).webp",
     "title": "FitTrack Pro",
     "companyName": "Healthify Ltd.",
     "id": 2,
@@ -38,7 +38,7 @@
     ]
   },
   {
-    "image": "./demo-app (3).webp",
+    "image": "/demo-app (3).webp",
     "title": "QuickBite",
     "companyName": "Foodies Hub",
     "id": 3,
@@ -57,7 +57,7 @@
     ]
   },
   {
-    "image": "./demo-app (4).webp",
+    "image": "/demo-app (4).webp",
     "title": "TripMate",
     "companyName": "Wander Inc.",
     "id": 4,
@@ -76,7 +76,7 @@
     ]
   },
   {
-    "image": "./demo-app (5).webp",
+    "image": "/demo-app (5).webp",
     "title": "MoneyWise",
     "companyName": "FinTech Labs",
     "id": 5,
@@ -96,7 +96,7 @@
   },
   
   {
-    "image": "./demo-app (6).webp",
+    "image": "/demo-app (6).webp",
     "title": "BattleZone",
     "companyName": "GameCore",
     "id": 6,
@@ -115,7 +115,7 @@
     ]
   },
   {
-    "image": "./demo-app (1).webp",
+    "image": "/demo-app (1).webp",
     "title": "ChatLoop",
     "companyName": "Connectify",
     "id": 7,
@@ -134,7 +134,7 @@
     ]
   },
   {
-    "image": "./demo-app (2).webp",
+    "image": "/demo-app (2).webp",
     "title": "Learnify",
     "companyName": "EduTech",
     "id": 8,
@@ -153,7 +153,7 @@
     ]
   },
   {
-    "image": "./demo-app (3).webp",
+    "image": "/demo-app (3).webp",
     "title": "SnapEdit",
     "companyName": "Pixel Labs",
     "id": 9,
@@ -172,7 +172,7 @@
     ]
   },
   {
-    "image": "./demo-app (4).webp",
+    "image": "/demo-app (4).webp",
     "title": "SkyCast",
     "companyName": "WeatherTech",
     "id": 10,
@@ -192,7 +192,7 @@
   },
 
   {
-    "image": "./demo-app (5).webp",
+    "image": "/demo-app (5).webp",
     "title": "NoteMaster",
     "companyName": "Productive Inc.",
     "id": 11,
@@ -211,7 +211,7 @@
     ]
   },
   {
-    "image": "./demo-app (6).webp",
+    "image": "/demo-app (6).webp",
     "title": "ShopEase",
     "companyName": "RetailHub",
     "id": 12,
@@ -230,7 +230,7 @@
     ]
   },
   {
-    "image": "./demo-app (1).webp",
+    "image": "/demo-app (1).webp",
     "title": "StreamFlix",
     "companyName": "MediaWorks",
     "id": 13,
@@ -249,7 +249,7 @@
     ]
   },
   {
-    "image": "./demo-app (2).webp",
+    "image": "/demo-app (2).webp",
     "title": "NavGo",
     "companyName": "GeoTech",
     "id": 14,
@@ -268,7 +268,7 @@
     ]
   },
   {
-    "image": "./demo-app (3).webp",
+    "image": "/demo-app (3).webp",
     "title": "PlanIt",
     "companyName": "TimeWorks",
     "id": 15,
@@ -288,7 +288,7 @@
   },
 
   {
-    "image": "./demo-app (4).webp",
+    "image": "/demo-app (4).webp",
     "title": "SecureVault",
     "companyName": "SafeTech",
     "id": 16,
@@ -307,7 +307,7 @@
     ]
   },
   {
-    "image": "./demo-app (5).webp",
+    "image": "/demo-app (5).webp",
     "title": "PodStream",
     "companyName": "AudioLabs",
     "id": 17,
@@ -326,7 +326,7 @@
     ]
   },
   {
-    "image": "./demo-app (6).webp",
+    "image": "/demo-app (6).webp",
     "title": "KidLearn",
     "companyName": "BrightKids",
     "id": 18,
@@ -345,7 +345,7 @@
     ]
   },
   {
-    "image": "./demo-app (1).webp",
+    "image": "/demo-app (1).webp",
     "title": "BankEase",
     "companyName": "DigitalBank",
     "id": 19,
@@ -364,7 +364,7 @@
     ]
   },
   {
-    "image": "./demo-app (2).webp",
+    "image": "/demo-app (2).webp",
     "title": "SmartAssist",
     "companyName": "AI Labs",
     "id": 20,

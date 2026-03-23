@@ -2,23 +2,26 @@ import { useEffect, useEffectEvent, useMemo, useState } from "react";
 import Card from "../components/Card";
 import { numberFomatter } from "../lib/utils";
 import { useAppData } from "../store/State";
-import { BehaviorSubject,debounceTime } from "rxjs";
-
+import { BehaviorSubject, debounceTime } from "rxjs";
 
 type Props = {};
 
 function Catalogue({}: Props) {
   const { state } = useAppData();
   const cardsData = state.data;
-  const cards = useMemo(() => cardsData.map((card) => ({
-    id: card.id,
-    title: card.title,
-    downloads: numberFomatter(card.downloads).toString(),
-    ratings: numberFomatter(
-      card.ratings.reduce((acc, curr) => acc + curr.count, 0),
-    ).toString(),
-    image: card.image,
-})), [cardsData]);
+  const cards = useMemo(
+    () =>
+      cardsData.map((card) => ({
+        id: card.id,
+        title: card.title,
+        downloads: numberFomatter(card.downloads).toString(),
+        ratings: numberFomatter(
+          card.ratings.reduce((acc, curr) => acc + curr.count, 0),
+        ).toString(),
+        image: card.image,
+      })),
+    [cardsData],
+  );
   const count = cards.length;
   const [searchText, setSearchText] = useState("");
   const debouncedSearch = useEffectEvent(() => {
@@ -39,10 +42,8 @@ function Catalogue({}: Props) {
       card.title.toLowerCase().includes(searchText.toLowerCase()),
     );
   }, [cards, searchText]);
-  const latestLength = filteredCards
-    ? filteredCards.length
-    : count;
-  
+  const latestLength = filteredCards ? filteredCards.length : count;
+
   return (
     <section className="flex-centered-y">
       <div className="flex-centered-y">
@@ -73,13 +74,12 @@ function Catalogue({}: Props) {
               type="search"
               value={searchText}
               onChange={(e) => setSearchText(e.target.value)}
-              
               placeholder="Search"
             />
           </label>
         </div>
       </div>
-      <div className="flex-centered-x flex-wrap lg:grid lg:grid-cols-4 gap-4 mb-5">
+      <div className="flex-centered-x flex-wrap xl:grid xl:grid-cols-4 gap-4 mb-5">
         {filteredCards.map((item, idx) => {
           return <Card key={idx} {...item} />;
         })}

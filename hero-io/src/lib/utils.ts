@@ -19,3 +19,4 @@ export function calculateAverage(ratings: { name: string; count: number }[]) {
 
   return totalCount === 0 ? 0 : totalScore / totalCount;
 }
+

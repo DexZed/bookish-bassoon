@@ -47,7 +47,18 @@ export function AppContextProvider({
     loading: false,
     error: null,
   });
-  const {data} = useDatabase()
+  const {data: dbData,addItem} = useDatabase()
+  // 0. Sync the Data 
+  const syncData = useMemo(()=> {
+    return state.data.map((item) => {
+      const dbItem = dbData.find((dbItem) => dbItem.id === item.id);
+      if (dbItem) {
+        return { ...item, ...dbItem };
+      }
+      return item;
+    })
+  }, [state.data, dbData])
+
   useEffect(() => {
     // 3. The RxJS Pipeline
     const subscription = dataRequest$
@@ -73,10 +84,10 @@ export function AppContextProvider({
   // 4. Provide a way to trigger a refresh
   const contextValue = useMemo(
     () => ({
-      state,
+      state:{...state, data: syncData},
       refresh: () => dataRequest$.next(),
     }),
-    [state],
+    [state,syncData,addItem],
   );
 
   return (

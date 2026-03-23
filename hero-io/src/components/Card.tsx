@@ -14,13 +14,14 @@ function Card({title,downloads,ratings,image,id}: Props) {
   function handleClick(id:string) {
     navigate(`/detail/${id}`);
   }
+  
   return (
     <div tabIndex={0} onClick={()=>handleClick(id!)} className="card bg-base-100 w-88 shadow-sm">
       <figure>
         <img
           className="w-88"
-          src={image ?? "https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.webp"}
-          alt={title + " image"}
+          src={image ? `${image}`:"https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.webp"}
+          alt={title ? `${title}`:"Placeholder image"}
         />
       </figure>
       <div className="card-body">

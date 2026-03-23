@@ -4,11 +4,11 @@ import { calculateAverage, numberFomatter } from "../lib/utils";
 import { useAppData } from "../store/State";
 import RatingGraph from "../components/RatingGraph";
 import { useDatabase } from "../database/LocalDB";
-import { useState } from "react";
+
 
 function Details() {
   const { id } = useParams();
-  const [disabled, setDisabled] = useState(false);
+  
   const { state } = useAppData();
   const {addItem} = useDatabase();
   const app = state.data.find((a) => a.id.toString() === id);
@@ -16,13 +16,13 @@ function Details() {
 
   function handleClick(item:Partial<AppData>){
     addItem({...item, isInstalled:true});
-    setDisabled(true);
+    
   }
   return (
     <>
       <section className="min-h-screen flex-centered-y gap-4 p-10">
         <div className="card lg:card-side bg-base-100 shadow-sm w-full card-xl" >
-          <figure className="w-96">
+          <figure>
             <img
               className="aspect-square"
               src={app?.image? `${app.image}` :"https://img.daisyui.com/images/stock/photo-1494232410401-ad00d5433cfa.webp"}
@@ -37,7 +37,7 @@ function Details() {
 
             </div>
             <div className="card-actions justify-center md:justify-start">
-              <button disabled={disabled} onClick={()=>handleClick(app!)} className="button-outlined btn-accent m-5 w-96">Install <span>( {app?.size} MB )</span></button>
+              <button disabled={app?.isInstalled? true : false} onClick={()=>handleClick(app!)} className="button-outlined btn-accent m-5 w-96">{app?.isInstalled? "Installed" : "Install"} <span>( {app?.size} MB )</span></button>
             </div>
           </div>
         </div>
