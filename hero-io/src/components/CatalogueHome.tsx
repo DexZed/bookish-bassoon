@@ -25,7 +25,7 @@ function CatalogueHome({}: Props) {
           <h2>Trending Apps</h2>
           <p>Explore all the Apps on the Market developed by us</p>
         </div>
-        <div className="flex-centered-x flex-wrap lg:grid lg:grid-cols-4 gap-4 p-5">
+        <div className="flex-centered-x flex-wrap xl:grid xl:grid-cols-4 gap-4 p-5">
           {cards.slice(0,8).map((card, index) => (
             <Card key={index} {...card} />
           ))}

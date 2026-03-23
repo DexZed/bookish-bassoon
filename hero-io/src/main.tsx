@@ -9,6 +9,7 @@ import Home from "./pages/Home.tsx";
 import Catalogue from "./pages/Catalogue.tsx";
 import Installations from "./pages/Installations.tsx";
 import Details from "./pages/Details.tsx";
+import Skeleton from "./components/Skeleton.tsx";
 
 const router = createBrowserRouter([
   {
@@ -30,8 +31,8 @@ const router = createBrowserRouter([
         element: <Details />,
       },
       {
-        path: "/not-found",
-        element: <div>Not Found</div>,
+        path: "/loading",
+        element: <Skeleton/>,
       },
     ],
   },

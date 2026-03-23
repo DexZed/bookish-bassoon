@@ -9,17 +9,17 @@
 
 @layer base {
   h1 {
-      @apply font-bold text-[clamp(20px,2vw,42px)] m-2 text-center;
+      @apply font-bold text-[clamp(38px,2vw,42px)] m-2 text-center;
   }
   h2 {
-    @apply font-semibold text-[clamp(14px,2vw,36px)] m-2 text-center text-gray-600;
+    @apply font-semibold text-[clamp(30px,2vw,36px)] m-2 text-center text-gray-600;
   }
   h3 {
     @apply font-medium text-xl m-2 ;
   }
 
   p {
-    @apply font-light m-2 text-[clamp(10px,1vw,20px)] text-gray-600;
+    @apply font-light m-2 text-[clamp(18px,1vw,20px)] text-gray-600;
   }
 }
 

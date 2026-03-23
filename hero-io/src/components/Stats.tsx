@@ -10,7 +10,7 @@ function Stats({}: Props) {
   const apps = state.data.length;
   return (
     <>
-      <section className="flex flex-col items-center ">
+      <section className="flex flex-col items-center">
         <div className="m-4">
           <h2 className="">Trusted By Millions, Built For You</h2>
           
