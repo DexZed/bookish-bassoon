@@ -1,3 +1,4 @@
+import { motion } from "motion/react";
 import { numberFomatter } from "../lib/utils";
 import { useAppData } from "../store/State";
 import Card from "./Card";
@@ -26,8 +27,23 @@ function CatalogueHome({}: Props) {
           <p>Explore all the Apps on the Market developed by us</p>
         </div>
         <div className="flex-centered-x flex-wrap xl:grid xl:grid-cols-4 gap-4 p-5">
-          {cards.slice(0,8).map((card, index) => (
-            <Card key={index} {...card} />
+          {cards.slice(0, 8).map((card, index) => (
+            <>
+              <motion.div
+                whileHover={{
+                  scale: 1.05,
+                }}
+                whileTap={{
+                  scale: 0.95,
+                }}
+                transition={{
+                  ease: "easeInOut",
+                  duration: 0.25,
+                }}
+              >
+                <Card key={index} {...card} />
+              </motion.div>
+            </>
           ))}
         </div>
         <div className="flex-centered-x">

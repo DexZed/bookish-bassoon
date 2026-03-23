@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useDatabase } from "../database/LocalDB";
 import type { AppData, RatingItem } from "../interfaces/InterfaceDefinitions";
 import { numberFomatter } from "../lib/utils";
+import CardAnimation from "../components/CardAnimation";
 
 type Props = {};
 
@@ -46,11 +47,15 @@ function Installations({}: Props) {
             </select>
           </div>
         </div>
+
         <div className="flex-centered-y w-full gap-4 p-10">
           {sortedData.map((item) => {
             return (
-              <React.Fragment key={item.id}>
-                <div className="card card-xs lg:card-side bg-base-100 shadow-sm w-96 lg:w-full shadow-amber-500">
+              <CardAnimation key={item.id}>
+                <div
+                  
+                  className="card card-xs lg:card-side bg-base-100 shadow-sm w-96 lg:w-full shadow-amber-500"
+                >
                   <figure>
                     <img
                       className=" lg:w-30 aspect-square"
@@ -65,11 +70,11 @@ function Installations({}: Props) {
                   <div className="card-body">
                     <div className="flex flex-col items-center lg:items-start">
                       <h3>{item.title ? item.title : "Placeholder title"}</h3>
-                    <AppStats
-                      size={item.size}
-                      downloads={item.downloads}
-                      ratings={item.ratings}
-                    />
+                      <AppStats
+                        size={item.size}
+                        downloads={item.downloads}
+                        ratings={item.ratings}
+                      />
                     </div>
 
                     <div className="flex-centered-x lg:card-actions lg:justify-end p-5 lg:p-0">
@@ -82,7 +87,7 @@ function Installations({}: Props) {
                     </div>
                   </div>
                 </div>
-              </React.Fragment>
+              </CardAnimation>
             );
           })}
         </div>
