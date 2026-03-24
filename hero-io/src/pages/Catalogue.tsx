@@ -3,6 +3,8 @@ import Card from "../components/Card";
 import { numberFomatter } from "../lib/utils";
 import { useAppData } from "../store/State";
 import { BehaviorSubject, debounceTime } from "rxjs";
+import { motion } from "motion/react";
+import { div } from "motion/react-client";
 
 type Props = {};
 

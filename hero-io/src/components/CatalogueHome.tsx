@@ -28,22 +28,7 @@ function CatalogueHome({}: Props) {
         </div>
         <div className="flex-centered-x flex-wrap xl:grid xl:grid-cols-4 gap-4 p-5">
           {cards.slice(0, 8).map((card, index) => (
-            <>
-              <motion.div
-                whileHover={{
-                  scale: 1.05,
-                }}
-                whileTap={{
-                  scale: 0.95,
-                }}
-                transition={{
-                  ease: "easeInOut",
-                  duration: 0.25,
-                }}
-              >
-                <Card key={index} {...card} />
-              </motion.div>
-            </>
+            <Card key={index} {...card} />
           ))}
         </div>
         <div className="flex-centered-x">
