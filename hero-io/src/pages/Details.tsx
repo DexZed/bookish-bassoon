@@ -24,7 +24,7 @@ function Details() {
         <div className="card lg:card-side bg-base-100 shadow-sm w-full card-xl" >
           <figure>
             <img
-              className="aspect-square"
+              className="w-96"
               src={app?.image? `${app.image}` :"https://img.daisyui.com/images/stock/photo-1494232410401-ad00d5433cfa.webp"}
               alt={app?.title? `${app.title}` :"Placeholder image"}
             />

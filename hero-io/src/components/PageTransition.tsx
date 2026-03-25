@@ -22,7 +22,7 @@ function PageTransition({ children }: Props) {
     exit: {
       top: "0",
       transition: {
-        duration: 1,
+        duration: 0.5,
         ease: [0.45, 0, 0.55, 1],
       },
     },
@@ -35,7 +35,7 @@ function PageTransition({ children }: Props) {
       scale: 0.9,
       opacity: 0.5,
       transition: {
-        duration: 1.2,
+        duration: 0.6,
         ease: [0.45, 0, 0.55, 1],
       },
     },
