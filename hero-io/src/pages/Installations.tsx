@@ -30,7 +30,7 @@ function Installations({}: Props) {
   }, [data, sort]); // Recalculates only when data or sort changes
   return (
     <>
-      <section className="flex flex-col items-center gap-4 h-screen">
+      <section className="flex flex-col items-center gap-4 min-h-screen">
         <div className="flex-centerd-y">
           <h2>Your Installed Apps</h2>
           <p>Explore all apps on our platform.</p>
@@ -48,7 +48,7 @@ function Installations({}: Props) {
           </div>
         </div>
 
-        <div className="flex-centered-y w-full gap-4 p-10">
+        <div className="flex-centered-x flex-wrap w-full gap-4 p-10">
           {sortedData.map((item) => {
             return (
               <CardAnimation key={item.id}>

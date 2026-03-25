@@ -5,13 +5,14 @@ import { AnimatePresence } from "motion/react";
 import PageTransition from "./components/PageTransition";
 import { Suspense } from "react";
 import Skeleton from "./components/Skeleton";
+import { ToastContainer } from "react-toastify";
 
 function App() {
   const location = useLocation();
   return (
     <>
       <main>
-        
+        <ToastContainer/>
         <AppContextProvider>
           <AnimatePresence mode="wait">
             <PageTransition key={location.pathname}>

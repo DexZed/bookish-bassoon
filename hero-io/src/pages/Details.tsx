@@ -1,6 +1,6 @@
 import { useParams } from "react-router";
 import type { AppData, RatingItem } from "../interfaces/InterfaceDefinitions";
-import { calculateAverage, numberFomatter } from "../lib/utils";
+import { calculateAverage, numberFomatter, successToast } from "../lib/utils";
 import { useAppData } from "../store/State";
 import RatingGraph from "../components/RatingGraph";
 import { useDatabase } from "../database/LocalDB";
@@ -16,7 +16,7 @@ function Details() {
 
   function handleClick(item:Partial<AppData>){
     addItem({...item, isInstalled:true});
-    
+    successToast('App Installed!');
   }
   return (
     <>
