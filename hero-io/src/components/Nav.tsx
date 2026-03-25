@@ -141,7 +141,10 @@ function Nav({}: Props) {
                 {links}
               </ul>
             </div>
-            <a className="btn btn-ghost text-xl">Hero IO</a>
+            <div className="flex">
+              <motion.img className={`w-10 aspect-square`} style={{rotate:rotate}} src="/Sharingan-PNG-File.png" alt="logo" />
+              <a className="btn btn-ghost text-xl">Hero IO</a>
+            </div>
           </div>
           <div className="navbar-center hidden lg:flex">
             <ul className="menu menu-horizontal px-1">{links}</ul>

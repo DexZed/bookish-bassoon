@@ -12,19 +12,18 @@ function App() {
   return (
     <>
       <main>
-        <ToastContainer/>
+        <ToastContainer />
         <AppContextProvider>
-          <AnimatePresence mode="wait">
-            <PageTransition key={location.pathname}>
-              <section  className="h-full">
-                <Suspense fallback={<Skeleton/>}>
+          <Suspense fallback={<Skeleton />}>
+            <AnimatePresence mode="wait">
+              <section key={location.pathname} className="h-full">
+                <PageTransition>
                   <Outlet />
-                </Suspense>
+                </PageTransition>
               </section>
-            </PageTransition>
-          </AnimatePresence>
+            </AnimatePresence>
+          </Suspense>
         </AppContextProvider>
-        
       </main>
     </>
   );
