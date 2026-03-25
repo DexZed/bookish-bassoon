@@ -47,7 +47,7 @@ function Catalogue({}: Props) {
   const latestLength = filteredCards ? filteredCards.length : count;
 
   return (
-    <section className="flex-centered-y">
+    <section className="flex-centered-y h-full">
       <div className="flex-centered-y">
         <h2>All Applications</h2>
         <p>Explore all apps on our platform.</p>

@@ -15,7 +15,7 @@ function App() {
         <AppContextProvider>
           <AnimatePresence mode="wait">
             <PageTransition key={location.pathname}>
-              <section  className="min-h-screen">
+              <section  className="h-full">
                 <Suspense fallback={<Skeleton/>}>
                   <Outlet />
                 </Suspense>

@@ -1,45 +1,59 @@
-import { motion, type Variants } from "motion/react";
+import { motion } from "motion/react";
 
 type Props = { children?: React.ReactNode };
 
 function PageTransition({ children }: Props) {
-  function anim(variants: Variants) {
+  const anim = (variants: any) => {
     return {
       initial: "initial",
       animate: "enter",
       exit: "exit",
       variants,
     };
-  }
+  };
   const opacity = {
     initial: { opacity: 0 },
-    enter: { opacity: 1, transition: { delay: 0.3 } }, // Delay so it appears after wipe
-    exit: { opacity: 0 },
+    enter: { opacity: 1 },
+    exit: { opacity: 1 },
   };
-  // Animation for the wipe overlay
-  const wipeVariants: Variants = {
-    initial: { scaleY: 0 },
-    enter: {
-      scaleY: 0,
-      transition: { duration: 0.6, ease: [0.76, 0, 0.24, 1] },
-    },
+  const slide = {
+    initial: { top: "100vh" },
+    enter: { top: "100vh" },
     exit: {
-      scaleY: 1,
-      transition: { duration: 0.6, ease: [0.76, 0, 0.24, 1] },
+      top: "0",
+      transition: {
+        duration: 1,
+        ease: [0.45, 0, 0.55, 1],
+      },
+    },
+  };
+  const perspective = {
+    initial: { y: 0, scale: 1, opacity: 1 },
+    enter: { y: 0, scale: 1, opacity: 1 },
+    exit: {
+      top: -100,
+      scale: 0.9,
+      opacity: 0.5,
+      transition: {
+        duration: 1.2,
+        ease: [0.45, 0, 0.55, 1],
+      },
     },
   };
   return (
-    <div className="relative overflow-hidden">
-      {/* The Blue Gradient Wipe */}
-      <motion.div
-        {...anim(wipeVariants)}
-        style={{ originY: 0 }} // Wipe from top down
-        className="fixed top-0 left-0 w-full h-full bg-linear-to-b from-blue-600 to-blue-400 z-50 pointer-events-none"
-      />
-
-      {/* The Page Content */}
-      <motion.div {...anim(opacity)}>{children}</motion.div>
-    </div>
+    <>
+      <div className="bg-black">
+        <motion.div
+          {...anim(slide)}
+          className="fixed top-0 left-0 w-screen h-[200vh] z-50 bg-white dark:bg-black"
+        />
+        <motion.div className="" {...anim(perspective)}>
+          <motion.div {...anim(opacity)} className="bg-white dark:bg-black">
+            {children}
+          </motion.div>
+        </motion.div>
+      </div>
+    </>
   );
 }
 

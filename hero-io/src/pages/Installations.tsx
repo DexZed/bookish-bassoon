@@ -30,7 +30,7 @@ function Installations({}: Props) {
   }, [data, sort]); // Recalculates only when data or sort changes
   return (
     <>
-      <section className="flex flex-col items-center gap-4 min-h-screen">
+      <section className="flex flex-col items-center gap-4 h-screen">
         <div className="flex-centerd-y">
           <h2>Your Installed Apps</h2>
           <p>Explore all apps on our platform.</p>
