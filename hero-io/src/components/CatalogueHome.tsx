@@ -1,4 +1,3 @@
-import { motion } from "motion/react";
 import { numberFomatter } from "../lib/utils";
 import { useAppData } from "../store/State";
 import Card from "./Card";
