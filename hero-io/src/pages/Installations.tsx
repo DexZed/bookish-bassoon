@@ -38,24 +38,26 @@ function Installations({}: Props) {
         <div className="flex justify-between w-full p-10">
           <div>({data.length}) Apps Found</div>
           <div>
-            <select onChange={handleChange} className="select select-neutral">
-              <option disabled={true} value={""}>
-                Sort By Downloads
-              </option>
-              <option value={"ASC"}>low-High</option>
-              <option value={"DESC"}>High-Low</option>
-            </select>
+            <fieldset className="fieldset">
+              <legend className="fieldset-legend">
+                Sort By No of Downloads
+              </legend>
+              <select onChange={handleChange} className="select select-neutral">
+                <option disabled={true} value={""}>
+                  Sort By Downloads
+                </option>
+                <option value={"ASC"}>low-High</option>
+                <option value={"DESC"}>High-Low</option>
+              </select>
+            </fieldset>
           </div>
         </div>
 
-        <div className="flex-centered-x flex-wrap w-full gap-4 p-10">
+        <div className="flex-centered-y flex-wrap w-full gap-4 p-10">
           {sortedData.map((item) => {
             return (
               <CardAnimation key={item.id}>
-                <div
-                  
-                  className="card card-xs lg:card-side bg-base-100 shadow-sm w-96 lg:w-full shadow-amber-500"
-                >
+                <div className="card card-xs lg:card-side bg-base-100 shadow-sm w-96 md:w-136 lg:w-216 shadow-amber-500">
                   <figure>
                     <img
                       className=" lg:w-30 aspect-square"
