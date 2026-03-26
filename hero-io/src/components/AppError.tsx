@@ -10,11 +10,11 @@ function AppError({}: Props) {
           <div className="flex-centered-y">
             <img src="/App-Error.png" alt="App-Error" />
           <div className="max-w-md">
-            <h1>Not Found</h1>
+            <h1>Welp This is Awkward</h1>
             <p className="py-6">
-              The app you are looking for does not exist.
+              The app you are looking for does not exist, go back perhaps and try again? 
             </p>
-            <Link to="/" className="button-outlined btn-warning">Go Back</Link>
+            <Link to="/" className="button-outlined btn-accent">Go Back</Link>
           </div>
           </div>
         </div>

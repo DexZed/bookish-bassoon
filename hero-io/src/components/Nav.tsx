@@ -6,11 +6,12 @@ import {
   useTransform,
 } from "motion/react";
 import { useState, useEffect } from "react";
-import { NavLink } from "react-router";
+import { NavLink, useNavigate } from "react-router";
 
 type Props = {};
 
 function Nav({}: Props) {
+  const navigate = useNavigate();
   const time = useTime();
   const rotate = useTransform(time, [0, 3000], [0, 360], {
     clamp: false,
@@ -101,6 +102,9 @@ function Nav({}: Props) {
     </>
   );
 
+  function handleClick() {
+    navigate("/");
+  }
   return (
     <>
       <AnimatePresence>
@@ -142,7 +146,7 @@ function Nav({}: Props) {
               </ul>
             </div>
             <div className="flex">
-              <motion.img className={`w-10 aspect-square`} style={{rotate:rotate}} src="/Sharingan-PNG-File.png" alt="logo" />
+              <motion.img onClick={handleClick} whileHover={{scale:1.1}} className={`w-10 aspect-square`+" hover:cursor-pointer"} style={{rotate:rotate}} src="/Sharingan-PNG-File.png" alt="logo" />
               <a className="btn btn-ghost text-xl">Hero IO</a>
             </div>
           </div>

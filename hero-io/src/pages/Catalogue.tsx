@@ -3,14 +3,14 @@ import Card from "../components/Card";
 import { numberFomatter } from "../lib/utils";
 import { useAppData } from "../store/State";
 import { BehaviorSubject, debounceTime } from "rxjs";
-import { motion } from "motion/react";
-import { div } from "motion/react-client";
+import AppError from "../components/AppError";
 
 type Props = {};
 
 function Catalogue({}: Props) {
   const { state } = useAppData();
   const cardsData = state.data;
+  const [isSearching, setIsSearching] = useState(false);
   const cards = useMemo(
     () =>
       cardsData.map((card) => ({
@@ -40,6 +40,10 @@ function Catalogue({}: Props) {
     if (!searchText) {
       return cards;
     }
+    setIsSearching(true);
+    setTimeout(() => {
+      setIsSearching(false);
+    }, 300);
     return cards.filter((card) =>
       card.title.toLowerCase().includes(searchText.toLowerCase()),
     );
@@ -55,37 +59,46 @@ function Catalogue({}: Props) {
       <div className="flex justify-between p-10 w-full">
         <div>({latestLength}) Apps Found</div>
         <div>
-          <label className="input">
-            <svg
-              className="h-[1em] opacity-50"
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 24 24"
-            >
-              <g
-                strokeLinejoin="round"
-                strokeLinecap="round"
-                strokeWidth="2.5"
-                fill="none"
-                stroke="currentColor"
+          <fieldset className="fieldset">
+            <label className="input">
+              <svg
+                className="h-[1em] opacity-50"
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
               >
-                <circle cx="11" cy="11" r="8"></circle>
-                <path d="m21 21-4.3-4.3"></path>
-              </g>
-            </svg>
-            <input
-              type="search"
-              value={searchText}
-              onChange={(e) => setSearchText(e.target.value)}
-              placeholder="Search"
-            />
-          </label>
+                <g
+                  strokeLinejoin="round"
+                  strokeLinecap="round"
+                  strokeWidth="2.5"
+                  fill="none"
+                  stroke="currentColor"
+                >
+                  <circle cx="11" cy="11" r="8"></circle>
+                  <path d="m21 21-4.3-4.3"></path>
+                </g>
+              </svg>
+              <input type="search" onChange={(e) => setSearchText(e.target.value)}required placeholder="Search" />
+            </label>
+            {isSearching ? (
+              <span className="skeleton skeleton-text text-xs">Searching...</span>
+            ) : null}
+          </fieldset>
         </div>
       </div>
-      <div className="flex-centered-x flex-wrap xl:grid xl:grid-cols-4 gap-4 mb-5">
-        {filteredCards.map((item, idx) => {
-          return <Card key={idx} {...item} />;
-        })}
-      </div>
+
+      {latestLength > 0 ? (
+        <div className="flex-centered-x flex-wrap xl:grid xl:grid-cols-4 gap-4 mb-5">
+          {filteredCards.map((item, idx) => {
+            return <Card key={idx} {...item} />;
+          })}
+        </div>
+      ) : (
+        <>
+          <div className="w-full">
+            <AppError />
+          </div>
+        </>
+      )}
     </section>
   );
 }

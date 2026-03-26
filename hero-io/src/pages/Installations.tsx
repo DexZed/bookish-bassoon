@@ -20,10 +20,10 @@ function Installations({}: Props) {
     const baseData = [...data];
 
     if (sort === "ASC") {
-      return baseData.sort((a, b) => (a.size ?? 0) - (b.size ?? 0));
+      return baseData.sort((a, b) => (a.downloads ?? 0) - (b.downloads ?? 0));
     }
     if (sort === "DESC") {
-      return baseData.sort((a, b) => (b.size ?? 0) - (a.size ?? 0));
+      return baseData.sort((a, b) => (b.downloads ?? 0) - (a.downloads ?? 0));
     }
 
     return baseData;
@@ -40,10 +40,10 @@ function Installations({}: Props) {
           <div>
             <select onChange={handleChange} className="select select-neutral">
               <option disabled={true} value={""}>
-                Sort By Size
+                Sort By Downloads
               </option>
-              <option value={"ASC"}>Ascending order</option>
-              <option value={"DESC"}>Descending order</option>
+              <option value={"ASC"}>low-High</option>
+              <option value={"DESC"}>High-Low</option>
             </select>
           </div>
         </div>

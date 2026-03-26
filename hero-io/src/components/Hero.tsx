@@ -1,6 +1,12 @@
 type Props = {};
 
 function Hero({}: Props) {
+  function playStore() {
+    window.open("https://play.google.com/store/apps");
+  }
+  function appStore() {
+    window.open("https://www.apple.com/app-store/");
+  }
   return (
     <>
       <div className="hero bg-base-200 min-h-screen">
@@ -11,7 +17,7 @@ function Hero({}: Props) {
               At Hero.IO, we craft innovative apps designed to make everyday life simpler, smarter, and more exciting. Our Goal is to turn your ideas into reality.
             </p>
             <div className="flex gap-2 justify-around">
-              <button className="btn btn-info btn-outline">
+              <button className="btn btn-info btn-outline" onClick={playStore}>
                 <svg
                   className="w-6 h-6 dark:invert"
                   xmlns="http://www.w3.org/2000/svg"
@@ -21,7 +27,7 @@ function Hero({}: Props) {
                 </svg>
                 Google Play
               </button>
-              <button className="btn btn-info btn-outline">
+              <button className="btn btn-info btn-outline" onClick={appStore}>
                 <svg
                   className="w-6 h-6 dark:invert"
                   xmlns="http://www.w3.org/2000/svg"
