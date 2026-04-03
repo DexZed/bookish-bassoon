@@ -1,0 +1,31 @@
+{
+  "name": "routing",
+  "module": "dis/index.js",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "start": "concurrently \"webpack --watch --config webpack.config.dev.ts\" \"nodemon --enable-source-maps ./dist/bundle.js\"",
+    "build": "webpack --config webpack.config.prod.ts --stats-error-details"
+  },
+  "devDependencies": {
+    "@types/bun": "latest",
+    "dotenv": "^17.4.0",
+    "nodemon": "^3.1.14",
+    "webpack": "^5.105.4",
+    "webpack-cli": "^7.0.2"
+  },
+  "peerDependencies": {
+    "typescript": "^5"
+  },
+  "dependencies": {
+    "@swc/core": "^1.15.21",
+    "@swc/helpers": "^0.5.21",
+    "@types/express": "^5.0.6",
+    "@types/node": "^25.5.2",
+    "@types/webpack-node-externals": "^3.0.4",
+    "express": "^5.2.1",
+    "regenerator-runtime": "^0.14.1",
+    "ts-node": "^10.9.2",
+    "webpack-node-externals": "^3.0.0"
+  }
+}
